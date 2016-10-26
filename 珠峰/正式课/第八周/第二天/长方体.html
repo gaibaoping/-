@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .wrap{
+            width: 200px;
+            height: 200px;
+            margin: 200px auto;
+            perspective: 2000px;
+        }
+        .item{
+            list-style: none;
+            transform-style: preserve-3d;
+            animation: move 5s infinite both;
+            transform-origin: 100px 100px -100px;
+        }
+        .item li{
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 2px solid #000000;
+            color: #ffffff;
+            font-size: 60px;
+            text-align: center;
+            background: rgba(152,251,152,1);
+        }
+        .front,.back{
+            width: 296px;
+            height: 196px;
+            line-height: 196px;
+        }
+        .front{
+            transform: translateZ(50px);
+        }
+        .back{
+            transform: translateZ(-50px);
+        }
+        .top,.bottom{
+            width: 296px;
+            height: 96px;
+            line-height: 96px;
+        }
+        .top{
+            transform: rotateX(-90deg) translateZ(-50px);
+        }
+        .bottom{
+            transform: rotateX(90deg)translateZ(-150px);
+        }
+        .left,.right{
+            width: 96px;
+            height: 196px;
+            line-height: 196px;
+        }
+        .left{
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        .right{
+            transform: rotateY(90deg) translateZ(250px);
+        }
+        @keyframes move {
+            0%{
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            100%{
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="item">
+            <li class="front">1</li>
+            <li class="back">2</li>
+            <li class="left">3</li>
+            <li class="right">4</li>
+            <li class="top">5</li>
+            <li class="bottom">6</li>
+        </ul>
+    </div>
+</body>
+</html>

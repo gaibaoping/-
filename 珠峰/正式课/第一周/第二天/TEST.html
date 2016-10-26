@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*console.log(total);
+    var total=0;
+    function sum(num1,num2){
+        console.log(num1,num2);
+        console.log(total);//undefined
+        var total=num1+num2;//这个total是当前私有作用域内的私有变量,这是一个赋值过程 total=30
+        console.log(total);//30
+    }
+    sum(10,20);//函数执行：1 私有作用域 2 形参赋值 3 预解释当前作用域 4 代码执行
+    console.log(total);*/
+
+    console.log(total);
+    var total=0;//全局变量total=0；
+    function sum(num1,num2){
+        console.log(num1,num2);
+        console.log(total);//0 说明去上一级的window全局把total的值拿来打印
+        total=num1+num2;//
+        console.log(total);//30 刚刚被修改为30就被打印出来了
+    }
+    sum(10,20);//函数执行：1 私有作用域 2 形参赋值 3 预解释当前作用域 4 代码执行
+    console.log(total);//由于执行sum函数这个全局的total被修改成了30
+    //console.log(f1);//报错，f1没有定义
+    f1=1;//只是一个简单的赋值过程
+    console.log(f1);
+    /*
+    * 全局变量：函数在执行的过程中，如果当前作用域内有私有变量（形参和var）那么优先使
+    * 用私有变量，如果没有那么到上一级作用域去查找，如果有直接拿来使用，如果没有继续向
+    * 上查找，一直到全局作用域，如果还没有报错。
+    * */
+
+    /*
+    * 作用域链：
+    *    如果当前作用域内使用的变量不存在那么到上一级作用域去查找，如果没有继续到上一级作用域查找，
+    *    一直查找到全局作用域window，如果还没有报错！！！，我们把这种查找机制就可以叫做作用域链
+    *    ps：全局变量任何时候都可以被访问，所以安全。
+    *
+    * */
+</script>

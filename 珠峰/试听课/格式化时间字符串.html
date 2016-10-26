@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var str='2016-8-11 17:01:02';
+    var ary=str.split(' ');//['2016-8-11','17:01:02']
+    var ary1=ary[0].split('-');//[2016,8,11]
+    var ary2=ary[1].split(':');//[17,01,02]
+    var str=ary1[0]+'年'+ary1[1]+'月'+ary1[2]+'日'+ary2[0]+'时'+ary2[1]+'分'+ary2[2]+'秒';
+    function addZero(n){
+       return n<10 ? '0'+n:n;
+    }
+    console.log(str);
+   // "2016年08月11日 17时01分02秒"
+
+</script>

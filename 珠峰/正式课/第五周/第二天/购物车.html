@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .shopCar{
+            background: coral;
+            position: relative;
+            width: 144px;
+            height: 35px;
+            margin: 50px auto;
+            text-align: center;
+            color: #000;
+        }
+        .shopCar .detail{
+            display: none;
+            background: green;
+            position: absolute;
+            right: 0;
+            top: 35px;
+            width: 300px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="shopCar">
+        <span>购物车</span>
+        <div class="detail"></div>
+    </div>
+</body>
+</html>
+<script>
+    var shopCar = document.getElementsByClassName('shopCar')[0];
+    var detail = shopCar.getElementsByClassName('detail')[0];
+    shopCar.onmouseover = function(){
+        detail.style.display = 'block';
+    };
+    shopCar.onmouseout = function (){
+        detail.style.display = 'none';
+    };
+    //从购物车上离开的时候触发了购物车onmouseout事件，但是在鼠标悬停在子元素盒子上的时候，又触发了子元素onmouseover事件。由于事件传播同时也触发了购物车的onmouseover事件，所以又显示出来了
+    //ps:如果元素有嵌套关系一定要注意好事件传播关系
+</script>

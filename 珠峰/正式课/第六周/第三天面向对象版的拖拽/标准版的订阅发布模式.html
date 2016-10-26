@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function EventEmitter(){
+        /*this.on.call(this);
+        this.fire().call(this);
+        this.off.call(this);*/
+    }//EventTarget的实现原理是一样的
+    EventEmitter.prototype.on= function(type,fn){//负责绑定事件
+        if(!this['aEmitter'+type]){
+            this['aEmitter'+type] = [];
+        }
+        var a = this['aEmitter'+type];
+        for(var i=0;i< a.length;i++){
+            if(a[i]==fn)return;
+        }
+        a.push(fn);
+    };
+    EventEmitter.prototype.fire = function(type,e){//负责通知，或叫“发布”事件
+        var a = this['aEmitter'+type];
+        if(a&& a.length){
+            for(var i=0;i<a.length;i++){
+                if(typeof a[i]=='function'){
+                    a[i].call(this,e);
+                }else{
+                    a.splice(i,1);
+                    i--;
+                }
+            }
+        }
+    };
+    EventEmitter.prototype.off = function(type,fn){//负责移除事件
+        var a = this['aEmitter'+type];
+        if(a&& a.length){
+            for(var i = 0; i< a.length; i++){
+                if(a[i]==fn){
+                    a[i]=null;
+                    break;
+                }
+            }
+        }
+    };
+
+
+    function Kettle(){}
+    Kettle.prototype = new EventEmitter();//这样的继承方式不能写在定义原型方法之后
+    //Kettle.prototype.__proto__ = EventEmitter.property;//这是一种更安全的原型继承方式，它不会破坏Kettle类上原有的prototype，但是这种方式IE不支持
+
+    Kettle.prototype.boiling = function(){
+        console.log('开始烧水');
+        var that = this;
+        window.setTimeout(function(){
+            console.log('水已烧开');
+            that.fire('boiling');
+        },600);
+    };
+    var k1 = new Kettle();
+    k1.on('boiling',drink);
+    k1.on('boiling',noodles);
+    k1.on('boiling',shower);
+    k1.boiling();
+
+    function drink(){
+        console.log('喝水');
+    }
+    function noodles(){
+        console.log('泡面');
+    }
+    function shower(){
+        console.log('冲澡');
+    }
+</script>

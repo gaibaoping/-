@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*function nextElementsibling(ele){
+        var next=ele.nextElementSibling;
+        while(next&&next.nodeType!=1){
+            next=next.nextSibling;
+        }
+        return next;
+    }*/
+    //求出0-100的和
+    /*var total=0;
+    for(var i=0;i<=100;i++){
+        if(i%3){//
+            total+=i;
+        }
+    }
+    console.log(total);*/
+    function sum(n){
+        if(n==0){
+            return 0;
+        }
+        if(!(n%3)){//被3整除的符合这个条件，符合这个条件的不加上
+            return sum(n-1);
+        }
+        return n+sum(n-1);
+    }
+    //sum(100)=100+99+98+97+sum(96)...
+    var res=sum(100);
+    console.log(res);
+    //在函数中自己调用自己就叫递归==>写递归的时候别写成死递归
+    //递归应用：在一堆数字中挑出符合条件的数字
+
+    //能被2整除的数相乘
+    function ji(n){
+        if(n==1){
+            return 1;
+        }
+        if(n%2){
+            return ji(n-1);
+        }
+        return n*ji(n-1);
+    }
+    var res=ji(10);
+    console.log(res);
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #wrap{
+            width: 200px;
+            height: 200px;
+            border: 2px solid green;
+            margin: 100px auto;
+            transform-style: preserve-3d;/*warp下的子元素在3d空间展示，作用在父标签*/
+            perspective: 800px;/*景深效果/透视效果 有近大远小的效果，作用在父标签或者祖先标签*/
+        }
+        .slide{
+            width: 100%;
+            height: 100%;
+            background: red;
+            /*transform: perspective(300px);*/
+            /*transform: translateZ(-60px);*/
+        }
+        /*#wrap:hover .slide{
+            transform: rotateX(45deg)scaleZ(0.5);/!*scaleZ()在z轴上的缩放如果单独使用不起作用，必须配合着其他变形方法一起使用才起作用*!/
+            transition: 1s;
+        }*/
+        #wrap:hover .slide{
+            /*transform: rotateX(360deg);*/
+            /*transform: rotateY(360deg);*/
+            transform: rotateZ(45deg);
+            transition: 1s;
+            /*rotateX:正值 前翻，负值 后翻*/
+            /*rotateY：正值 右翻，负值 左翻*/
+            /*rotateZ:*在z轴上旋转等同于2d变形的rotate的方法的效果*/
+            rotate3d(1,0,0,45deg);
+            /*rotate3d(rx,ry,rz,a);
+            rx:x轴上的矢量坐标 rotate3d(1,0,0,45deg) ->rotateX(45deg)
+            ry:y轴上的矢量坐标 rotate3d(0,1,0,45deg) ->rotateY(45deg)
+            rz:z轴上的矢量坐标 rotate3d(0,0,1,45deg) ->rotateZ(45deg)
+            */
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="slide"></div>
+    </div>
+</body>
+</html>

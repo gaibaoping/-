@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>乘法表</title>
+    <style>
+        *{
+            margin: 0;padding: 0;font-size: 16px;
+        }
+        #tab{
+            width: 900px;
+            height: 270px;
+            padding: 10px;
+            border: 1px solid red;
+        }
+        ul,li{
+            list-style: none;
+        }
+        span{
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .c1{
+            background-color: brown;
+        }
+        .c2{
+            background-color: aqua;
+        }
+        .c3{
+            background-color: blanchedalmond;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+
+    </div>
+
+</body>
+</html>
+<script>
+    var oDiv=document.getElementById('tab');
+    var str='';
+    str+='<ul>';
+    for(var i=1;i<=9;i++){
+        str+='<li>';
+        for(var j=1;j<=i;j++){
+            str+='<span>';
+            str+=''+j+'*'+i+'='+(j*i)+'';
+            str+='</span>';
+        }
+        str+='</li>';
+    }
+    str+='</ul>';
+    oDiv.innerHTML=str;
+    var spans=document.getElementsByTagName('span');
+    for(var i=0;i<spans.length;i++){
+        spans[i].className='c'+(i%3+1);
+    }
+</script>

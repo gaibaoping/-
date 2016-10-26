@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 构造函数模型：构造函数中的this是当前实例
+    *    实例，类，对象
+    *    1 定义一个构造函数（类）和定义一个普通函数相同，但是一般情况我们把类名字的首字母大写 Array String
+    *    2 区分构造函数还是普通函数只有在函数执行的时候是否使用new
+    *    3 当作构造函数执行的时候，会默认返回一个实例
+    *    4 构造函数中的this是当前实例
+    *    5 在构造函数中声明的私有变量对返回实例值没有影响
+    *    6 在构造函数中如果return一个引用数据类型会破坏实例返回
+    *    7 任何一个实例都是对象数据类型的
+    *  ps:任何一个对象数据类型（包括函数）都是Object这个类的实例，Object是所有对象数据类型的基类
+    *
+    *  ps:instanceof 判断一个实例是否属于一个类 true、false
+    * */
+   // var ary1=new Array();//内置类 Number String ... Object
+    //类：Array String Number Date RegExp Boolean Function
+    //console.log(ary1);
+    function Tab(){
+        //var tab={};
+        //return tab;
+        this.name='xx';
+    }
+    Tab();//window.name='xx'
+    console.log(name);
+    var tab1=new Tab();//把Tab当作一个类去执行
+    var tab2=Tab();//把Tab当作一个普通函数执行
+    //console.log(tab2);
+    console.log(tab1);
+</script>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        #div1{
+            position: absolute;
+            top: 0px;
+            left: 600px;
+            width: 150px;
+            height: 150px;
+            background: green;
+        }
+        a{
+            text-decoration: none;
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            border: 1px solid red;
+            border-radius: 50%;
+            background: lightgreen;
+            text-align: center;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div style="margin: 200px 0 0 570px">
+        <a class="left" href="javascript:void 0">L</a>
+        <a class="right" href="javascript:void 0">R</a>
+    </div>
+
+</body>
+</html>
+<script src="../utils.js"></script>
+<script>
+    var left=utils.getElesByClass('left')[0];
+    var right=utils.getElesByClass('right')[0];
+    var div1=document.getElementById('div1');
+    //实现点击左右按钮分别向左右运动切换
+    //根据点击时候的终点不同来判断是左还是右
+    var minLeft=0;
+    var maxLeft=utils.win('clientWidth')-div1.offsetWidth;
+    left.onclick=function(){//左
+        move(minLeft,function(){
+            alert(0);
+        });
+    };
+    /*left.ondblclick=function(){
+      window.clearInterval(div1.timer);
+    };*/
+    right.onclick=function(){//右
+        move(maxLeft,function(){
+            alert(1);
+        });
+    };
+    /*right.ondblclick=function(){
+        window.clearInterval(div1.timer);
+    };*/
+    function move(target,back){//根据终点来判断方向
+        var time=0;
+        var beginLeft=utils.css(div1,'left');
+        var changeLeft=target-beginLeft;//终点-起点
+        var duration=1000;
+        window.clearInterval(div1.timer);
+        div1.timer=window.setInterval(function(){
+            time+=10;
+            if(time>=duration){
+                window.clearInterval(div1.timer);
+                //根据target的不同来设置不同的终点的值
+                if(target==minLeft){//向左运动，到达终点的时候设置成最小值minLeft
+                    utils.css(div1,'left',minLeft);
+                    back();
+                }else{
+                    utils.css(div1,'left',maxLeft);
+                    back();
+                }
+                return;
+            }
+            var nextStepLeft=linear(time,beginLeft,changeLeft,duration);//根据花费时间的变化来计算出位置的值
+            utils.css(div1,'left',nextStepLeft);//把已经求出来的值重新设置回去
+        },10)
+    }
+    function linear(t,b,c,d){
+        return b+t/d*c;
+    }
+</script>

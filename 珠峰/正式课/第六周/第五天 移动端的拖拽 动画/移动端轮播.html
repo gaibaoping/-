@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0"/>
+    <!--
+    width 默认值是980px document.documentElement.clientWidth
+    device-width设备的宽度
+    initial-scale默认缩放值
+    maximum-scale=1.0最大的缩放值
+    min-scale最小缩放值
+    user-scalable = no/yes 是否允许用户缩放
+    -->
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;list-style: none;}
+        #bannerInner{
+            overflow: hidden;
+            height: 100px;
+        }
+        #bannerInner div{
+            width: 100%;
+            height: 100%;
+            background: springgreen;
+            float: left;
+        }
+        #bannerInner div:hover{
+            width: 300px;/*结束值*/
+            /*transition-property: width;/!*过渡属性*!/
+            transition-duration: 1s;/!*动画执行时间*!/
+            transition-timing-function: ease;/!*动画类型*!/
+            transition-delay: 1s;/!*延迟事件*!/*/
+
+            /*移动端只需要写标准和webkit前缀的写法*/
+            transition: 1s;/*设置所有默认值*/
+            -webkit-transition: 1s;
+        }
+    </style>
+</head>
+<body>
+        <div id="bannerInner">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+</body>
+</html>

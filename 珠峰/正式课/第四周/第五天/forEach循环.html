@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+/*    var ary=['a','b','c'];
+    ary.forEach(function(item,index,ary){
+
+    })*/
+    //1
+    $('#ul').find('li').each(function(index,item){
+        console.log(this);//<li></li>
+        //这个this打印出来是遍历的每一个li，其实也就是参数item，这个this肯定在each方法中被处理过，从window修改成了当前遍历的项
+        console.log(item);
+        console.log(this==item);//true =>这里使用this和item参数都可以
+    });
+
+    //2
+    var $lis=$('#ul li');
+    $.each($lis,function(index,item){
+        console.log(index,item);
+        //这种遍历方式和上一种用法相同，只是定义的位置不同，这个each是定义在jQuery这个类本身属性上的，这个each的第二个参数就是你要遍历的对象
+    })
+</script>

@@ -1,0 +1,9 @@
+[
+    {"name":"宝宝","sex":0,"age":18,"height":175,"weight":50},
+    {"name":"猪","sex":1,"age":29,"height":174,"weight":80},
+    {"name":"吴宁","sex":1,"age":28,"height":178,"weight":75},
+    {"name":"江仁","sex":0,"age":19,"height":165,"weight":50},
+    {"name":"徐静","sex":0,"age":18,"height":164,"weight":49},
+    {"name":"孙急停","sex":1,"age":20,"height":180,"weight":88},
+    {"name":"马宾","sex":1,"age":22,"height":193,"weight":86}
+]

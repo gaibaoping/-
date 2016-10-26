@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="tab1">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    /*
+    * 单例模式：其实就是一个对象，可以解决函数名字互相冲突的问题，这个对象的名字又可以叫做命名空间，nameSpace,在开发过程中比较常用的一种方式。
+    * 单例模式属性函数和属性函数之间的调用可以使用this.属性名字
+    * */
+    var tianxi={
+        copy:function (){
+            console.log('');
+        },
+        edit:function(){
+            console.log(this);//tianxi
+            this.copy();//这里的this就是tianxi了，属性之间可以互相调用
+        }
+    };
+    tianxi.copy();
+    tianxi.edit();
+</script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Date</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #time{
+            width: 300px;height: 40px;padding: 0 10px; border: 2px solid #cc0000;
+            background: lightgreen;margin: 20px auto;text-align: center;line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="time">距离下课时间：<span>01:08:05</span></div>
+</body>
+</html>
+<script>
+    /*
+    var ary=[];//字面量的赋值方式
+    var ary=newArray();//实例创建方式
+    */
+    /*var date=new Date();//用实例创建方式返回的永远都是对象
+    var date1=new Date('2018/12/31 18:02:59');
+    console.log(typeof date);
+    console.log(date);
+    console.log(date1.getFullYear());//年
+    console.log(date.getMonth());//月 月份取值[0-11]月份比实际小1
+    console.log(date.getDate());//日
+    console.log(date.getHours());//小时
+    console.log(date.getMinutes());//分钟
+    console.log(date.getSeconds());//秒
+    console.log(date.getMilliseconds());//毫秒 ms  1s=1000ms
+    console.log(date.getDay());//星期(0-6)
+    console.log(date1.getTime());//1970年1月1日8点0分0秒距离date的ms数
+    */
+    function title() {
+        var time = document.getElementById('time');
+        var span = time.getElementsByTagName('span')[0];
+        console.log(span);
+        //record();//我需要一个苦力，is帮我执行一次这个record这个函数就可以了
+        var curDate = new Date();
+        var targetDate = new Date('2016/08/16 18:00:00');//目标时间
+        //计算这两个时间距离1970ms数
+        var curDate1970 = curDate.getTime();
+        var targetDate1970 = targetDate.getTime();
+        //求出时间差的ms数
+        var timeMs = targetDate1970 - curDate1970;
+        //需要把timeMs换算成小时分钟秒
+        var h = Math.floor(timeMs / (1000 * 3600));
+        //换算分钟，需要把小时所占用的ms数减去，然后再换算成分钟
+        var m = Math.floor((timeMs - h * 3600 * 1000) / (1000 * 60));
+        //换算秒，把小时和分钟所占用的ms数减去，然后再换算成s
+        var s = Math.floor((timeMs - h * 3600 * 1000 - m * 60 * 1000) / 1000);
+        console.log(s);
+        span.innerHTML = add(h) + ':' + add(m) + ':' + add(s);
+        function add(n) {
+            return n < 10 ? '0' + n : n;
+        }
+    }
+    title();
+    window.setInterval(title,1000);
+
+</script>

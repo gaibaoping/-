@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary = ['red','green','blue','yellow','black'];
+    for(var i = 0; i<30; i++){
+        var oDiv = document.createElement('div');
+        oDiv.style.width = '20%';
+        oDiv.style.borderRadius = '50%';
+        oDiv.style.height = '200px';
+        oDiv.style.display = 'none';
+        oDiv.style.cssFloat = 'left';
+        var ran = Math.round(Math.random()*4);
+        oDiv.style.backgroundColor = ary[ran];
+        document.body.appendChild(oDiv);
+    }
+    var divs = document.getElementsByTagName('div');
+    var index = 0;
+    var timer = window.setInterval(function(){//如何让元素一个一个出来
+        if(index == 29){
+            window.clearInterval(timer);
+            return;
+        }
+        divs[index].style.display = 'block';
+        index++;
+    },500);
+    //事件委托
+    document.body.onclick = function(e){
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        //删除元素
+        this.removeChild(e.target);
+    }
+</script>

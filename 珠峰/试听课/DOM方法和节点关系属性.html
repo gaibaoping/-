@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1">
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul></ul>
+        <div></div>
+    </div>
+<div></div>
+</body>
+</html>
+<script>
+    var div1=document.getElementById('div1');//document可以理解为是一个范围
+    console.log(div1);
+    var ul=div1.getElementsByTagName('ul');//类数组:
+    console.log(ul[0]);
+    /*
+    *  dom获取元素方法：
+    *  1 document.getElementById('id')
+    *       ps:在低版本的ie中表单(input)元素的name属性会被当作id获取来
+    *       ps：context(上下文)只能是document
+    *       ps: 如果这个id不存在那么默认返回一个null
+    *       ps： 如果存在相同的id那么默认获取的是第一个
+    *  2 context.getElementsByTagName('tagName')
+    *       ps： context.getElementsByTagName('*')//获取context范围内的所有标签
+    *       ps: 获取回来的是一组元素，如果想具体到第一个必须通过索引0
+    *  3 context.getElementsByClassName('class')通过类名获取元素
+    *       ps： 获取回来的也是一组元素，即使没有获取到那么也是返回一个空的类数组
+    *  4 document.getElementsByName(name)通过name属性获取元素（表单）
+    *       ps：在标准浏览器name也可以赋值给出了表单的元素，<div name="name">在标准可以获取到
+    *  5 document.documentElement : html
+    *  6 document.body : body
+    *  7 获取浏览器可视窗口的看度和高度：（没有单位）
+    *       document.documentElement.clientWidth||document.body.clientWidth
+    *       document.documentElement.clientHeight||document.body.clientHeight
+    *  8 一般应用于移动端：类似于jQuery的语法
+    *       document.querySelector()//获取一个
+    *       document.querySelectorAll()//获取所有
+    * */
+</script>

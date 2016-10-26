@@ -1,0 +1,15 @@
+1、回去后总结除了DIV标签的私有属性和公有属性方法，在把A标签的、document的、window的...自己去查找总结扩展学习
+2、获取后重写函数原型上的slice方法，尽量考虑详细
+slice(n,m)
+slice(n)
+slice()
+slice(n,m)n>m
+slice(n,m)n或者m是负数
+slice(n,m)n或者m不是有效数字或者是小数呢
+要求不能使用数组内置的方法：比如pop push
+
+Array.prototype.mySlice=function(){
+    <your code>
+}
+3 在Number的原型上扩展两个方法:plus(加法)、minus(减法)
+     (5).plus(3).minus(2)  ->6

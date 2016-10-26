@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        ul{
+            width: 300px;
+            margin: 0 auto;
+        }
+        ul li{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+            background: green;
+            color: white;
+            line-height: 30px;
+            font-size: 18px;
+            text-align: center;
+        }
+        ul li:nth-child(1){/*第一个子元素,1、查找ul的第一个子元素 2、子元素的标记名是否是li标签*/
+            background: pink;
+        }
+        /*n是从0开始计算的*/
+        /*ul li:nth-child(3n){
+            background: red;
+        }
+        ul li:nth-child(3n+1){
+            background: blue;
+        }
+        ul li:nth-child(3n+2){
+            background: black;
+        }*/
+        /*
+        nth-child 获得的子元素是不分类的，是在所有的子元素中查找，不限制范围
+        nth-of-type 限制范围的的，只能在同标记名的元素下查找
+        :first-child  :first-of-type
+        :last-child  :last-of-type
+        :only-child  只有一个子元素
+        :only-of-type  同种标记名的子元素只有一个
+        */
+        ul :nth-of-type(1){
+            background: yellow;
+        }
+        ul :last-of-type{
+            background: red;
+        }
+        ul :first-child{
+            background: blue;
+        }
+        div{
+            height: 40px;
+            background: blue;
+            line-height: 40px;
+        }
+        div:empty{
+            height: 40px;
+        }
+
+        ul li:not(.a2){
+            border-radius: 50%;
+        }
+
+        /*ul li[class=zf]{等于zf
+            background: pink;
+        }*/
+        /*ul li[class |=zf]{包含zf或者等于zf
+            background: pink;
+        }*/
+        /*ul li[class*=zf]{包含zf字符串
+            background: pink;
+        }*/
+        /*ul li[class~=zf]{属性值可以有多个，其中一个是zf
+            background: pink;
+        }*/
+        /*ul li[class^=zf]{以zf开头
+            background: pink;
+        }*/
+        ul li[class$=zf]{/*以zf结尾*/
+            background: pink;
+        }
+
+        #div1,#div2{
+            display: none;
+        }
+        #div1:target{
+            display: block;
+        }
+        #div2:target{
+            display: block;
+            background: pink;
+        }
+
+        #div1:first-letter{
+            background: yellow;
+        }
+        #div1:after{
+            content: '王脱险';
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <p>12</p>
+        <p>13</p>
+        <li>1</li>
+        <li class="a2">2</li>
+        <li class="zf">3</li>
+        <li class="zhufeng">4</li>
+        <li class="zf-feng">5</li>
+        <li class="zhufeng zf">6</li>
+        <li class="zf-sdd zf">7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+    </ul>
+    <div>
+        <a href="" style="background: red">aaawan</a>
+    </div>
+
+    <a href="#div1" target="_blank">点击显示div1元素</a>
+    <div id="div1">
+        url地址里指向的目标元素，在css里面用:target表示
+    </div>
+    <a href="#div2" target="_blank">显示颜色</a>
+    <div id="div2">显示颜色</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>string</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *  js中常用的字符串的方法：
+    *    属性：
+    *      length: 这个属性是字符串中包含的字符的个数
+    *      index: 字符串也可以通过索引来获取到具体的某一个字符
+    *    方法：
+    *      通过索引获取指定字符
+    *         charAt(index)如果对应索引没有字符那么返回空字符
+    *         charCodeAt(index)通过索引获取对应字符的ASCII码表
+    *      复制和截取字符串
+    *         substr(n,m) 从索引n开始截取m个，如果m没有那么多，从n开始截取到末尾，如果没有参数那么是全部截取
+    *         substring(n,m)从索引n开始截取，到索引m但是不包含m，其实真正截取的是从n到m-1，
+    *         如果只有一个参数n是从n截取到末尾，如果没有参数截取全部
+    *         slice(n,m)和substring用法相同，slice支持负数，负数索引的时候自动累加上了字符串的长度
+    *
+    *      转换大小写
+    *         toLowerCase()转换成小写
+    *         toUpperCase()转换成大写
+    *
+    *      获取字符在字符串中出现的索引位置
+    *      indexOf（字符）返回字符在字符串中出现的索引位置，如果出现就返回对应的索引，如果没有出现那么返回-1
+    *      lastIndexOf 最后一次出现的索引位置，如果没有返回-1
+    *
+    *      把字符串按照指定分隔符拆分成数组和数组中的jion方法相同
+    *      split()
+    *      split(/^\d$/) split参数也可以是一个正则==>正则是专门用来匹配字符串的
+    *
+    *      替换字符串（重要）
+    *         replace(old,new) replace并不是在原有的字符串上进行了替换操作，而是返回了一个已经替换好了
+    *         的新字符串
+    *         replace(old,function())用function函数的返回值（也就是fn中的return）来替换old在原字符
+    *         串中匹配到的字符
+    *)
+    *
+    * */
+    var str="zhufengpeixun";
+    console.log(str.length);
+    /*for(var i=0;i<str.length;i++){
+        console.log(str[i]);
+    }*/
+    //console.log(str.charAt(20));
+     var res=str.substr(3,4);
+    console.log(res);
+    //var res=str.substring(3,7);
+    var res=str.slice(-3,-1);//支持负数索引
+    console.log(res);
+    var res=str.indexOf('u');
+    console.log(res);
+
+    //判断当前浏览器是否是ie8 “MSIE 8”
+    if(window.navigator.userAgent.indexOf("MSIE 8")>-1){
+
+    }
+    var res=str.split('');
+
+    console.log(res.join('+'));
+
+    //replace
+    //str=str.replace('zhu',"猪");
+    str=str.replace("zhu",function(){
+        console.log(arguments);
+        return "珠";
+    });
+    console.log(str);
+</script>

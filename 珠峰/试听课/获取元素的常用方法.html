@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{width:100%;height: 100%;}
+			.cursor{cursor: pointer;}
+			.cursor:nth-child(1){
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+			.cursor:nth-child(2){
+				width: 50px;
+				height: 50px;
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="outer" class="cursor">
+			<div id="middle">
+				<div id="inner"></div>
+				<ul class="cursor"></ul>
+				<p class="cursor" name="tianxi"></p>
+			<!--
+            	作者：offline
+            	时间：2016-08-09
+            	描述：
+            -->
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var outer=document.getElementById('outer');//通过di获取元素
+	/*
+	 
+	 * document.getElementById 通过ID获取元素，只能是document才能调用
+	 *   ps:如果页面不存在这个id返回null
+	 *   ps：ie低版本中，name属性经常会被当作id使用
+	 *   ps：如果页面中存在相同的id默认获取第一个
+	 *   ps：范围（context上下文）只能是document
+	 *
+	 *context.getElementsByClassName('classname');低版本ie不兼容==>后期我们自己写
+	 *    ps：获取回来的是一组元素，即使只有一个也不会默认第一个，也需要通过索引值来获取具体的某一个。这是一类数组（有索引,有length就可以叫做类数组）
+	 *context.getElementsByTagName('tagName')通过标签名取元素
+	 *    ps：返回值也是一类数组
+	 *    ps：document.getElementsByTagName('*')获取这个范围内的所有标签元素
+	 * document.getElementsByName('')//一般应用于表单元素
+	 *    ps：在标准浏览器给出了表单元素也可以添加name属性，并且用来获取，在ie低版本中只能给表单元素使用
+	 * html：document.documentElement
+	 * body: document.body
+	 *
+	 * document.documentElement.clientWidth||document.body.clientWidth
+	 * document.documentElement.clientHeight||document.body.clientHeight
+	 *     ps:获取浏览器可是窗口的高度和宽度==>兼容任何浏览器
+	 * 不兼容==>一般可以引用于移动端，语法类似于jQuery
+	 * document.querySelector()//获取一个
+	 * document.querySelectorAll()//获取多个
+	 */
+	console.log(outer);
+	//if(outer){}//判断这个元素是否存在
+	var cursors=outer.getElementsByClassName('cursor')[1];//字符号中的1代表的是索引值，也就是的调用第二个class=cursor
+	console.log(cursors);
+	
+	var names=document.getElementsByName('tianxi');
+	console.log(names);
+	
+	var html=document.documentElement; //document.getElementsByTagName('html')[0]
+	var body=document.body;//document.getElementsByTagName('body')[0]
+	console.log(body);
+	console.log(html);
+	
+	var divs=document.querySelectorAll('#middle .cursor[name="tianxi"]')
+	console.log(divs);
+	
+	var htmls=document.getElementsByTagName('*');
+	console.log(htmls);
+</script>

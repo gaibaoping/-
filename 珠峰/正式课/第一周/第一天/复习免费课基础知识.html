@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 基本数据类型：number parseInt parseFloat Number isNaN - * / +3
+    * string "" + 7
+    *       charAt(index)
+    *       charCode(index)
+    *       substr(n,m)m是数量
+    *       substring (n,m)m是索引
+    *       slice() 负数索引
+    *
+    *       toUpperCase()
+    *       toLowerCase()
+    *
+    *       indexOf()  -1
+    *       lastIndexOf() -1
+    *       window.navigator.userAgent='MSIE 8.0'
+    *
+    *       split('') 把字符串拆成数组
+    *       replace(old,new)如果第二个参数是函数的话，是用这个函数的返回值去替换原有字符串
+    *
+    *       boolean true/false
+    *       =赋值
+    *       var obj={};//开辟一个内存空间，把属性名字和属性值当作字符串添加到这个内存空间中，然后把空间
+    *       地址赋值给obj变量==>obj代表的就是一个堆内存地址
+    *       函数的赋值过程：是把函数的空间地址赋值给函数名字
+    *       ==
+    *       []==false [].string()==>""  Number("")==>0  Number(false)==>0 0==0==>true
+    *       object==object==>false
+    *       object==sting  object==>string
+    *       ...左右两边都转化成数字
+    *       ===
+    *       null  undefined(1 一个对象根本不存在的属性 2 定义了形参，但是没有传 3 如果函数体中没有return那么
+    *       函数运行完留下的结果就是undefined)
+    *       自身为false:0 NaN "" false undefined  !去反 ！！强制转换成boolean数据类型
+    *
+    *       引用：
+    *           {} 对象.属性名=属性值； 对象['属性名']=属性值  delete
+    *           [] length  ary[ary.length]=vale  ary.length--  索引
+    *               unshift()
+    *               shift()
+    *               push()
+    *               pop()
+    *               splice(n,m) 没删返回[]
+    *               splice(n,m,x)
+    *               slice(n,m)
+    *
+    *               concat()
+    *               join()默认是逗号
+    *               eval()把数列当作字符串去运行，就是把逗号去掉
+    *
+    *               reverse
+    *               sort(function(a,b){return a-b})
+    *
+    *               indexOf
+    *               lastIndexOf
+    *
+    *               forEach(function(item,index){})无返回值
+    *               map(function(item,index){return})有返回值
+    *
+    *           var date=new Date()
+    *                   date.getFUllYear()
+    *                        getMonth()
+    *                        getDate()
+    *                        getDar()
+    *                        getHours()
+    *                        getMinutes()
+    *                        getSeconds()
+    *                        getMilliSeconds()
+    *                        getTime()
+    *               Math
+    *                   Math.abs()
+    *                   Math.max()
+    *                   Math.min()
+    *                   Math.ceil()
+    *                   Math.floor()
+    *                   Math.round()
+    *                   Math.random()
+    *                   Math.round(Math.random()*(m-n)+n)
+    *
+    *           判断
+    *              if(document.getElementById('div1')){//判断一个元素是否存在
+    *              }else if(条件){
+    *              }
+    *              switch case==>break;  case是绝对比较
+    *              三元运算符 条件？条件为真的是好执行：条件为false执行
+    *
+    *          循环
+    *             for(var i=0;i<5;i++){//我们知道次数，length
+    *             continue; i++继续（解决的都是i的问题）
+    *             break；直接跳出循环
+    *             }
+    *             for(var key in object){
+    *                 key每循环一次都代表不同的属性名字
+    *                 obj[key]
+    *             }
+    *             while(pre&&pre.nodeType!=1){//一般应用于条件循环
+    *                   pre=pre.preciousSibling;//条件迭代
+    *             }
+    *
+    *             99乘法表 两个循环
+    *             for(var i=1;i<=9;i++){
+    *                 for(var j=1;j<=9;j++){
+    *                 }
+    *             }
+    *             i%3
+    *             div.money='12k';
+    *             div.onclick=function(){
+    *               console.log=(this.money)
+    *             };
+    *             //自定义属性一般用来存储值的
+    *
+    *             函数
+    *             function fn(n,m){//函数名字也可以理解为一个变量，这个变量存储的是函数的堆内存地址
+    *                   arguments[1,2]//所有的实参，类数组 有index length
+    *                   console.log(n,m);//形参相当于在函数体内声明的变量
+    *                   console.log(2);
+    *                   return  函数运行完想留下东西
+    *                   //没有return，默认留下undefined
+    *             }
+    *             fn(1,2);
+    *             console.log(fn);
+    *
+    *             选项卡；
+    *             for(var i=1;i<lis.length;i++){
+    *               lis[i].zhu=i;
+    *               lis[i].onclick=function(){
+    *                   lis[this.zhu].className='';
+    *               }
+    *             }
+    *
+    *             //随机获取不同4位验证码
+    *
+    *             ranNumber=Math.round(Math.random()*(m-n)+n)
+    *             str.charAt(0-61)=
+    *             str+=随机字符
+    *
+    *             //倒计时
+    *             //定时器
+    *               window.setTimeout()
+    *               window.setInterval()
+    *               window.clearTimeout()
+    *               window.clearInterval()
+    *
+    *
+    *
+    */
+</script>

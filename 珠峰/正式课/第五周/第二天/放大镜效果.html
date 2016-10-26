@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .box{
+            position: relative;
+            width: 350px;
+            height: 350px;
+            background: url("images/iphone.jpg")no-repeat;
+            box-shadow: 3px 3px 10px #111;
+            margin: 10px auto;
+        }
+        .box .innerBox{
+            display: none;
+            position: absolute;
+            width: 175px;
+            height: 175px;
+            background: darkorange;
+            opacity: 0.5;
+            cursor: move;
+        }
+        .box .bigImgBox{
+            display: none;
+            width: 350px;
+            height: 350px;
+            position: absolute;
+            left: 380px;
+            box-shadow: 3px 3px 10px #111;
+            overflow: hidden;
+        }
+        .box .bigImgBox img{
+            display: block;
+            width: 700px;
+            height: 700px;
+            border: none;
+            vertical-align: top;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="innerBox" id="innerBox"></div>
+        <div class="bigImgBox" id="bigImgBox"><img id="bigImg" src="images/iphone_big.jpg"/></div>
+    </div>
+</body>
+</html>
+<script>
+    /*
+    *  放大镜效果：是为了看得更清楚
+    * */
+    var box = document.getElementById('box');
+    var innerBox = document.getElementById('innerBox');
+    var bigImgBox = document.getElementById('bigImgBox');
+    var bigImg = document.getElementById('bigImg');
+    box.onmousemove = function (e){
+        innerBox.style.display =bigImgBox.style.display = 'block';//鼠标移动的时候需要遮罩盒子显示
+        e = e || window.event;
+        //算出里面橘色小盒子的坐标
+        var l = e.clientX - this.offsetLeft - innerBox.offsetWidth/2;
+        var t = e.clientY - this.offsetTop - innerBox.offsetHeight/2;
+        //把算好的坐标赋值回去
+        //由于存在边界问题我们需要处理最大的left和最小的left值
+        var minLeft = 0;
+        var minTop = 0;
+        //最大的left值是大盒子的宽度-小盒子带边框的宽度
+        var maxLeft = box.clientWidth - innerBox.offsetWidth;
+        var maxTop = box.clientHeight - innerBox.offsetHeight;
+        //用L和t去和最大值和最小值比较,如果比最小值还小那么赋值给最小值
+        //如果比最大值还大那么就赋值为最大值
+        if(l < minLeft){
+            l = minLeft;
+        }else if(l > maxLeft){
+            l = maxLeft;
+        }
+        if(t < minTop){
+            t = minTop;
+        }else if(t > maxTop){
+            t = maxTop;
+        }
+        innerBox.style.left = l + 'px';
+        innerBox.style.top = t + 'px';
+        //计算右面图片的left和top的值：如果左面遮罩橘色盒子移动1px，那么右面大图片应要向左移动2倍（并且是负值）
+        bigImg.style.left = -2 * l + 'px';
+        bigImg.style.top = -2 * t + 'px';
+    };
+    box.onmouseout = function (){
+        innerBox.style.display =bigImgBox.style.display = 'none';
+    }
+</script>

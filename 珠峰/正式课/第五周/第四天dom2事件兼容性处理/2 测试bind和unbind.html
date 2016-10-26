@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="event2（兼容性处理2）.js"></script>
+<script>
+    var oDiv = document.getElementById('div1');
+    function fn1(){
+        console.log(1);console.log(this);
+        unbind(oDiv,'click',fn1);
+    }
+    function fn2(){console.log(2);}
+    function fn3(){console.log(3);}
+    function fn4(){console.log(4);}
+    function fn5(){console.log(5);}
+    function fn6(){console.log(6);}
+    function fn7(){console.log(7);}
+    function fn8(){console.log(8);}
+    //bind(oDiv,'click',fn1);
+    //bind(oDiv,'click',fn1);
+    on(oDiv,'click',fn1);
+    on(oDiv,'click',fn2);
+    on(oDiv,'click',fn3);
+    on(oDiv,'click',fn4);
+    on(oDiv,'click',fn5);
+    on(oDiv,'click',fn6);
+    debugger;
+    on(oDiv,'click',fn7);
+    on(oDiv,'click',fn8);
+
+    /*
+    * 如何使用debugger
+    *       1 F10 逐语句调试，如果当前这个语句是方法的执行。off(oDiv,'click',fn1)如果想进入到off方法中去查看那么就需要F11。那么现在就在off方法中执行，如果想跳出off方法那么shift+F11跳出当前的off方法。
+    *       2 F8 逐断点调试 还有跳出断点的作用
+    *       3 添加监视  在chrome中需要选中监控的变量然后右键add to watch。可以实时查看变量的值的变化
+    *       4 在调试的过程中只有执行过的代码才会重新赋值
+    *       5 使用外链的文件。 刷新的不妨使用ctrl+F5 强制刷新
+    *       6 查看网络请求去network中
+    *       7 资源source中
+    *       8 Element使用好
+    *
+    * */
+</script>

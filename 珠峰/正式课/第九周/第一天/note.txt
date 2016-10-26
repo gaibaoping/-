@@ -1,0 +1,85 @@
+CSS3  工具书：图解CSS3（大漠） 或者http://www.w3cplus.com/
+HTML5  HTML5秘籍（第二版）
+
+1、HTML5中的表单
+    传统的表单元素
+        form、input、select、textarea、label。。。
+        input：text、password、radio、checkbox、submit、reset、button、file、hidden(隐藏文本框)
+
+        事件:onfous、onblur、onkeydown、onkeyup、onchange(input中的内容改变)、onselect(被选中)
+
+    HTML5中新的表单元素
+        input：search、url、email、tel、number、range、time、date、color...
+        优势：
+            功能强大：提供的属性中，有一些属性浏览器自带操作控件（例如：date、range...），这样就不需要我们自己再使用js去开发了
+            方便输入：我们不使用新增加的属性，当用户输入的时候调取出来的都是默认统一的键盘，如果用户想输入邮箱，需要在符号、数字、英文输入键盘中来回切换，不方便用户的使用；但是一但使用了新的类型，浏览器根据我们设定的类型，调取出最符合用户输入的键盘，例如：type='email'调取出来的键盘上既有数字也有英文也有@/.这些邮箱常用的内容；type='number'，调取出来的键盘就是纯数字的;
+            强大的表单验证：css3的伪类验证（可以在用户输入的过程中，通过改变元素的样式来进行提示）、js中的checkValidity这个方法检测格式是否正确=>我们也可以使用自己写的正则进行验证
+            placeholder：对于input提供了placeholder这个强大的属性，可以在文本框中提示一些信息，但是这个属性不兼容IE浏览器（如果在PC端使用的话，我们需要针对于IE再去做一套）
+
+        弊端：
+            不兼容IE低版本浏览器，并且基本上没有什么解决方案，所以这些新的类型基本上只有在移动端才会使用
+
+        事件：
+            在移动端我们的键盘是虚拟的，很多的手机都不支持keydown和keyup事件，我们需要使用input事件
+
+2、hyBrid 混合式APP开发
+    开发原理：App在webView中嵌入了一些需要H5调取的方法，它是在webView中增加了一个和window相同的对象，例如：微信App增加的对象叫做wx，它会往这个对象中增加H5需要的方法
+    wx = {
+        init:function...
+        read:function...
+    } =>JS SDK
+    这样的话我们的H5就可以调取wx这个对象中的所有方法了
+
+    在IOS上还有一种通信方式：（伪装URL）
+        H5和APP商定一套不存在的URL，例如：sports://phone?callback = fn  fn是我H5中的一个方法
+        H5需要调取功能了，直接在页面中通过window.location.href='地址'发送请求（其实就是JSONP的原理）
+
+    APP：手机应用，例如：QQ、微信、浏览器...=>Native APP 需要使用的技术：IOS系统需要使用OBJECT-C、安卓系统需要使用JAVA-NATIVE
+        特点：
+            不可以跨平台，需要针对不同的系统使用不同的系统使用不同的技术开发两套产品
+            Native App 是直接的运行在手机的操作系统中的，基本上手机上的相关功能它是否可以操作，例如：拍照、读取通讯录、读取短信、获取地理位置、获取手机的重力感应实现摇一摇和相关的游戏...
+            Native App 更新需要用户的自主性选择，不能第一时间把最新的产品展示给用户
+    H5:其实就是一个HTML页面，我们需要把页面在手机的浏览器中或者其他的APP应用中（例如：微信）运行=>webAPP
+        特点：
+            可以跨平台，做出一套页面，在IOS和安卓手机上都可以访问
+            webApp 是运行在手机的某一个应用中的（例如在浏览器中打开页面），不能直接的操作手机的内部功能，如果需要的话都是需要寄宿的环境提供相关的支持才可以
+            Web App 开发的产品性能体验等都没有Native App好
+            Web App 我们想更新就更新，用户看到的永远都是最新的
+
+            在移动端我们写的HTML页面不仅仅可以运行在浏览器中，还可以运行在Native App的webView中（我们也可以把webView理解为一个浏览器，安卓和苹果手机的webView都是webkit内核的）
+
+3、移动端事件
+    PC端：click、mouseover（mouseenter）、mousemove、mouseout（mouseleave）、mousedown、mouseup、mousewheel、keydown、keyup...
+
+    移动端：
+        我们的操作基本上都是靠手指完成的：单击、双击、长按、滑动、上滑、下滑、左滑、右滑、拖拽、缩放、旋转...但是这些都是常规的操作，移动端并没有提供对应的事件类型，所有的操作效果都是由接下来的几个事件类型模拟出来的
+        单手指事件类型：touchstart、touchmove、touchend、(touchcancle)
+        多手指事件类型：gesturestart、gesturechange、gestureend
+
+        制作单击事件库：排除双击 300ms内是否触发第二次touchstart
+                     排除长按 750ms内手指是否离开了屏幕
+                     排除滑动 手指在屏幕上是否发生了偏移，为了防止误操作，我们一般认为偏移值在30px/10px以内的不属于移动
+
+        滑动方向：
+            计算出x轴和y轴的偏移值，如果changeX>changeY，说明是左右滑动，反之是上下滑动
+            假设是左右滑动，偏移值是负数，肯定是向左滑，偏移值是正数肯定是向右滑，上下滑同理
+
+4、移动端的click？
+    在移动端使用click会存在300ms的延迟
+
+    解决300ms延迟的问题只能把click替换为touchstart、touchmove、touchend，如果自己替换写代码很麻烦，我们可以使用fastclick.js来处理
+
+5、移动端事件操作常用的事件库
+    百度云的touch手势事件库 touch-0.2.14.min.js
+    hammer.js 国际上常用的手势事件库
+    Zepto.js 做pc端如果需要类库我们第一个想到的是JQ，同样在移动端如果需要类库，第一个想到的就是Zepto
+
+    Zepto PK jquery
+        Z比Q更小更轻量级，更适合移动端的使用 => 为什么会小？Z中没有处理低版本浏览器的兼容，Z当中只提供了Q中部分常用的方法
+        Z在使用的时候它的用法和Q一模一样
+        Z中的动画支持css3的transform变形
+        Z中提供了很多移动端专用的事件方法，这些方法都是使用touch模型封装好的：tap点击、singleTap单击、doubleTap双击、longTap长按、swipe滑动、swipeLeft/Right/Down/Up各方向的滑动
+
+        $('#box').singleTop(function(ev){
+
+        });

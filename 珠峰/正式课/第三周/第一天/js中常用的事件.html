@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0px;padding: 0px; width: 100%;height: 100%;}
+    </style>
+</head>
+<body>
+<input id="input" type="text" placeholder="请输入"/>
+<span style="display: none;color: red">不能为空</span>
+<select id="select">
+    <option value="1">沈阳</option>
+    <option value="2">大连</option>
+    <option value="3">铁岭</option>
+</select>
+<input type="radio"/>
+<input type="radio"/>
+<input type="file"/><!--上传文件--><!--进度条-->
+</body>
+</html>
+<script>
+    //onfocus  当表单元素获得焦点的时候
+    var input=document.getElementById('input');
+    input.onfocus=function(){
+        console.log(1);
+        console.log(this);
+    };
+    //onblur  当表单元素失去焦点的时候
+    input.onblur=function(){
+        console.log(2);
+        console.log(this.value);//可以通过表单元素的value属性拿到输入的值
+        var reg=/^\s*$/;
+        if(reg.test(this.value)){//验证通过说明什么也没有填，提示
+            this.nextElementSibling.style.display='block';
+            //document.write('<p style="color: red">输入不能为空</p>');
+        }
+    };
+
+    //onchange事件一般应用于下拉菜单
+    var sel=document.getElementById('select');
+    sel.onchange=function(){
+        console.log(this.value);
+    };
+    sel.onclick=function(){
+        console.log('我是被点击触发的');
+    };
+
+    //ondblclick 双击
+
+    //ondrag 拖拽
+
+    //oninput 键入
+    input.oninput=function(){
+        console.log(123);
+    };
+
+    //onkeydown  按键按下的时候
+    input.onkeydown=function(){
+        console.log(100);
+    };
+    //onkeypress  按键按下的过程中
+    input.onkeypress=function(){
+        console.log(200);
+    };
+    //onkeyup  按键弹起的时候
+    input.onkeyup=function(){
+        console.log(300);
+    };
+
+    //onload  加载完成  img的scr属性去加载图片，当加载完成时候会触发
+
+    //onmouseover
+    //onmouseout
+    //onmouseenter=onmouseover
+    //onmouseleave=onmouseout
+    //onmousedown鼠标按下的时候
+    //onmouseup 鼠标弹起
+    //onmousemove 鼠标移动
+    //onmousewheel 鼠标滚轮
+
+    //onresize  改变窗口大小
+    window.onresize=function(){
+        console.log('ok');
+    };
+    //onscroll  滚动条滚动的时候，也可以绑定给元素
+    window.onscroll=function(){
+        console.log('a');
+    };
+
+    //onsubmit 表单元素提交
+</script>

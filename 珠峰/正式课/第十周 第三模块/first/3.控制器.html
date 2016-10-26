@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--以哪一个模块来启用程序-->
+<html lang="en" ng-app="zfModule">
+<head >
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="firstCtrl">
+    {{name}}
+    {{age}}<!--父不可以找子-->
+</div>
+<div ng-controller="secondCtrl">
+    {{age}}
+    {{name}}
+</div>
+<!--控制器嵌套-->
+<div ng-controller="firstCtrl">
+    {{name}}
+    <div ng-controller="secondCtrl">
+        {{age}}
+        {{name}}<!--子可以找父-->
+    </div>
+</div>
+
+<div ng-controller="myCtrl">
+    {{arr[0]}}
+    {{obj.chain}}
+    {{fn()}}
+</div>
+<div ng-click="fn()">hello</div>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    /*不要污染全局变量 命名空间 调用过长 无法完全避免命名冲突
+    模块化  angular一切从模块开始
+
+    创建模块 模块名字,依赖的模块（没有依赖模块的话用[]）,fn配置函数
+    */
+    var app = angular.module('zfModule',[]);
+    //angular.module('zfModule');获取模块
+    //alert(app === angular.module('zfModule'));
+    //通过模块创建控制器，创建控制器后 买一送一 送一个$scope 是我们的viewModel
+
+    app.run(function($rootScope){
+       $rootScope.name='zfpx';//初始化全局变量 在run方法中配置
+    });
+
+    app.controller('firstCtrl',function($scope){
+        $scope.name = 'zhufeng';
+
+    });
+    app.controller('secondCtrl',function($scope){
+        $scope.age = 'aaa';
+        //$scope.name = 'xxx'
+    });
+    //数组仿压缩(上线开发的时候)
+    app.controller('myCtrl',['$scope','$rootScope',function(a,b){
+        a.age = 'aaa';
+        a.arr = [1,2,3,4];
+        a.obj = {chain:'语文'};
+        a.fn = function(){
+            alert(1);//最少执行两次
+            //return '中国';
+        }
+    }]);
+    //1.创建控制器时 会赠送一个$scope，作用范围和应用时所在的标签范围相同（和dom平齐）
+    //2.数据挂载在$scope上，才能是使用{{}}的方式取出内容
+    //3.控制器里不要操作dom 在link函数中
+    //4.控制器可以嵌套（dom标签可以嵌套）
+</script>
+</body>
+</html>

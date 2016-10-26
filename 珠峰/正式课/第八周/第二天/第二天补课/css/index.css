@@ -1,0 +1,61 @@
+.box .gray {
+  color: #eee;
+}
+nav ul .gray {
+  color: #eee !important;
+}
+#div1 {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+#div2 {
+  -webkit-transition: all 2s ease 0s;
+  -moz-transition: all 2s ease 0s;
+  -ms-transition: all 2s ease 0s;
+  -o-transition: all 2s ease 0s;
+  transition: all 2s ease 0s;
+}
+#div3 {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+div {
+  padding: 33px;
+}
+#div5 {
+  opacity: 0.8;
+  filter: alpha(opacity = 80);
+}
+.box1 {
+  background-color: black;
+}
+.box2 {
+  background-color: white;
+}
+.column-1 {
+  width: 25%;
+}
+.column-2 {
+  width: 50%;
+}
+.column-3 {
+  width: 75%;
+}
+.column-4 {
+  width: 100%;
+}
+.myclass {
+  box-shadow: inset 0 0 10px #555, 0 0 20px black;
+}
+.myclass2 {
+  transform: scale(2) rotate(45deg);
+}
+.header .menu {
+  border-radius: 5px;
+}
+.no-border-radius .header .menu {
+  background-image: url('images/button-background.png');
+}

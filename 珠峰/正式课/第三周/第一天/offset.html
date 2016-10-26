@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>判断是不是ie8</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function offset(ele){
+        var l=null;
+        var t=null;
+        l+=ele.offsetLeft;
+        t+=ele.offsetTop;
+        var par=ele.offsetParent;
+        while(par){
+            //判断是不是ie8
+            if(window.navigator.userAgent.indexOf('MSIE 8')===-1){
+                //满足条件的不是ie8，不是ie8需要正常情况下累加上边框
+                l+=par.clientLeft;
+                t+=par.clientTop;
+            }
+            l+=par.offsetLeft;
+            t+=par.offsetTop;
+            par=par.offsetParent;
+        }
+        return {left:l,top:t};
+    }
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;list-style: none;}
+        #div1{
+            width: 300px;
+            height: 200px;
+            background: red;
+            margin-left: 3px;
+        }
+        #div1 li{
+            width: 200px;
+            height: 30px;
+            background: green;
+            margin-top: 3px;
+        }
+        #div1 .c1{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" class="div1">
+        <ul>
+            <li>文本</li>
+            <li class="c1">闻</li>
+            <li></li>
+            <li>本<span></span></li>
+        </ul>
+    </div>
+    <span></span>
+
+    <p id="p1"></p>
+
+    <h1></h1>
+
+    <form action="url">
+        <input type="text" disabled/>
+        <input type="hidden"/>
+        <input type="submit" name="abcd"/>
+        <input type="reset" name="bdcsa"/>
+        <input type="checkbox"/>
+        <input type="checkbox" checked="checked"/>
+        <input type="checkbox" checked="checked" value="1"/>
+        <input type="checkbox"/>
+        <input type="checkbox"/>
+    </form>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    var div1 = document.getElementById('div1');
+    //把原生对象包装成jq对象
+    var $div1 = $(div1);//把原生对象转化成一个jq对象，就是在原有基础上使用$()包装一下即可
+
+    //如何把一个jq对象转化成原生对象  用get方法
+    var $p=$('#p1');//jq实例
+    console.log($p.get(0));//这个就是把这一个jq对象转化成原生对象
+</script>

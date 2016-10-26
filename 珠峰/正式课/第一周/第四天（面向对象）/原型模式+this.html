@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Fn(){
+        this.x=100;
+        this.y=200;
+    }
+    Fn.prototype.x=200;
+    Fn.prototype.getX=function(){
+        console.log(this.x);
+    }
+    var f1=new Fn();
+    var f2=new Fn();
+    f1.getX();//
+    f1.__proto__.getX();
+</script>

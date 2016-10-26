@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1">
+        <p></p>
+        <ul id="ul1">
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        /*
+        *   document.createElement('Tagname')创建一个元素
+        *   父级.appendChild（要添加的元素） //动态的在页面内添加元素，默认添加到末尾
+        *       ps：对于一个已经存在的元素就是更换这个元素在页面内的位置
+        *   父级.insertBefore（要加入的新节点，插入到那个节点前面）
+        *   父级.removeChild(要删除的子节点)
+        *   父级.replaceChild（new，old）
+        *   克隆节点 cloneNode(true)
+        * */
+        var div1=document.getElementById('div1');
+        var ul1=document.getElementById('ul1');
+        console.log(div1);
+        //创建一个div标签，并且把它添加到div的document构中
+        var oDiv=document.createElement('div');
+        oDiv.style.width='100px';
+        oDiv.style.height='100px';
+        oDiv.style.background='red';
+        div1.appendChild(oDiv);
+        //div1.insertBefore(oDiv,ul1);
+        div1.appendChild(ul1);
+        //删除节点
+        //div1.removeChild(ul1);
+        //div1.replaceChild(oDiv,ul1);
+        var newUL1=ul1.cloneNode(true);
+        div1.appendChild(newUL1);
+        /*
+        * js中获取、设置和删除标签行内属性：都会改变html结构
+        *    setAttribute(“属性名”，“属性值”)
+        *    getAttribute('属性名')
+        *    removeAttribute('属性名')
+        * */
+        div1.setAttribute('name','zhufeng');//给元素div1添加新的属性名和属性值
+        console.log(div1.getAttribute('name'));//通过属性名获取属性值
+        //div1.removeAttribute('name');//删除行内属性
+    </script>
+</body>
+</html>

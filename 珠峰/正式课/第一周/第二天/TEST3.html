@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <itle></itle>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary=[100,200];
+    function fn(ary){//var ary；ary被赋值的是全局变量ary所指向的地址所以共用一个数组
+        ary[ary.length]=300;
+        var ary=ary.slice();//把一个新数组复制给ary变量==>把ary这个私有变量赋值，ary已经不再代表以前的数组了
+        //是一个新数组的引用地址
+        ary[0]=[100];
+        ary.length--;
+        console.log(ary);
+    }
+    fn(ary);
+    console.log(ary);
+
+</script>

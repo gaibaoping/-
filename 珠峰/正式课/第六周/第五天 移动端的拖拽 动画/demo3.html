@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul li{
+            width: 100px;
+            height: 30px;
+            background: green;
+            list-style: none;
+            margin: 10px 0;
+        }
+        #div1{
+            width: 200px;
+            height: 100px;
+            background: yellow;
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li draggable="true"></li>
+        <li draggable="true"></li>
+        <li draggable="true"></li>
+    </ul>
+    <div id="div1"></div>
+    <img src="1.png" alt=""/>
+    <!--multiple可以选择多张图片
+        accept='image/*'只能选择图片
+    -->
+    <input type="file" multiple id="file1"/>
+    <input type="button" value="确定" id="btn"/>
+    <div id="div2" style="width: 300px ;height: 300px"></div>
+</body>
+</html>
+<script>
+    var oLis = document.querySelectorAll('ul li');
+    var img = document.querySelector('img');
+    [].forEach.call(oLis,function(item,index){
+        item.addEventListener('dragstart',dragstart,false);
+        item.addEventListener('drag',drag,false);
+        item.addEventListener('dragend',dragend,false);
+    });
+    function dragstart(e){
+        this.style.background = 'orange';
+        e.dataTransfer.setDragImage(img,100,100);
+    }
+    function drag(e){
+        this.style.background = 'blue';
+    }
+    function dragend(e){
+        this.style.background = 'green';
+    }
+    var oDiv = document.getElementById('div1');
+    oDiv.ondragenter=function(){
+        this.innerHTML='可以释放鼠标了';
+    };
+
+    //files
+    var input1 = document.querySelector('#file1');
+    var btn = document.querySelector('#btn');
+    btn.onclick = function(){
+        var files = input1.files;
+        for(var i =0; i<files.length;i++){
+            showImg(files[i]);
+        }
+    };
+    var oDiv2 = document.querySelector('#div2');
+    function showImg(file){
+        var name = file.name;
+        var size = Math.floor(file.size/1024);
+        var type = file.type;
+        if(!/image\//.test(type)){
+            return false;
+        }
+        if(size>500){
+            return false;
+        }
+        if(typeof FileReader == 'undefined'){
+            alert('不支持');
+        }else{
+            var reader = new FileReader();
+            reader.readAsDataURL(file);//把文件以DataURL形式读取到，并显示出来
+            reader.onload = function(){
+                //console.log(this.result);
+                //console.log(file.type);
+                oDiv2.innerHTML = '<img src="'+this.result+'"/><span>'+file.type+'</span>';
+            }
+        }
+    }
+</script>

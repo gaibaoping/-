@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">放苦啊</div>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    //show() 显示 hide() 隐藏  如果添加数字就是一个简单动画
+    //slideDown() slideUp()
+    $('#div1').hide(300).show(300).slideUp(1000).slideDown(1000).slideToggle(1000).slideToggle(1000).fadeOut(500).fadeIn(500);
+
+    //animate() jQuery动画的核心方法
+    //stop() 方法在动画开始之前先调用一次清除上一个可能存在的动画
+    //finish() 用的不多
+    $('#div1').animate({width:200},500,'linear',function(){
+        console.log(1);
+    });
+</script>

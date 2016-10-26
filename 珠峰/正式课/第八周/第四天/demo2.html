@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*html{
+            font-size: 100px;/!*100px = 1rem 为了方便计算，设定了一个标准的值*!/
+         }*/
+         /*@media all and (device-width: 320px){
+             html{
+                 font-size: 50px;
+             }
+         }*/
+         #div1{
+             width: 0.86rem;
+             height: 0.86rem;
+             background: red;
+         }
+        /*设计稿宽度/设备的宽度 = 100/设备的根元素字体大小
+        假设设备宽度是375,640/375 = 100/x（375宽度的设备大小）
+        x = 375/640*100
+        */
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<!--移动适配：是指页面在不同尺寸的移动设备上，显示的效果和设计稿是一样的
+说白了是：设计一套页面，在不同尺寸的设备上，页面的间隙，留白，图片大小等发生变化，但是比例和设计稿是一样的
+rem相对于根元素的字体大小，根据不同的设备，更改根元素的字体大小即可
+-->
+<script>
+    var desW = 640;
+    var winW = document.documentElement.clientWidth;
+    var desWfontSize = 100;//假设设计稿宽度的设备上，根元素字体大小是100px；
+    //设备缩小多少倍，设备的根元素字体大小就缩小多少倍
+    //这个设备的根元素字体大小
+    document.documentElement.style.fontSize = winW/desW*desWfontSize + 'px';
+</script>
+</body>
+</html>

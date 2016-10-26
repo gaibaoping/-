@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Fn(){
+        this.index=10;
+    }
+    Fn.prototype.sum=function(){
+        console.log(this.index);
+    };
+    //两种方式的区别：视频17课时
+    var f=new Fn;
+    var f2=new Fn;
+    /*
+    * 首先确定方法中的this：就看方法名前面是否有点，点前面是谁this就是谁
+    * 然后到方法中把出现的this替换成对应的代码
+    * 然后根据代码按照原型链查找的机制把对应的结果找到即可
+    * */
+    f.sum();//f.index==>10
+    f.__proto__.sum();//undefined f.__proto__.sum()==>Fn.prototype.sum()==>Fn.prototype.index==>Object.prototype.index==>undefined  在IE浏览器中报错'无法获取未定义或null引用的属性'， 'sum'：它的意思是IE浏览器中没有__proto__这个属性，但是其实是IE下有这个属性只不过IE不让我们用而已，就怕我们自己把内置类的原型给更改了，这样就不安全了。。。
+
+    //f.sum()和 Fn.prototype.sum()是不相等的，因为sum执行的过程中this不同
+</script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 480px;
+            height: 75px;
+            margin: 30px auto;
+            position: relative;
+        }
+        .box .imgsWrap div{
+            width: 100px;
+            height: 75px;
+            display: inline-block;
+        }
+        .box div img{
+            width: 100%;
+            height: 100%;
+            border: none;
+            vertical-align: top;
+        }
+        .box .big{
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="imgsWrap">
+            <div><img src="images/apple_1.jpg" big="images/apple_1_bigger.jpg"/></div>
+            <div><img src="images/apple_2.jpg" big="images/apple_2_bigger.jpg"/></div>
+            <div><img src="images/apple_3.jpg" big="images/apple_3_bigger.jpg"/></div>
+            <div><img src="images/apple_4.jpg" big="images/apple_4_bigger.jpg"/></div>
+        </div>
+        <div class="big"><img src=""/></div>
+    </div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script src="js/animate.js"></script>
+<script>
+    //1 当鼠标进入到几张小图片的时候，让跟随的大图片显示，并且立刻把新的位置计算出来然后赋值
+    //2 鼠标当前的坐标-box的距离浏览器的左偏移量+10px左右的偏移就是大图片的left值
+
+    var box = utils.getElesByClass('box')[0];
+    var bigImg = utils.getElesByClass('big',box)[0];//大图片
+    var imgs = utils.getElesByClass('imgsWrap')[0].getElementsByTagName('img');//所有点图片
+
+    for(var i = 0; i<imgs.length; i++){//给每张小图片绑定事件
+        imgs[i].onmousemove = function (e){//鼠标在图片上移动就会触发
+            e = e || window.event;
+            utils.css(bigImg,'display','block');//先把大图片显示出来
+            animate(bigImg,{width:400,height:300},500);//让这个大图片动画显示
+            utils.children(bigImg)[0].src = this.getAttribute('big');//给大图换图片
+            var l = e.clientX - box.offsetLeft + 10;//大图片相对于box的定位的left值
+            var t = e.clientY - box.offsetTop + 10;
+            utils.css(bigImg,'left',l);
+            utils.css(bigImg,'top',t);
+        };
+        imgs[i].onmouseout = function(){
+            utils.css(bigImg,'display','none');
+            utils.css(bigImg,'width',0);
+            utils.css(bigImg,'height',0);
+            console.log(utils.css(bigImg,'width'));
+        }
+    }
+</script>

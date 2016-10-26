@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        html,body{
+            width: 100%;
+            height: 300%;
+        }
+        ul{
+            list-style: none;
+            width: 30%;
+            float: left;
+        }
+        ul:nth-child(2){/*只有css3可用*/
+            margin: 0 5%;
+        }
+        .top{
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 10px solid black;
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            color: white;
+            line-height: 100px;
+            text-align: center;
+            font-size: 60px;
+            text-decoration: none;
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+    <a class="top" href="javascript:void 0">顶</a><!--阻止a标签的默认行为-->
+</body>
+</html>
+<script src="../../方法/utils.js"></script>
+<script>
+    //向每一个ul中添加li元素，一共添加50个
+    var uls=document.getElementsByTagName('ul');
+    var ulsAry=utils.listToArray(uls);
+    function createLi(){
+        for(var i=0;i<50;i++){
+            var li=document.createElement('li');//创建一个li元素
+            var ran=utils.getRandom(100,300);//[100,300]
+            utils.setCss(li,'height',ran);//给li设置高度范围是100-300px
+            li.style.backgroundColor='rgb('+utils.getRandom(0,255)+','+utils.getRandom(0,255)+','+utils.getRandom(0,255)+')';//随机的背景色
+            //放到ul中，并且放到高度最小的ul中，我需要给ul排序
+            //按高度排序
+            ulsAry.sort(function(a,b){
+                return utils.getCss(a,'height')-utils.getCss(b,'height');
+            });
+            var shortUl=ulsAry[0];//高度最小的ul
+            shortUl.appendChild(li);
+        }
+    }
+    createLi();
+    console.log(utils.win('scrollHeight'));
+    window.onscroll=function(){
+        var scrollHeight=utils.win('scrollTop');//当前已经滚出去的高度
+        if(scrollHeight>utils.win('scrollHeight')-2800){//还差600像素的时候滚动到页面内容最底部的时候，再重新创建50个
+            createLi();
+        }
+    };
+    //回顶部
+    var top=document.getElementsByClassName('top')[0];
+    var timer=null;
+    top.onclick=function(){
+        /*
+         *   由于点击一次就会形成一个新的定时器去驱动滚动条向上运动，有可能在运动还没有到达终点之前，这个定时器里的任务还在继续。那么页面内就存在两个或者多个定时器同时驱动滚动条运动。形成了一个定时器累积问题。
+         *   处理方式: 无论上一次定时器是否已经清除，只要有新的定时器就把上一次清除,不管上一个定时器是否已经把任务执行完。
+         *
+         * */
+        window.clearInterval(timer);
+        var duration = 500;
+        //匀速
+        var distance = utils.win('scrollTop') - 0;
+        var speed = distance / duration;
+        timer=window.setInterval(function(){
+            //每10ms在scrollTop这个值的基础上减去一定的值。然后把每次减之后的值重新赋值回去.
+            //减速
+            /*var distance = utils.win('scrollTop') - 0;
+             var speed = distance/duration;*/
+            var scrollTop=utils.win('scrollTop');//每次需要获取当前的滚出去的高度
+            if(scrollTop==0){//当已经回到顶部之后需要清除定时器
+                window.clearInterval(timer);
+            }
+            scrollTop-=5;//在当前的基础上减去5
+            utils.win('scrollTop',scrollTop);//把减去5之后的值重新赋值回去才会生效
+            // 每10ms执行一次这个函数，然后下一次执行的时候获取就是这一次赋值之后的结果
+            console.log(scrollTop);
+        },10);
+
+        //utils.win('scrollTop',0);
+    }
+</script>

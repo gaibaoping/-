@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function fn(num){
+        return function (){
+            ++num;//由于执行这行代码把fn作用域内的num从10变成11
+            console.log(num);
+        };
+    }
+    var f=fn(10);
+    f();//11 把第一次运行fn产生的私有作用域内的私有num的值修改成了11
+    var f1=fn(10);//这是fn第二次运行，又会形成一个新的私有作用域和第一次执行产生的作用域没有任何关系，这个作用域内的私有的num还是10
+    f1();//11
+    f();//12
+
+    var f3=fn(20);
+    f3();
+
+    var num;
+    function fn(){
+        //var num=30;
+        return function(n){
+            console.log(n+ ++num);
+        }
+    }
+    var f=fn(30);
+    f(3);
+    f(4);
+
+</script>

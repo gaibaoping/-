@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let a='aa';
+    a = 'bb';//let定义的块元素可以被修改
+    if ( true ) {
+        let a='aaa';
+        console.log(a)
+    }
+    console.log(a);
+
+    const MAX_LEM = 10;
+    //const MAX_LEM = 12;
+    //MAX_LEM = 12;//const定义的变量是无法被修改的
+    { const MAX_LEM=12; }//对全局的没有影响
+    console.log(MAX_LEM);
+</script>

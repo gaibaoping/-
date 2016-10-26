@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+}
+html,body{
+    width: 100%;
+    overflow: hidden;
+    color: #555;
+    font-size: 14px;
+}
+input{
+    outline: none;
+}
+
+.box{
+    margin: 10px auto;
+    padding: 10px;
+    width: 500px;
+    border: 2px solid green;
+}
+.box div{
+    height: 50px;
+    line-height: 50px;
+}
+.box div span{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+}
+.box div input{
+    display: inline-block;
+    padding: 0 10px;
+    width: 350px;
+    height: 30px;
+    line-height: 30px;
+}
+#userName,#userAge{
+    width: 175px;
+}
+.box div.submit{
+    margin: 20px auto;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    background: green;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div1{
+            margin: 30px;
+            /*margin-top: 1000px;*/
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        #link{
+            margin-left: 30px;
+            display: block;
+            width: 100px;
+            height: 30px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <a id="link" href="https://www.baidu.com/"></a>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    div1.onclick = function(e){
+        e = e || window.event;//处理事件对象兼容性问题
+        //console.log(arguments);
+        //console.log(arguments[0]);
+        //console.log(e);
+        console.log(e.clientX);
+        console.log(e.clientY);
+        //处理e.pageX/Y的兼容性问题
+        e.pageX = e.pageX || (document.documentElement.scrollLeft || document.body.scrollLeft) + e.clientX;
+        e.pageY = e.pageY || (document.documentElement.scrollTop || document.body.scrollTop) + e.clientY;
+
+        console.log(e.pageX);//在ie6-8中没有这个属性
+        console.log(e.pageY);
+
+        console.log(e.type);//记录的事件类型 ==> 当前绑定的是什么事件 click/dbclick
+    };
+    /*
+    *  事件被触发的时候，浏览器会默认给函数传一个叫事件对象的参数，鼠标事件就会传一个叫做MouseEvent的对象
+    *       MouseEvent：
+    *           clientX：鼠标的X轴坐标  距离浏览器窗口的
+    *           clientY：鼠标的Y轴坐标  距离浏览器窗口的
+    *
+    *           pageX：鼠标距离页面左上角的X轴距离
+    *           pageY：鼠标距离页面左上角的Y轴距离
+    *
+    *           e.target:事件源
+    *           e.type:事件类型
+    *           e.preventDefault();
+    *           e.stopPropagation();
+    *
+    *      ie6-8中：事件对象存放在window.event这个属性上
+    *           pageX : (document.documentElement.scrollLeft || document.body.scrollLeft) + e.clientX;
+    *           pageY : (document.documentElement.scrollTop || document.body.scrollTop) + e.clientY;
+    *
+    * */
+    var link = document.getElementById('link');
+    link.onclick = function(e){
+        e = e||window.event;
+        e.preventDefault ? e.preventDefault(): e.returnValue = false;//阻止默认行为 a链接标签的默认跳转行为
+        return false;//也可以阻止默认行为，不用解决兼容性
+    }
+</script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;list-style: none;}
+        #div1{
+            width: 300px;
+            height: 200px;
+            background: red;
+            margin-left: 3px;
+            border: 10px solid;
+        }
+        #div1 li{
+            width: 200px;
+            height: 30px;
+            background: green;
+            margin-top: 3px;
+        }
+        #div1 .c1{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1" class="div1">
+    <ul>
+        <li>文本</li>
+        <li class="c1">闻</li>
+        <li></li>
+        <li>本<span></span></li>
+    </ul>
+</div>
+<span></span>
+
+<p id="p1"></p>
+
+<h1></h1>
+
+<form action="url">
+    <input type="text" disabled/>
+    <input type="hidden"/>
+    <input type="submit" name="abcd"/>
+    <input type="reset" name="bdcsa"/>
+    <input type="checkbox"/>
+    <input type="checkbox" checked="checked"/>
+    <input type="checkbox" checked="checked" value="1"/>
+    <input type="checkbox"/>
+    <input type="checkbox"/>
+</form>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    //width,height...都是定义在jQuery这个类的原型上的方法  只有jQ实例才能调用
+    var $div1=$('#div1');
+    //height(500)：如果写参数就是设置，如果不写就是获取
+    console.log($div1.height());
+    $div1.height(500);
+
+    //css方法
+    /*jQuery.prototype.css=function(){//保证链式调用的最根本原因
+        //...
+        return this;
+    };*/
+    $div1.css('width',100);
+    console.log($div1.css('width'));
+    $div1.css('height',400).css({'width':300,'background':'yellow'});//同时设置多个样式的时候需要一个对象参数
+
+    //offset 和 utils.offset()用法是相同的
+    console.log($div1.offset());
+
+    //position()相对于父元素的偏移
+    console.log($div1.position());
+
+    //scrollTop() scrollLeft()
+    console.log($div1.scrollTop(1000));//如果有参数就是设置，如果没有就是获取
+
+    //innerWidth  innerHeight==clientWidth clientHeight
+    console.log($div1.innerHeight());
+
+    //outerHeight outerWidth==offsetHeight offsetWidth
+    console.log($div1.outerHeight());
+</script>

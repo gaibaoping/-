@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 500px;
+            height: 300px;
+            /*background: -webkit-linear-gradient(left,red,blue);
+            background: -moz-linear-gradient(left,red,blue);
+            background: -ms-linear-gradient(left,red,blue);
+            background: -o-linear-gradient(left,red,blue);
+            background: linear-gradient(left,red,blue);*/
+            /*在移动端只需-webkit和标准浏览器支持的写法*/
+            background: linear-gradient(0deg,red,blue);/*标准浏览器*/
+            background: -webkit-linear-gradient(-90deg,red 0%,blue 50%,yellow 80%,yellow 50%);
+            /*渐变过渡区，去掉渐变过渡区就可以通过设置两个着色点（起始着色点和终点着色点）*/
+            background: -webkit-repeating-linear-gradient(top,red 0px,red 10px,blue 20px,blue 30px,yellow 40px,yellow 50px);
+            background-size: 100% 50px;/*100%宽  50px 高*/
+            background-repeat: repeat-y;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{width: 300px;margin: 30px auto;}
+        #div1 ul{list-style: none;padding: 10px;}
+        #div1 ul li{width: 200px; height: 40px;background-color: darkturquoise;margin: 5px 0;font-size: 30px;line-height: 40px;text-align: center;}
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+    //
+    var div1=document.getElementById('div1');
+    var ul=div1.getElementsByTagName('ul')[0];
+    var lis=ul.getElementsByTagName('li');
+    console.log(lis);
+    //排序，需要先把它转化成数组
+    function fn(likeArray) {//类数组转化成数组
+        try {
+            return Array.prototype.slice.call(likeArray, 0);
+        } catch (e) {
+            var ary = [];
+            for (var i = 0; i < likeArray.length; i++) {
+                ary[ary.length] = likeArray[i];
+            }
+            return ary;
+        }
+    }
+    var lisAry=fn(lis);
+    console.log(lisAry);
+    lisAry.sort(function(a,b){return b.innerHTML-a.innerHTML;});
+    console.log(lisAry);//排序之后的数组
+
+    //把排好序的数组中的每一项（dom映射关系存在的那个li）重新填回到页面中
+    //appendChlid
+    for(var i=0;i<lisAry.length;i++){
+        //debugger;
+        ul.appendChild(lisAry[i]);
+    }
+    //不难发现：是把页面中的li元素按照排好的顺序重新排列
+</script>

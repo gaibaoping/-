@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body></body>
+</html>
+<script type="text/javascript">
+    var num=12;//15==>14第一次执行fn的时候变成了14
+    var obj={//obj存储的就是这个对象的地址
+        num:3,//obj.num=3 第二次执行obj.fn的时候被this.num-=1==>2
+        fn:(function(num){//var num=12==>14==>5;
+            num+=2;//14
+            this.num+=3;//15 window.num+=3==>15
+            var num=5;//从这行代码之后num=5，第一次fn执行的时候把num从5-=1变成了4，第二次执行obj.fn的时候，这个4又被改了一次变成了3
+            return function(){
+                num-=1;//4 第一次把fn执行把上一级作用域的num修改了
+                this.num-=1;//14  2
+                console.log(num);//4私有作用域没有到上一级获取
+            }
+        })(num)//这个实参是12
+    };
+    var fn=obj.fn;//fn和obj.fn共用自运行函数返回的那个匿名函数的内存地址
+    fn();//4
+    obj.fn();//3
+    console.log(num,obj.num);//14 2
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>长方体</title>
+    <style type="text/css">
+        .wrap{
+            width: 300px;
+            height: 200px;
+            margin: 200px auto;
+            -webkit-perspective: 2000px;
+            perspective: 2000px;
+        }
+        .item{
+            width: 100%;
+            height: 100%;
+            -webkit-transform-style: preserve-3d;
+            list-style: none;
+            transform-origin: 100px 100px -100px;
+            animation: move 5s infinite both;
+        }
+        .item li{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 200px;
+            border: 2px solid #000000;
+            color: #ffffff;
+            font-size: 60px;
+            text-align: center;
+            background: rgba(152,251,152,0.5);
+        }
+        .item li.left,.item li.right{
+            width: 100px;
+            height: 200px;
+            left: 100px;
+            background: rgba(152,25,12,0.5);
+        }
+        .item li.left{
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+        .item li.right{
+            transform:rotateY(90deg) translateZ(150px);
+        }
+        .item li.top,.item li.bottom{
+            width: 300px;
+            height: 100px;
+            top: 50px;
+            background: rgba(0,0,62,0.5);
+        }
+        .item li.top{
+            transform: rotateX(90deg) translateZ(100px);
+        }
+        .item li.bottom{
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+        .item li.front{
+            transform: translateZ(50px);
+        }
+        .item li.back{
+            transform: translateZ(-50px);
+        }
+        @keyframes move {
+            0%{
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+
+            100%{
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="item">
+        <li class="front">1</li>
+        <li class="back">2</li>
+        <li class="left">3</li>
+        <li class="right">4</li>
+        <li class="top">5</li>
+        <li class="bottom">1</li>
+    </ul>
+</div>
+</body>
+</html>

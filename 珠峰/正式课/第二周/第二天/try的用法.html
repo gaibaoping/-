@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+     *  try{
+     *       先尝试try里面的代码，如果报错了那么就直接再使用catch中的代码
+     *  }catch(e){
+     *       只有try的代码报错了才会执行catch中的代码
+     *       其中这个e对象中存放了报错的信息 e.message
+     *  }
+     * */
+    function listToArray(likeArray){//把类数组转化成数组
+        try{
+            return Array.prototype.slice.call(likeArray);
+        }catch(e){
+            console.log(e);//看看是什么错误
+            var ary=[];
+            for(var i=0;i<likeArray.length;i++){
+                ary.push(likeArray[i]);
+                //throw new Error('这是我自己写的'); //可以认为是主动在控制台内报错误
+            }
+            return ary;
+        }
+    }
+    var res=listToArray([1,2,3]);
+    console.log(res);
+</script>

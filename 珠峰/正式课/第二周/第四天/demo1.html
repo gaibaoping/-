@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //非空验证正则  应用于表单注册必须填入内容的input
+    var reg=/^\s*$/;//可以匹配所有的空
+    console.log(reg.test('  '));
+
+    //有效数字  0 +0 -0 +0.03 -1865.155 8 532.515
+    var reg=/^[+-]?(\d|[1-9]\d+)(\.\d+)?$/;
+
+    //简单的邮箱验证
+    //121170784@qq.com
+    //tianxi@163.com
+    //tianxi@sina.com.cn
+
+    var reg=/^[\w.]+@[0-9a-zA-Z]{1,30}(\.[a-zA-Z]{2,4}){1,2}$/;
+    console.log(reg.test('251821167@qq.com'))
+
+    //18-65  18-19  20-59  60-65
+    var reg=/^(1[8-9]|[2-5][0-9]|6[0-5])$/;
+
+    //身份证  211224 19860319 8210/x
+
+
+</script>

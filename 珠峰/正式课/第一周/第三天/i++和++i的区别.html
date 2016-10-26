@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 如果i++后者++i自己出现在一行没有区别，都是自身累加1
+    * 如果i++和++i和其他值做运算的时候就有区别了，++i是先累加后运算，而i++是先运算后累加，累加是把自己累加，运算是和别人运算
+    * */
+    var i=0;
+    //i++;
+    ++i;
+    console.log(i);
+
+    var j=0;
+    //console.log(2+j++);
+    console.log(2+ ++j);
+
+    var k=2;
+    console.log(3+ k++ + ++k + ++k + k++);
+    console.log(k);
+
+</script>

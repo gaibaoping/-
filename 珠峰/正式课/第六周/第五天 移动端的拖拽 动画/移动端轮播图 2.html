@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;list-style: none;}
+        #outer{
+            height: 300px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        #inner{
+            width: 500%;
+            height: 100%;
+        }
+        #inner li{
+            width: 20%;
+            height: 100%;
+            float: left;
+        }
+        #inner li:nth-child(1){
+            background: red;
+        }
+        #inner li:nth-child(2){
+            background: yellow;
+        }
+        #inner li:nth-child(3){
+            background: green;
+        }
+        #inner li:nth-child(4){
+            background: pink;
+        }
+        #inner li:nth-child(5){
+            background: blue;
+        }
+        #items{
+            position: absolute;
+            right: 5%;
+            bottom: 5%;
+        }
+        #items span{
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            background: #000;
+            color: #fff;
+        }
+        #items span.cur{
+            background: orange;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div id="outer">
+        <ul id="inner">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <div id="items">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var slider = {
+        init:function(ele){
+            this.inner = ele.inner||{};
+            this.oLis = ele.oLis||{};
+            this.oSpan = ele.oSpan||{};
+            var that = this;
+            [].forEach.call(this.oLis,function(item,index){
+                item.index = index;
+                item.addEventListener('touchstart',that.start,false);
+                item.addEventListener('touchmove',that.move,false);
+                item.addEventListener('touchend',that.end,false);
+            })
+        },
+        start:function(e){
+            this.startX = e.changedTouches[0].pageX;//按下时坐标
+            this.time = +new Date();//按下去的时间
+        },
+        move:function(e){
+            this.flag = true;//点击不触发方法
+            var moveX = e.changedTouches[0].pageX;
+            var time = +new Date();
+            var index = this.index;
+            if(time - this.time>25){//滑动事件大于25ms的时候才让其滑动
+                var movePos = moveX - this.startX;//滑动的距离
+                this.movePos = movePos;
+                //当前位置（ul向左移动多少距离到当前这一屏）
+                var offset = -this.offsetWidth*index;
+                var pos = offset + movePos;
+                //ul移动的距离
+                slider.inner.style.webkitTransform = 'translate('+pos+'px)';
+            }
+        },
+        end:function(e){
+            if(this.flag){
+                var index = this.index;
+                var len = slider.oLis.length;
+                if(this.movePos>0){//右滑动
+                    //上一张索引
+                    this.nPreveSIndex = index == 0?len-1:index-1;
+                }else if(this.movePos<0){//左滑动
+                    //下一张索引
+                    this.nPreveSIndex = index == len - 1?0:index+1;
+                }
+                var pos = -this.offsetWidth*this.nPreveSIndex;//上一张或下一张当前位置
+                slider.inner.style.webkitTransform = 'translate('+pos+'px)';
+                slider.inner.style.webkitTransition = '0.3s';//增加动画过渡效果
+                var nIndex = this.nPreveSIndex;
+                slider.inner.addEventListener('webkitTransitionEnd',function(){
+                    this.style.webkitTransition = '';//相当于清除动画积累
+                    slider.setItem(nIndex);//动画结束后设置焦点选中效果
+                },false);
+            }else{
+                this.flag =false;
+            }
+        },
+        setItem:function(nIndex){
+            [].forEach.call(this.oSpan,function(item){
+                item.className = '';
+            });
+            this.oSpan[nIndex].className = 'cur';
+        }
+    };
+    var obj = {
+        inner:document.querySelector('#inner'),
+        oLis:document.querySelectorAll('#inner li'),
+        oSpan:document.querySelectorAll('#items span')
+    };//真实的初始化数据
+    slider.init(obj);
+</script>

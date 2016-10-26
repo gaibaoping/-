@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    'use strict';//以下代码按照严格模式
+
+    function f1(){
+        console.log(this);
+    }
+    f1.call(null);//window、undefined
+    f1.call(undefined);//window、undefined
+    f1.call();//没有参数的时候在非严格模式下是window，在严格模式下是undefined
+
+    (function (){
+        console.log(this);//window  在严格模式下是undefined
+    })();
+
+    f1();//window 在函数执行的时候如果前面没有点那么函数中this在严格模式下是undefined
+</script>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //1、解决DOM二级事件的绑定方法的不同的这个问题
+    //IE里用attachEvent,标准浏览器用addEventListener，现在统一用bind来绑定事件，用unbind来移除事件
+    //2、绑定到事件上的方法，在事件触发运行的时候，this要指向被绑定的元素
+    //解决this关键字最核心的代码是：ele.attachEvent('on'+type,function(){fn.call(ele)})
+    //通过这两个方法，逐渐培养思想：跨作用域考虑代码的写法（在一个方法里的代码，是为了另外一个方法能够工作）
+    /*
+    * bind方法：负责完成DOM2级事件的绑定
+    * 三个参数：ele被绑定事件的元素，type是事件类型，fn是绑定在事件上的方法
+    *
+    * */
+    function bind(ele,type,fn){
+        if(ele.addEventListener){
+            ele.addEventListener(type,fn,false);
+        }else{
+            //ele.attachEvent('on'+type,fn);
+                //如果不考虑事件上的方法被移除，则下一行代码就够了
+            //ele.attachEvent('on'+type,function(){fn.call(ele);});
+            //现在需要第一步：
+               //把function(){fn.call(ele)}保存下来
+            //第二步：把这个方法不但保存下来，还要能够通过fn将其识别出来
+            //所以：就需要做一下工作
+            //第一步：有一个保存路径fn改造而来的那些方法的数组
+            if(!ele['aBind'+type]){
+                ele['aBind'+type] = [];//aBind叫属性的前缀，type叫数组的区分符。区分符的作用就是把绑定在不同的事件类型上的方法，保存到不同的数组中
+            }
+            var a = ele['aBind'+type];
+            for(var i = 0; i< a.length;i++){
+                if(a[i].origin == fn){
+                    return;
+                }
+            }
+            //第二步：改造fn是fn无论在什么情况下被执行，它的this都要指向ele
+            var fnTemp = function (){
+                fn.call(ele);
+            };
+            //第三步：把被改造的方法保存下来
+            a.push(fnTemp);
+            //把被改造的方法fnTemp绑定到type事件上
+            ele.attachEvent('on'+type,fnTemp);
+            //给被改造方法加一个标识属性，以便在unbind里，能够通过此属性再通过fn把它的改造版的方法fnTemp识别出来
+            fnTemp.origin = fn;
+        }
+    }
+
+    function unbind(ele,type,fn){
+        if(ele.removeEventListener){
+            ele.removeEventListener('on'+type,fn);
+        }else{
+            //通过fn把真正绑定到事件上的那个方法识别出来
+            var a = ele['aBind'+type];
+            if(a&& a.length){
+                for(var i = 0; i< a.length;i++){
+                    if(a[i].origin == fn){
+                        ele.detachEvent('on'+type,a[i]);//然后移除
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+    * 解决绑定到事件上的方法的执行顺序问题的
+    * IE中无法解决顺序问题，我们把IE的事件机制推翻，然后重写一套机制，来解决这个问题
+    * 这是半个“订阅-发布”模式
+    *
+    * on方法==>负责约定、订阅、绑定====>把方法先保存到一个程序池（事件池）里
+    * run方法---通知机制---->去事先已经准备好的程序池里，遍历执行保存在里面的那些方法
+    * off方法
+    *
+    * */
+    function on(ele,type,fn){//负责挖程序池，并且把需要绑定的方法保存到程序池里
+        if(ele.addEventListener){
+            ele.addEventListener(type,fn,false);
+            return;
+        }
+        if(!ele['aEvent'+type]){
+            ele['aEvent'+type] = [];
+            ele.attachEvent('on'+type,function(){run.call(ele)});
+        }
+        var a = ele['aEvent'+type];
+        for(var i = 0; i< a.length; i++){
+            if(a[i] == fn){return;}
+        }
+        a.push(fn);
+        /*bind(ele,type,run);//触发run的执行代码*/
+        //不再使用bind方法来解决绑定的方法的this关键字的指向问题
+        //把run绑定在相对事件上，并且run运行的时候，run的this指向ele
+        //ele.attachEvent('on'+type,function(){run.call(ele)});
+        //给第104行代码，找一个安全的地方，无论on执行多少次，run的变形方法也不会被重复绑定
+    }
+    function run(){//负责找到对应的程序池，然后遍历执行这个数组里的所有相关方法
+        var e = window.event;
+        if(!e.target){
+            e.target = e.srcElement;
+            e.pageX = (document.documentElement.scrollLeft||document.body.scrollLeft)+ e.clientX;
+            e.pageY = (document.documentElement.scrollTop || document.body.scrollTop) + e.clientY;
+            e.preventDefault = function(){
+                e.returnValue = false;
+            };
+            e.stopPropagation = function(){
+                e.cancelBubble = true;
+            };
+            var type = e.type;
+            var a = this['aEvent'+type];
+            if(a&& a.length){
+                for(var i = 0;i< a.length;i++){
+                    if(typeof a[i]=='function'){
+                     a[i].call(this,e);//用call来执行a数组里的每个方法，是为了让数组里的方法在执行的时候，this指向被绑定的DOM元素
+                    }else{
+                        a.splice(i,1);
+                        i--;
+                    }
+                }
+            }
+        }
+    }
+    function off(ele,type,fn){//负责把对应的方法从程序池里移除
+        if(ele.removeEventListener){
+            ele.removeEventListener(type,fn,false);
+            return;
+        }
+        //for ie6-8
+        var a = ele['aEvent'+type];
+        if(a){
+            for(var i = 0; i < a.length; i++){
+                if(a[i] === fn){
+                    a[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+</script>

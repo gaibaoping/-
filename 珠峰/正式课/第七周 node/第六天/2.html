@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    //jQuery中AJAX操作，配置的每一个参数都有一些自己的特殊使用，和我们自己封装的AJAX库还是有区别，我们分装的没有他的全，思考题：首先查看jQuery文档或者搜一些文章，把jQuery中常用的配置参数怎么用有哪些特殊的地方去总结，最正确可以把我们的AJAX库进行升级，最后让我们的AJAX库也可以达到jQuery的效果
+    //ajax
+    /*$.ajax({
+        url:'data.json',
+        type:'get',
+        dataType:'text',
+        cache:false,
+        async:true,
+        success:function(result){
+            console.log(result)
+        },
+        error:function(msg){
+
+        }
+    });*/
+
+    //JSONP
+    //jQuery在处理JSONP请求的时候，会默认的帮我们在请求地址的后面传递一个?callback=jQuery111305562199694010632_1476157695849&_=1476157695850 这个函数是JQ随机创建的函数，可以理解为就是success后面配置的那个匿名函数
+    $.ajax({
+        url:'http://localhost:86/getAll',
+        type:'get',
+        dataType:'jsonp',
+        jsonp:'cb',//设置传递函数名的那一个属性不是默认的callback了而是cb
+        jsonpCallback:'fn',//设置传递给服务器的函数名不是随机生成的那个而是我们指定的fn
+        //cache:false,//这个可以不用加，因为JSONP都是GET请求，所以JQ都会给追加一个随机数来清缓存
+        async:true,
+        success:function(result){
+            console.log(result)
+        },
+        error:function(msg){
+
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //字面量：不能使用变量
+   /* var name='tianxi';
+    var reg=/name/;//name根本就不是变量
+    console.log(reg.test('name'));*/
+
+    //实例:使用这种创建方式的第一个参数是一个字符串，其实就是放在字面量方式两个斜杠中间的
+    //    ps:如果正则中要想使用变量只能使用实例的创建方式
+    //  实例创建方式第二个参数是i m g  修饰符
+
+    var reg=new RegExp('name');//  /name/
+    console.log(reg);
+    console.log(reg.test('name'));
+
+    var name='tianxi';
+    var reg=new RegExp(name+7,'g');//'tianxi7'  /tianxi7/
+    console.log(reg.test('tianxi7'));
+
+    //当需要动态正则，考虑用实例创建方式
+/*
+    var ary=['a','b','c'];
+    for(var i=0;i<ary.length;i++){
+        var reg=new RegExp(ary[i],'g');
+        console.log(reg);
+        }
+*/
+    //实例创建方式的时候，如果使用特殊的元字符\d  \w需要在第一次参数里用'\'转义
+    var reg=new RegExp('\\d');
+    console.log(reg.test('8'));
+
+
+
+</script>

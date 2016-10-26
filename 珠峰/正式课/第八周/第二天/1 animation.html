@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, yellow, red);
+            margin: 100px 0 0 100px;
+            border-radius: 50%;
+            animation: move 2s 1 reverse backwards;
+            /*animation-play-state: paused;*/
+        }
+            /*transform: translate(0,0);默认值是0*/
+        @keyframes move {
+            0%{
+                transform: translate(100px,100px);
+                -webkit-transform: translate(100px,100px);
+            }
+            50%{
+                transform: translate(200px,200px);
+                -webkit-transform: translate(200px,200px);
+            }
+            100%{
+                transform: translate(300px,100px);
+                -webkit-transform: translate(300px,100px);
+            }
+        }
+        @-webkit-keyframes move {
+            0%{
+                transform: translate(100px,100px);
+                -webkit-transform: translate(100px,100px);
+            }
+            50%{
+                transform: translate(200px,200px);
+                -webkit-transform: translate(200px,200px);
+            }
+            100%{
+                transform: translate(300px,100px);
+                -webkit-transform: translate(300px,100px);
+            }
+        }
+    /*控制元素何时执行动画效果，常用的有两种方式
+    1、通过增加、移除类名（id名）
+    2、animation-play-state 如果设置成running表示运行的，paused停止的
+    */
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

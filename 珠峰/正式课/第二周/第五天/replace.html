@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var str='zhufeng2015peixun2016';
+    //str=str.replace('2015','哈哈');//把已经替换好的返回的字符串重新赋值给str
+    //console.log(str);
+    /*
+    *   replace的用法：
+    *       第一个参数是正则，第二个参数是函数，函数的执行次数取决于这个正则能成功匹配多少次。
+    *       函数中的arguments内容：[正则匹配到的内容，1分组，2分组...index:索引值，input:原有字符串]
+    *       每次正则所匹配到的内容都会用函数的返回值替换
+    *       如果正则中存在分组，那么第二个参数如果不是函数，是"$1,$2"这样的字符串，$1和$2分别代表的是第一个分组和第二个分组所捕获到的内容，然后用内容去替换正则所匹配的字符
+    * */
+    str=str.replace(/(\d+)/g,function(item,index){
+        console.log(arguments);
+    })
+</script>

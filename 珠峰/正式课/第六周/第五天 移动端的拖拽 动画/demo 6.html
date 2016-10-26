@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #oA{
+            background: #cccccc;
+        }
+    </style>
+</head>
+<body>
+<canvas id="oA" width="500" height="500" ></canvas>
+</body>
+</html>
+<script>
+    var oA = document.querySelector('#oA');
+    var context = oA.getContext('2d');
+    context.fillStyle = 'red';
+    context.fillRect(0,0,100,100);
+    var data = oA.toDataURL('image/jpeg');
+    data = data.replace('data:image/jpeg;base64,','');
+    console.log(atob(data));
+    //ÿØÿà
+</script>

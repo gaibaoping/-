@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+//订阅发布模式它的意义是什么？（EventEmitter类的作用和意义）
+<!--
+    Drag产品使用说明和二次开发文档：
+        1、基本用法：
+            比如有DOM元素；var ele=document.getElementById('div1');
+            使此元素实例拖拽：new Drag(ele);
+        2、Drag类的基本结构：
+            Drag.prototype.down 准备拖拽方法 在mousedown事件触发
+            Drag.prototype.move 进行拖拽的方法
+            Drag.prototype.up   结束拖拽的方法
+            Drag类的实例obj上有四个值得注意的属性
+                obj.x,obj.y,obj.mx,obj.my
+                尤其是this.ele保存的被拖拽的DOM元素
+        3、扩展新的功能
+            使用事件绑定的方法来使拖拽实现新的功能
+            如果在拖拽开始的阶段扩展功能，则使用'dragstart'事件
+            用法如：
+                obj.on('dragstart',fn);
+            如果在拖拽进行的阶段扩展功能，可使用'dragging'事件
+            用法如：
+                obj.on('dragging',fn);
+            如果在拖拽结束的阶段扩展功能，可使用'dragend'事件
+            用法如：
+                obj.on('dragend',fn);
+    Drag产品升级版 1.1版
+        增加了一个限定拖拽的功能
+        obj.range({left:100,top:0,right:500,bottom:400});
+        表示此拖拽只能在水平方向从100到500，垂直方向从0到400的范围内进行拖拽
+
+        这个功能也可以不固化在Drag产品（不写在原型上），让用户自行开发也是可以的。
+
+    Drag产品升级版 1.2版
+        增加了一个拖拽时出现
+-->
+</body>
+</html>

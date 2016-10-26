@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //escape和unescape:如果我们是对中文汉字值进行编码的话，可以使用这种方式，但是这种方式其他的服务器端语言不支持
+    //  escape('珠峰培训')->
+    //  unescape
+
+    var url = 'http://www.zhufengpeixun.cn/info?name=珠峰培训&age=10';
+    //encodeURI decodeURI
+    var a = encodeURI(url);
+    console.log(a);
+    console.log(decodeURI(a));
+
+    var b = encodeURIComponent(url);
+    console.log(b);
+    console.log(decodeURIComponent(b));
+
+    //encodeURI PK encodeURIComponent
+    //encodeURI 只给中文进行编码
+    //encodeURIComponent  给所有的内容进行编码
+</script>

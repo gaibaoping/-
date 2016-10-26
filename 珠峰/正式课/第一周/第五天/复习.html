@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+    //单例模式的作用：把描述同一个事物的属性和方法放在相同的命名空间下，这样的话本命名空间下定义的方法就会和其他的命名空间下的方法不冲突（单例模式是项目中实现模块化开发一个最简单最基本也是最常见的方式）
+    var obj1={
+        fn:function(){}
+    };
+    var obj2={
+        fn:function(){}
+    };
+
+    //首先会把自执行函数执行，形成一个私有作用域A，把A的返回结果赋值给searchModule，此时searchModule指向xxxfff111，刚才形成的那个A私有作用域就不能销毁了，在A中定义的私有的变量和函数也都不会销毁了
+    //高级单例模式：因为此单例模式使用了js高级编程技巧”惰性思想“进行封装的
+    var searchModule=(function(){
+        var n=0;
+        function submit(){
+            n++;
+        }
+        function fn(){
+            submit();
+        }
+        return {
+            submit:submit,
+            fn:fn
+        }
+    })();
+    searchModule.submit();
+</script>

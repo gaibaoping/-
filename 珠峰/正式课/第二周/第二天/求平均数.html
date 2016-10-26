@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+    function avg(){//求平均数（去掉最高去掉取缔）
+        //首先需要把这些参数都拿到
+        var ary=[];
+        for(var i= 0;i<arguments.length;i++){
+            ary[ary.length]=arguments[i];
+        }
+        ary.sort(function(a,b){return a-b;});
+        console.log(ary);
+        ary.shift();
+        ary.pop();
+        return eval(ary.join('+'))/ary.length;
+    }
+    console.log(avg(1,6,5,3,9,8));
+
+    //你见过类数组有哪些：arguments
+    var lis=document.getElementsByTagName('li');
+    // htmlLiElement==>htmlElement==>element==>nodea==>eventTarget==>Object  dom元素的原型链==>原型链上的所有方法都可以使用。
+</script>
