@@ -8,7 +8,7 @@
 <body ng-controller="carCtrl">
 <table class="table table-bordered ">
     <tr>
-        <th><input type="checkbox" ng-model="selectAll" ng-click="check(products)">全选</th>
+        <th><input type="checkbox" ng-model="selectAll" ng-click="check(selectAll)">全选</th>
         <th>商品名称</th>
         <th>单价</th>
         <th>数量</th>
@@ -16,7 +16,7 @@
         <th>操作</th>
     </tr>
     <tr ng-repeat="product in products track by $index">
-        <td><input type="checkbox" ng-model="product.selected"></td>
+        <td><input type="checkbox" ng-model="product.selected" ng-click="notCheck(product.selected)"></td>
         <td>{{product.name}}</td>
         <td>{{product.price}}</td>
         <td><input type="text" ng-model="product.count"></td>
@@ -56,9 +56,18 @@
         };
         //全选 点击全选时 每个商品的checkbox要根据全选的值来确定（全选为true都为true）
         $scope.check = function(a){
-
+                $scope.products.forEach(function(item,index){
+                    item.selected = a;
+                })
         };
         //每一个商品的选择框 如果有一个为false 则全选状态为false 都为true 则全选为true(假设法)
+        $scope.notCheck = function(){
+            $scope.products.forEach(function(item,index){
+                if(!item.selected){
+                    $scope.selectAll = item.selected;
+                }
+            })
+        }
     }]);
 </script>
 
