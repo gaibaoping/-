@@ -16,7 +16,7 @@
         <th>操作</th>
     </tr>
     <tr ng-repeat="product in products track by $index">
-        <td><input type="checkbox" ng-model="product.selected" ng-click="notCheck(product.selected)"></td>
+        <td><input type="checkbox" ng-model="product.selected" ng-click="notCheck()"></td>
         <td>{{product.name}}</td>
         <td>{{product.price}}</td>
         <td><input type="text" ng-model="product.count"></td>
@@ -62,11 +62,14 @@
         };
         //每一个商品的选择框 如果有一个为false 则全选状态为false 都为true 则全选为true(假设法)
         $scope.notCheck = function(){
-            $scope.products.forEach(function(item,index){
-                if(!item.selected){
-                    $scope.selectAll = item.selected;
+            for(var i = 0;i<$scope.products.length;i++){
+                var cur = $scope.products[i].selected;
+                if(!cur){
+                    $scope.selectAll = false;
+                    return;
                 }
-            })
+                $scope.selectAll = cur;
+            }
         }
     }]);
 </script>
