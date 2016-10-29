@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>移动端宣传片</title>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <link rel="stylesheet" href="css/swiper.min.css"/>
+    <link rel="stylesheet" href="css/animate.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script>
+        //移动适配-设置各个设备根元素字体大小
+        var winW = document.documentElement.clientWidth;
+        var desW = 640;
+        var desWfontSize = 100;
+        document.documentElement.style.fontSize = winW/desW*desWfontSize + 'px';
+    </script>
+</head>
+<body>
+<div id="main">
+    <div class="music">
+        <audio src="audio/beyond.mp3" loop preload="none" id="beyond"></audio>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!--<div class="swiper-slide slide2">
+                <img src="img/swiper/page2-text1.png" alt=""/>
+                <img src="img/swiper/page2-text2.png" alt=""/>
+                <img src="img/swiper/page2-text3.png" alt=""/>
+                <img src="img/swiper/page2-text4.png" alt=""/>
+            </div>&lt;!&ndash;0 ->page2&ndash;&gt;-->
+            <div class="swiper-slide slide1">
+                <img src="img/swiper/page1-text1.png" alt=""/>
+                <img src="img/swiper/page1-text2.png" alt=""/>
+                <img src="img/swiper/page1-text3.png" alt=""/>
+                <img src="img/swiper/page1-text4.png" alt=""/>
+            </div><!--1 ->page1-->
+            <div class="swiper-slide slide2">
+                <img src="img/swiper/page2-text1.png" alt=""/>
+                <img src="img/swiper/page2-text2.png" alt=""/>
+                <img src="img/swiper/page2-text3.png" alt=""/>
+                <img src="img/swiper/page2-text4.png" alt=""/>
+            </div><!--2 ->page2-->
+            <!--<div class="swiper-slide slide1">
+                <img src="img/swiper/page1-text1.png" alt=""/>
+                <img src="img/swiper/page1-text2.png" alt=""/>
+                <img src="img/swiper/page1-text3.png" alt=""/>
+                <img src="img/swiper/page1-text4.png" alt=""/>
+            </div>&lt;!&ndash;3 ->page1&ndash;&gt;-->
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="js/swiper.min.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container',{
+        direction:'vertical',//水平(horizontal)
+        loop:true,//循环模式
+        //autoplay:2000,
+        speed:1000,
+        autoplayDisableOnInteraction:false,
+        onSlideChangeEnd:function(swiper){
+            var slides = swiper.slides,//获得所有的滑块
+                    curIndex = swiper.activeIndex,//当前滑块的索引
+                    trueSlideNum = slides.length - 2,//真实滑块的个数
+                    lastSlideNum = trueSlideNum + 1;//最后一个滑块的索引
+        [].forEach.call(slides,function(item,index){
+            item.id = '';//把所有滑块的id名去掉
+            if(index == curIndex){
+                switch (index){
+                    case 0:
+                        item.id = 'page'+trueSlideNum;
+                        break;
+                    case lastSlideNum://最后一个滑块是真实的第一个滑块的副本
+                        item.id = 'page1';
+                        break;
+                    default :
+                        item.id = 'page' + curIndex;
+                }
+
+            }
+        })
+        },
+        /*onInit : function(swiper){
+            //swiper初始化完成后给第一个滑块增加动画效果
+            var slides = swiper.slides;
+            slides[0].id = 'page1';
+        }*/
+    });
+    var beyond =document.querySelector('#beyond');
+    var music = document.querySelector('.music');
+    window.setTimeout(function(){
+        beyond.play();//音频文件播放 -边缓存边播放
+        beyond.addEventListener('canplay',function(){
+            music.className = 'music musicMove';
+            music.style.opacity = 1;
+        })
+    },1000);
+    music.addEventListener("click",function(){
+        if(beyond.paused){
+            beyond.play();
+            music.className = 'music musicMove';
+            return;
+        }
+        beyond.pause();
+        music.className = 'music';
+    })
+</script>

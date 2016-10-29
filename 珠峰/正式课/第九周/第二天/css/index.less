@@ -1,0 +1,143 @@
+@import (reference)"public";
+html {
+  font-size: 100px;
+}
+
+html, body {
+  width: 100%;
+  background: #ebf0f5;
+  overflow-x: hidden;
+  color: @color-text;
+  font-size: .24rem;
+}
+
+a, a:active, a:hover, a:visited, a:target {
+  color: @color-text;
+}
+
+.header{
+  height: .88rem;
+  background: @color-blue;
+
+  .logo,.title,.login,.menu{
+    float:left;
+    height: .88rem;
+    line-height: .88rem;
+    color:@color-white;
+    font-size: .32rem;
+    font-weight: normal;
+  }
+  .logo{
+    box-sizing: border-box;
+    padding-left: .7rem;
+    border-right: .02rem solid #066dc4;
+    width: 2.16rem;
+    background: url("@{img}/icon-logo.png") no-repeat .1rem center;
+    background-size: .48rem;
+  }
+
+  .title{
+    padding: 0 .2rem;
+    border-left: .02rem solid #61b2f6;
+  }
+  .login{
+    float:right;
+    padding: 0 .2rem;
+  }
+  .menu{
+    float: right;
+    width: .88rem;
+    background: url("@{img}/btn-nav-fold.png") no-repeat center center;
+    background-size: 50%;
+  }
+}
+
+.nav{
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: .3s;
+  -webkit-transition: .3s;
+  a{
+    float:left;
+    width: 16%;
+    height: .74rem;
+    line-height: .74rem;
+    text-align: center;
+    font-size: .32rem;
+    &:nth-child(6n+1){
+      margin-right: 2%;
+    }
+  }
+
+}
+.player{
+  height: 3.6rem;
+  background: @color-black;
+  overflow: hidden;
+}
+.matchInfo{
+  height: 1.44rem;
+  padding: .3rem;
+  background: @color-white;
+  overflow: hidden;
+
+  .top{
+    height: .6rem;
+    line-height: .6rem;
+
+    .left,.right,.center{
+      float: left;
+      width: 34%;
+      height: 100%;
+    }
+    .center{
+      width: 32%;
+      text-align: center;
+      color: @color-gray;
+      font-size: .24rem;
+    }
+    .left img,.right img{
+      display: inline-block;
+      width: .6rem;
+      height: .6rem;
+      vertical-align: bottom;
+    }
+    .left span,.right span{
+      display: inline-block;
+      font-size: .4rem;
+      vertical-align: bottom;
+    }
+    .left{
+      float: left;
+      span{
+        margin-left: .24rem;
+      }
+    }
+    .right{
+      float: right;
+      span{
+        margin-right: .24rem;
+      }
+    }
+  }
+  .middle{
+    position: relative;
+    margin: .2rem 0;
+    height: .04rem;
+    background: @color-blue;
+
+    .progress{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: .04rem;
+      background: @color-red;
+    }
+  }
+  .bottom{
+    height: .4rem;
+  }
+}
+

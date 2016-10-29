@@ -1,0 +1,19 @@
+1 单例模式 对象 命名空间
+2 工厂模式  批量生产  声明一个对象然后到最后返回
+3 构造函数 用new的方式去执行就是构造函数
+         是否返回实例==>return引用数据类型会破坏实例返回
+         构造函数中的this就是当前实例
+4 原型模式： prototype
+           __proto__：类.prototype
+           任何一个对象数据类型都有__proto__属性
+           函数的三种角色
+           内置类：Number String Array Object Date RegExp
+
+           原型链
+           hasOwnProperty
+5 原型模式+this
+        定义在构造函数原型上方法中的this一般都是这个类的实例
+
+        定义在数组原型上（Array.prototype）的方法中的this一般都是数字
+
+        Array.prototype.slice这个函数中的this就是数字实例

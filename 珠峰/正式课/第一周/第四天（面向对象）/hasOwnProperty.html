@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+     * 判断私有属性：person2.hasOweProperty('name')
+     * 判断一个属性是否是这个对象的私有属性
+     * */
+    function isPublicProperty(obj,prop){//判断一个属性是不是对象的公有属性
+        return prop in obj && !obj.hasOwnProperty(prop)
+    }
+
+</script>

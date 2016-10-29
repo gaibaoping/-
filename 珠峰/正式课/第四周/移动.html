@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .div1{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0;
+            top: 30px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1"></div>
+</body>
+</html>
+<script>
+    var div1=document.getElementsByClassName('div1')[0];
+    function linear(t,b,c,d){
+            return b+t/d*c;
+    }
+    var time=0;
+    var duration=1000;
+    var begin=window.getComputedStyle(div1,null).left;
+    var change=document.documentElement.clientWidth-begin;
+    console.log(change);
+    div1.timer=window.setInterval(function(){
+        time+=10;
+        if(time>=duration){
+            div1.style.left=change;
+            window.clearInterval(div1.timer);
+            return;
+        }
+        var leftVal=linear(time,begin,change,duration);
+        div1.style.left=leftVal;
+    },10);
+</script>1

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    function Fn(){}
+    Fn.prototype.sum=function(){
+        console.log(this);
+    };
+    var f1=new Fn();
+    var f2=new Fn();
+
+    f1.sum();//sum中的this是f1
+    f2.sum();//sum中的this是f2
+
+    //Array function Array(){}
+
+    Array.prototype.unique=function(){
+        console.log(this);
+        for(var i=1;i< ary.length-1;i++){
+            for(var j=i+1;j<ary.length;j++){
+                if(ary[i]==ary[j]){
+                    ary.splice(j,1);
+                    j--;
+                }
+            }
+        }
+        return this;
+    };
+    var ary1=[1,2,3];
+    var ary2=[1,2,3,2,1];
+    ary2.unique();//去重 把ary2中的重复项去掉
+    ary1.unique();//b把ary1去重
+
+
+    //slice()
+    ary.slice(1,3);
+    ary.mySlice(1,3);
+
+    Array.prototype.mySlice=function(n,m){
+        if(arguments.length==0){
+            n=0;
+            m=this.length;
+        }
+        var ary=[];
+        //[1,2,3,4,5]  slice(1,3)
+        for(var i= n;i<=m-1;i++){
+            ary[ary.length]=this[i];
+        }
+        return ary;
+    }
+
+    function sum(){}//sum既然是Function的一个实例，我可以调用Function.prototype上的方法
+    console.log(Function.prototype);
+
+</script>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var str='My name is {0}, I am {1} years old, I come from {2}';
+    //body.innerHTML='<div>{0}</div>'
+    var ary=['田喜','30','liaoningProvince'];
+    var reg=/{(\d)}/g;
+    str=str.replace(reg,function(){
+        return ary[arguments[1]]
+    });
+    console.log(str);
+
+    //前端模板的实现原理
+</script>

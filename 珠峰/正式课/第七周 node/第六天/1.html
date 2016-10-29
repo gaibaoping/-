@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--async defer什么意思回去查查-->
+<script type="text/javascript" src="js/1.js" async defer></script>
+<!--<script type="text/javascript">
+    function fn(result){
+        console.log(result);
+    }
+</script>
+<script type="text/javascript" src="http://matchweb.sports.qq.com/kbs/hotMatchList?callback=fn"></script>-->
+<script type="text/javascript">
+    function aa(result){
+        console.log(result);
+    }
+</script>
+<script type="text/javascript" src="http://localhost:86/getAll?cb=aa"></script>
+</body>
+</html>

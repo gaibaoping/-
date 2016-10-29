@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/swiper.min.css"/>
+    <style>
+        .swiper-container{
+            width: 500px;
+            height: 300px;
+        }
+        .swiper-wrapper,.swiper-slide{
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-pagination{
+            width: 20px;
+            bottom: 20px;
+            border-radius: 50%;
+        }
+        .swiper-pagination span{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img data-src="img/banner/banner1.jpg" class="swiper-lazy" alt=""/>
+                <div class="swiper-slide"></div>
+            </div>
+            <div class="swiper-slide">
+                <img data-src="img/banner/banner2.jpg" class="swiper-lazy" alt=""/>
+                <div class="swiper-slide"></div>
+            </div>
+            <div class="swiper-slide">
+                <img data-src="img/banner/banner3.jpg" class="swiper-lazy" alt=""/>
+                <div class="swiper-slide"></div>
+            </div>
+            <div class="swiper-slide">
+                <img data-src="img/banner/banner4.jpg" class="swiper-lazy" alt=""/>
+                <div class="swiper-slide"></div>
+            </div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+</body>
+<script src="js/swiper.min.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container',{
+        direction:'horizontal',//滑动方向（水平方向horizontal 垂直方向vertical）
+        loop:true,//循环自动轮播
+        autoplay:1000,
+        effect:'coverflow',
+        //如果需要分页
+        pagination:'.swiper-pagination',
+        paginationClickable:true,//分页可点击
+        //如果需要前进后退按钮
+        nextButton:'.swiper-button-next',
+        prevButton:'.swiper-button-prev',
+        lazyLoading:true,//设置延迟加载
+        onSlideChangeEnd:function(){
+            //滑动滑块结束时执行这里的代码
+        },
+        onInit:function(){
+            //初始化
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,336 @@
+/*只导入不编译*/
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+  color: #555;
+  background: #f4f4f4;
+}
+a,
+a:hover,
+a:active {
+  color: #555;
+}
+/*header*/
+.header {
+  height: 63px;
+  border-bottom: 1px solid #ddd;
+  background: #ffffff;
+}
+.header .box {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 1020px;
+  height: 63px;
+}
+.header .box .logo {
+  float: left;
+  width: 160px;
+  margin-right: 60px;
+  height: 63px;
+  background: url("../img/kbs-logo.png") no-repeat center;
+  font-size: 0;
+}
+.header .box .nav {
+  float: left;
+  height: 63px;
+  line-height: 63px;
+  text-align: center;
+}
+.header .box .nav a {
+  float: left;
+  width: 90px;
+  height: 55px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  font-size: 16px;
+  font-weight: 700;
+  /*a.bg*/
+  /*a:hover*/
+}
+.header .box .nav a.bg {
+  color: #ffffff;
+  background: #346aff;
+}
+.header .box .nav a:hover {
+  border-top-color: #346aff;
+}
+.header .box .nav a.liveQQ {
+  width: 63px;
+  height: 63px;
+  text-align: center;
+  border: none;
+  /*background: url("../img/live-qq-logo.jpg") no-repeat center;*/
+}
+.header .box .nav a.liveQQ img {
+  width: 56px;
+  height: 56px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.header .box .nav a.downLoad {
+  position: relative;
+}
+.header .box .nav a.downLoad .weChat {
+  z-index: 88;
+  position: absolute;
+  top: 59px;
+  left: -15px;
+  padding: 0 15px;
+  width: 90px;
+  height: 0;
+  /*130*/
+  overflow: hidden;
+  -webkit-transition: all 0.3s linear 0s;
+  -moz-transition: all 0.3s linear 0s;
+  -o-transition: all 0.3s linear 0s;
+  -ms-transition: all 0.3s linear 0s;
+  transition: all 0.3s linear 0s;
+}
+.header .box .nav a.downLoad .weChat img {
+  width: 90px;
+  height: 90px;
+  display: block;
+}
+.header .box .nav a.downLoad .weChat p {
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: normal;
+}
+.header .box .nav a.downLoad .weChatBg {
+  z-index: 88;
+  position: absolute;
+  top: 59px;
+  left: -15px;
+  padding: 0 15px;
+  width: 90px;
+  height: 0;
+  /*130*/
+  overflow: hidden;
+  -webkit-transition: all 0.3s linear 0s;
+  -moz-transition: all 0.3s linear 0s;
+  -o-transition: all 0.3s linear 0s;
+  -ms-transition: all 0.3s linear 0s;
+  transition: all 0.3s linear 0s;
+  background: #ffffff;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.header .box .nav a.downLoad .weChatBg img {
+  width: 90px;
+  height: 90px;
+  display: block;
+}
+.header .box .nav a.downLoad .weChatBg p {
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: normal;
+}
+.header .box .nav a.downLoad:hover .weChat,
+.header .box .nav a.downLoad:hover .weChatBg {
+  padding: 18px 15px;
+  height: 130px;
+}
+.header .box .login {
+  float: right;
+  margin-top: 17.5px;
+  width: 46px;
+  height: 28px;
+  line-height: 28px;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 2px;
+  background: #346aff;
+}
+.header .box .login:hover {
+  /*background: #265cf0;*/
+  background: #0145ff;
+}
+.content {
+  margin: 20px auto;
+  width: 1040px;
+  /*height: auto; 需要在JS中计算：一屏幕的高度-header区域的高度-margin值*/
+}
+.content .iScrollIndicator {
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.content .menu {
+  width: 198px;
+  /*height:auto;需要在JS中计算：content-2*/
+  background: #ffffff;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  /*overflow-y: auto;*/
+  position: relative;
+  float: left;
+}
+.content .menu .menuItem a {
+  display: block;
+  position: relative;
+  height: 50px;
+  width: 169px;
+  line-height: 50px;
+  border-left: 5px solid transparent;
+  padding-left: 24px;
+  font-size: 16px;
+  /*after是往容器的末尾追加一个虚拟的子元素*/
+}
+.content .menu .menuItem a i,
+.content .menu .menuItem a i:after {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+  display: none;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  border: 6px solid transparent;
+  border-left-color: #346aff;
+}
+.content .menu .menuItem a i:after {
+  top: -6px;
+  right: -4px;
+  content: '';
+  z-index: 1;
+  border-left-color: #eff3ff;
+}
+.content .menu .menuItem a.bg,
+.content .menu .menuItem a:hover {
+  border-left-color: #346aff;
+  background-color: #eff3ff;
+  color: #346aff;
+}
+.content .menu .menuItem a.bg i,
+.content .menu .menuItem a.bg i:after {
+  display: block;
+}
+.content .conRight {
+  width: 820px;
+  height: 100%;
+  float: right;
+}
+.calendar {
+  position: relative;
+  height: 80px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  background: #ffffff;
+}
+.calendar .btnLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 80px;
+}
+.calendar .btnLeft i {
+  position: absolute;
+  top: 31px;
+  height: 0;
+  width: 0;
+  font-size: 0;
+  border: 9px solid transparent;
+  border-right-color: #999;
+}
+.calendar .btnLeft i:after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  z-index: 1;
+  border: 9px solid transparent;
+  border-right-color: #ffffff;
+}
+.calendar .btnLeft:hover i {
+  border-right-color: #346aff;
+  border-left-color: transparent;
+}
+.calendar .btnRight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 80px;
+  left: auto;
+  right: 0;
+}
+.calendar .btnRight i {
+  position: absolute;
+  top: 31px;
+  height: 0;
+  width: 0;
+  font-size: 0;
+  border: 9px solid transparent;
+  border-right-color: #999;
+}
+.calendar .btnRight i:after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  z-index: 1;
+  border: 9px solid transparent;
+  border-right-color: #ffffff;
+}
+.calendar .btnRight:hover i {
+  border-right-color: #346aff;
+  border-left-color: transparent;
+}
+.calendar .btnRight i {
+  left: 7.5px;
+  border-right-color: transparent;
+  border-left-color: #999999;
+}
+.calendar .btnRight i:after {
+  left: -12px;
+  border-right-color: transparent;
+  border-left-color: #ffffff;
+}
+.calendar .btnRight:hover i {
+  border-left-color: #346aff;
+  border-right-color: transparent;
+}
+.calendar .container {
+  position: relative;
+  margin: 5px 24px;
+  width: 770px;
+  height: 70px;
+  overflow: hidden;
+}
+.calendar .container .wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 7700px;
+  /*需要在js中针对于A的个数动态计算宽度值*/
+  height: 100%;
+}
+.calendar .container .wrapper .slide {
+  float: left;
+  width: 110px;
+  height: 100%;
+}
+.calendar .container .wrapper .slide:hover,
+.calendar .container .wrapper .slide.bg {
+  background: #eff3ff;
+  color: #346aff;
+}
+.calendar .container .wrapper .slide span {
+  display: block;
+  line-height: 27px;
+  text-align: center;
+  font-size: 16px;
+}
+.calendar .container .wrapper .slide .week {
+  margin-top: 9px;
+}

@@ -1,0 +1,25 @@
+*{margin: 0px;padding: 0px;}
+#box{
+    width: 500px;
+    border: 3px solid orangered;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+#tab th{background-color: orangered;}
+#tab th,td{
+    width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    -webkit-user-select: none;
+}
+.cursor{
+    cursor: pointer;
+}
+.c1{
+    background-color: aqua;
+}
+.c2{
+    background-color: burlywood;
+}

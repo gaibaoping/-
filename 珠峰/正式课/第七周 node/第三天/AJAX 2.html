@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('get','json/data.json');
+    //设置自定义请求头信息：我们可以通过这个手段把内容传递给服务器（属性值不能为中文：如果需要传中文的话我们需要进行编码），而且
+    xhr.setRequestHeader("zhufeng",escape("zhufengpeinxun珠峰培训2016"));
+    console.log(escape("zhufengpeinxun珠峰培训2016"));
+    console.log(unescape("zhufengpeinxun珠峰培训2016"));
+    //设置超时时间：设置一个超时时间，当AJAX请求超过这个时间，AJAX请求就中断了
+    //xhr.timeout = 10;
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState ==2){
+            xhr.abort();//中断当前的AJAX请求
+        }
+        if(xhr.readyState == 4&&xhr.status == 200){
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send(null);
+</script>

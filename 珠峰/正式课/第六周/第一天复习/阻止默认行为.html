@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body style="width: 1000px; height: 2000px">
+兼容性处理:   e || window.event;
+e.target = e.target || e.srcElement;
+e.type
+e.clientX
+e.pageX = e.pageX || (document.documentElement.scrollLeft||document.body.scrollLeft) + clientX;
+e.preventDefault = e.preventDefault || function (){
+e.returnValue = false;
+}
+e.preventDefault ? e.preventDefault() : e.returnValue = false;  // return false  //阻止默认行为
+上下文菜单（右键菜单）document.oncontextmenu=function(){return:false},如果让你自定义菜单：
+
+e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+
+
+阻止的默认行为：a标签的点击跳转行为；鼠标滚轮事件有时候需要阻止（这个兼容性问题）container.onmousewheel=fn;
+
+4、事件对象本身，获得的方式不一样
+    标准浏览器是由浏览器动态的传给它的一个参数，这个参数就是事件对象
+    IE是有一个全局的对象叫window.event，这是事件对象（IE中的事件对象是由window.event来提供的）
+    chorme浏览器是两种方法都支持的
+5、DOM2级事件的方式完全不同
+    5.1 DOM2级事件绑定的方法不同
+    5.2 被绑定到事件上的方法，当事件触发执行的时候方法里的this指向不同，IE中this指向window，标准浏览器中指向当前的元素
+    5.3 IE浏览器中，绑定的顺序和执行的顺序不一样，执行的顺序是混乱的
+    5.4 IE浏览器中，一个方法可以被重复的绑定在同一个事件上。
+</body>
+</html>
+<script>
+    var ele = document.createElement('div');
+    with (ele.style){
+        width = '150px';
+        height = '250px';
+        background = 'gray';
+        position = 'absolute';
+        display = 'none';
+    }
+    document.body.appendChild(ele);
+    document.oncontextmenu = function(e){
+        e.preventDefault();
+        with (ele.style){
+            display = 'block';
+            left = e.pageX + 'px';
+            top = e.pageY + 'px';//page包括划出的，client不包括划出的（滚动条问题）
+        }
+    };
+    document.onclick = function(e){
+        if(e.target.nodeName !== "DIV"){
+            with (ele.style){
+                display = 'none';
+            }
+        }
+    }
+</script>

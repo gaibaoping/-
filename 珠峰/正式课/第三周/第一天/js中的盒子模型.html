@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        .outer{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: #cc0000;
+            margin: 30px auto;
+            padding: 100px;
+        }
+        .outer .middle{
+            width: 200px;
+            height: 200px;
+            border: 5px solid #111111;
+            background-color: lightgreen;
+            overflow: auto;
+            padding: 30px 0;
+        }
+        .outer .middle .inner{
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer" id="outer">
+        <div class="middle" id="middle">
+            是前端开发的主要语言，我们可以通过编写JavaScript程序来判断浏览器的类型及版本。JavaScript判断浏览器类型一般有两种办法，一种是根据各种浏览器独有的属性来分辨，另一种是通过分析浏览器的userAgent属性来判断的。在许多情况下，值判断出浏览器类型之后，还需判断浏览器版本才能处理兼容性问题，而判断浏览器的版本一般只能通过分析浏览器的userAgent才能知道。是前端开发的主要语言，我们可以通过编写JavaScript程序来判断浏览器的类型及版本。JavaScript判断浏览器类型一般有两种办法，一种是根据各种浏览器独有的属性来分辨，另一种是通过分析浏览器的userAgent属性来判断的。在许多情况下，值判断出浏览器类型之后，还需判断浏览器版本才能处理兼容性问题，而判断浏览器的版本一般只能通过分析浏览器的userAgent才能知道。
+            <!--<div class="inner" id="inner">sfh</div>-->
+        </div>
+    </div>
+    <video src=" ">视频</video>
+    <audio src=" ">音频</audio>
+</body>
+</html>
+<script>
+    var outer=document.getElementById('outer');
+    var middle=document.getElementById('middle');
+    var inner=document.getElementById('inner');
+    console.dir(middle);
+    /*
+    * js盒子模型：
+    *       （有没有滚动条问题）
+    *       clientWidth:内容的宽度+填充
+    *       clientHeight:内容的高度+填充
+    *       clientLeft:左边框的宽度
+    *       clientTop:上边框的宽度
+    *
+    *       draggable:true/false 是否可拖拽
+    *
+    *       offsetWidth:内容的宽度+左右边框的宽度
+    *       offsetHeight:内容的高度+上下边框
+    *       offsetLeft：offsetLeft的值要取决于offsetParent是谁，是自己左边框外距离offsetParent的内边框的距离
+    *       offsetTop:上边框外距离offsetParent的内边框的距离
+    *       offsetParent:offsetParent是父级参照物。offsetParent是谁，要取决于元素的parentNode是否有定位属性(absolute,relative,fixed)，如果有就是这个。如果没有继续向上查找，直到找到包含定位属性的节点。如果还没有把body拿过来
+    *       document.body.offsetParent=null
+    *       document.body.parentNode=html
+    *       document.documentElement.parentNode=document
+    *
+    *       scrollWidth:内容的宽度+左填充
+    *       scrollHeight:内容的高度+上填充
+    *       scrollLeft： 滚出去的宽度
+    *       scrollTop: 滚出去的高度
+    *
+    *       ps:scrollWidth和clientWidth只有当内容溢出的情况下才不同
+    *       ps：除了scrollTop和scrollLeft 其他属性都不能重新赋值
+    * */
+
+    function offset(ele){//获取一个元素距离body的左偏移量和上偏移量
+        var l=null;//声明一个基数
+        var t=null;
+        l+=ele.offsetLeft;//先把自己的左偏移累加
+        t+=ele.offsetTop;
+        var par=ele.offsetParent;//先获取自己的offsetParent(父级参照物)
+        //如果存在需要累加par的左边框和左偏移量var par2=ele.offsetParent;
+        while(par){//我不管执行多少次，只要存在offsetParent就累加。直到body的offsetParent为null的时候停止
+            l+=par.clientLeft+par.offsetLeft;
+            t+=par.clientTop+par.offsetTop;
+            par=par.offsetParent;//不断更换循环的条件，每次需要获取不同的offsetParent的边框和偏移量
+        }
+        return {left:l,top:t};
+    }
+    var res=offset(inner);
+    console.log(res);
+</script>

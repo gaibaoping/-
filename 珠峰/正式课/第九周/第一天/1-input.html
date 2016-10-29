@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>html5中的表单</title>
+    <link type="text/css" rel="stylesheet" href="css/reset.min.css"/>
+    <style type="text/css">
+        /*input{
+            display: block;
+            margin: 20px auto;
+            width: 300px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid green;
+        }*/
+        .box{
+            width: 300px;
+            margin: 20px auto;
+        }
+        .box input{
+            display: block;
+            width: 260px;
+            padding: 0 5px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid green;
+        }
+        .box span{
+            display: block;
+            padding: 0 5px;
+            line-height: 30px;
+            font-size: 14px;
+            color: green;
+        }
+        .box span.error{
+            color: red;
+        }
+
+        /*默认使用css3中的伪类:valid/invalid验证，但是它只能验证格式是否正确，对于输入的情况验证的结果是正确的=>这样不需要我们自己使用keyup和keydown事件在js中属性来处理了*/
+        #userEmail:valid{
+            background-color: pink;
+        }
+        #userEmail:invalid{
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+<!--<input type="search"/>
+<input type="url"/>
+<input type="number" max="65" min="18" step="5" value="25"/>
+<input type="date"/>
+<input type="time"/>
+<input type="color"/>
+<input type="range" max="65" min="18" step="1" value="25"/>
+<input type="week"/>-->
+
+<div class="box">
+    <input type="email" id="userEmail"/>
+    <span class="emailTip" id="emailTip">请您输入常用的邮箱</span>
+</div>
+<script type="text/javascript">
+    var userEmail = document.getElementById('userEmail'),
+            emailTip = document.getElementById('emailTip');
+    userEmail.onblur = function(){
+        if(!this.checkValidity()){
+            emailTip.innerHTML = '您输入的邮箱格式不正确';
+            emailTip.className = 'error';
+            return;
+        }
+        emailTip.innerHTML = '输入正确';
+        emailTip.className = null;
+    };
+    /*userEmail.onblur = function(){
+        //trim浏览器自带的去除字符串的首位空格，但是低版本浏览器不兼容（trimLeft/trimRight）
+        //var val = this.value.trim();
+        var val = this.value.replace(/^ +| +$/g,'');//正则替换字符串的首尾空格
+        if(!val){
+            emailTip.innerHTML = '输入的邮箱不能为空！';
+            emailTip.className = 'error';
+            return;
+        }
+
+        //验证邮箱的格式
+        var reg =  /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if(!reg.test(val)){
+            emailTip.innerHTML = '您输入的邮箱格式不正确';
+            emailTip.className = 'error';
+            return;
+        }
+
+        //正确
+        emailTip.innerHTML = '输入正确';
+        emailTip.className = null;
+    }*/
+</script>
+</body>
+</html>

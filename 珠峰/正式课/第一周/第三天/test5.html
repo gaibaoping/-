@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var num=10;//11 12
+    var obj={num:3};//4
+    obj.fn=(function(){
+        num++;//预解释时var num未赋值
+        this.num+=1;//11
+        var num=3;//4 5
+        return function(n){
+            this.num+=1;//12 4
+            console.log(n+ ++num);//7 9
+        }
+    })(obj.num);
+    var f=obj.fn;
+    f(3);//7
+    obj.fn(4);//9
+    console.log(obj.num,num);//4 12
+</script>

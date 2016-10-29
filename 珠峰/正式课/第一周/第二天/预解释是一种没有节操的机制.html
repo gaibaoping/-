@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 无节操：
+    *    1 预解释只看变量不看值，即使值是一个函数名字也不会被解释
+    *    2 预解释不理会条件if(false){var num;}
+    *    掌握in判断属性是否属于一个对象
+    *    3 自运行函数即使有函数名字也不会被预解释
+    *    4 return后面即使是一个函数也不会被预解释，把函数当做一个整体返回。
+    *    但是return下面的代码虽然不会执行但是却会被预解释,如果return后面是一个自运行函数，那么要等这个自运行函数
+    *    先去执行完，然后把自运行函数的运行结果留给return
+    *    5 如果函数名字和变量名字重名，在预解释阶段以最后一个函数为准。在代码执行阶段，从变量赋值开始就开始代表这个
+    *    变量的值了 var fnn=100;
+    * */
+    //1 不看值
+    //console.log(f);
+    console.log(fn);
+    //var num=12;
+    var fn=function f(){
+        console.log(1);
+    };
+    //2 预解释不理会条件
+    //in运算符是判断一个属性是否属于一个对象，属性名字是一个字符串
+    //window.setTimeout 对于这种全局对象window的属性，window可以省略不写
+    //在全局作用下的全局变量都可以理解为是window的一个属性
+    var zhuFeng=10;
+    console.log(window.zhuFeng);
+    console.log(num);//没有报错，说明在执行之前就被声明过
+    if('num' in window){
+        var num=10;//只要这个num被预解释过，那么这个num就是window的一个属性
+    }
+    console.log(num);//10
+
+    //3 自运行函数即使有函数名字也不会被预解释
+    //console.log(f);
+    (function f(){
+        console.log(1);
+    })();
+
+    //4 return相关的
+    function foo(){
+        var num1=12;
+        console.log(fxx);
+        //console.log(fyy);//return后面即使是一个函数也不会被预解释，把函数当做一个整体返回
+        return (function fyy(){
+            alert();
+        })();
+        function fxx(){
+
+        }
+    }
+    foo();
+    //console.log(num1);//num1是私有变量
+
+    //5
+    fnn();//2
+    function fnn(){console.log(1);}
+    fnn();//2
+    var fnn='100';//从这行代码开始fn不是一个函数了
+    //fnn();
+    function fnn(){console.log(2);}
+   // fnn();
+    console.log(fnn);//fnn被赋值为100
+</script>

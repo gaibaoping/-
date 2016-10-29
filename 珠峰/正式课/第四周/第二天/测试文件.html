@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: red;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
+<script src="../utils.js"></script>
+<script src="animate.js"></script>
+<script>
+    var div1=document.getElementById('div1');
+    animate(div1,{width:100,height:200,opacity:1,left:100},3000,function(){//utils.css(this,'background','blue');
+    animate(this,{left:0,top:0},2000);});
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //JS都是单线程的
+    //同步没有等待任务队列：主任务队列中的任务自上而下执行，只有把当前任务完成，才能做下一个任务
+
+    //异步有等待任务队列：在主任务队列执行中，我们可以把一些任务放到等待任务队列中，当主任务队列中所有任务都执行完成后，再去执行等待任务队列中已经做完的任务
+
+    //JS中的异步编程：定时器、事件绑定、回调函数、AJAX中的异步，其余的都是同步处理
+
+    /*var n = 0;
+    window.setTimeout(function(){
+        console.log(++n);//2)1
+    },0);//浏览器会存在一个最小的等待时间，即使我们写的是0也不是立即执行
+    console.log(n);*/
+
+    /*var n = 0;
+    window.setTimeout(function(){
+        console.log(++n);//2)1
+    },0);
+    console.log(n);
+    while(1){
+        //在主任务队列中出现了一个死循环，导致主任务队列永远不会结束，这样的话，等待任务队列中的事情都不可能被执行了 -> 所以定时器的等待时间不一定是准的，主任务队列完不成，等待任务队列中的事情即使到了时间了也需要继续在等着，一直等到主任务队列完成才可以
+    }*/
+
+    window.setTimeout(function(){
+        console.log(1);
+    },10);
+    window.setTimeout(function(){
+        console.log(2);
+    },8);
+    var time = new Date();
+    for(var i = 0;i<9000000;i++){
+
+    }
+    console.log('总时间:'+(new Date()-time));
+
+    //AJAX这件任务”在执行send后开始“ ”在readyState==4的时候结束“
+    var xhr = new XMLHttpRequest();
+    xhr.open('get','json/TEST.json',true);
+    xhr.onreadystatechange=function(){
+        console.log(xhr.readyState);
+    xhr.send(null);
+    };
+</script>
+</body>
+</html>

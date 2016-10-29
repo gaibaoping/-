@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script>
+    var oDiv = document.querySelector('#div1');
+    oDiv.addEventListener('touchstart',function(e){
+       this.start = e.changedTouches[0].pageX;
+    },false);
+    oDiv.addEventListener('touchmove',function(e){
+        e.preventDefault();//阻止页面的默认滚动行为
+        this.move = e.changedTouches[0].pageX;
+        console.log(this.move - this.start);
+    },false);
+    oDiv.addEventListener('touchend',function(e){
+
+    },false);
+
+    /*
+    * zepto 通过touchstart touchmove touchend封装的组合事件
+    * tap（按下时还要判断下按了一下还是按了两下（单击还是双击））
+    * singTop 按一下 相当于click事件（避免了300ms延迟的问题）
+    * doubleTap 连续按了两下  相当于双击
+    * longTap  长按 按住超过750ms触发
+    * swipeLeft swipeRight swipeUp swipeDown swipe
+    * */
+</script>

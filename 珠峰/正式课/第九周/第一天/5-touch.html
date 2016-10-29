@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <style type="text/css">
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            /*top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;低版本浏览器不兼容*/
+            width: 100px;
+            height: 100px;
+            background: green;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+</body>
+</html>
+<script>
+    var oBox = document.getElementById('box');
+    //ev:手指事件对象  touches/changedTouches存放了每一个手指的坐标信息，我们一般只需要获取第一个手指的坐标信息即可，当手指在屏幕上操作的时候，touches和changedTouches获取的值是一样的，但是当手指离开了屏幕，touches里面就没有内容了，需要使用changedTouches获取离开的时候手指的坐标信息
+    oBox.addEventListener('touchstart',function(ev){
+        //记录手指的起始坐标
+        var point = ev.changedTouches[0];
+        this['strX'] = point.pageX;
+        this['strY'] = point.pageY;
+        this['changeX'] = 0;
+        this['changeY'] = 0;
+        this['isFlag'] = false;//记录是否发生滑动
+    },false);
+    oBox.addEventListener('touchmove',function(ev){
+        //手指一丁点偏移都没有，就不触发touchmove，这样的肯定是点击操作，只有发生了偏移，我们才会进一步验证是否发生了滑动
+        var point = ev.changedTouches[0];
+        this['changeX'] = point.pageX - this['strX'];
+        this['changeY'] = point.pageY - this['strY'];
+        if(Math.abs(this['changeX'])>30||Math.abs(this['changeY'])>30){
+            this['isFlag'] = true;
+        }
+    },false);
+    oBox.addEventListener('touchend',function(ev){
+        //离开的时候，验证isFlag的值，就知道是滑动还是点击了，而且如果是滑动的话，还可以判断出滑动的方向
+        if(this['isFlag']===false){
+            console.log('我是点击操作');
+            return;
+        }
+        console.log('我是滑动操作!我的滑动方向是'+swipeDir(this['changeX'],this['changeY']));
+    },false);
+
+    //验证滑动的方向
+    function swipeDir(changeX,changeY){
+        return Math.abs(changeX)>Math.abs(changeY)?(changeX>0?'right':'left'):(changeY>0?'down':'up');
+    }
+</script>

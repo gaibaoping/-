@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 300px;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" realSrc="url"></div>
+    <input id="input" type="text" name="aaa" value=""/>
+    <input id="radio" type="radio" name="sex" value="1"/>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    //addClass('c1') 添加类   removeClass('c1')  移除类
+    //toggleClass()切换  如果有就移除  如果没有就添加
+    $('#div1').addClass('c1').removeClass('c1');
+
+    //html(val) 如果没有参数就是获取innerHTML，如果有参数就是设置
+    console.log($('#div1').html('今天不妨学了'));
+
+    //text(val) 跟html()用法相同
+    //val(00)  如果有参数就是设置value的值,如果没有就是设置
+    console.log($('#input').val('aaa'));
+
+    //attr setAttribute  getAttribute removeAttribute
+    $('#div1').attr('realSrc','hahah');//两个参数的时候就是setAttribute
+    console.log($('#div1').attr('realSrc'));//获取getAttribute
+    $('#div1').removeAttr('realSrc');//removeAttribute
+
+    //prop  也是对属性的操作，一般应用内置属性 类似于checked的这种属性，要么选中要么没有选中，必须要使用prop方法(对表单操作)
+    $('#radio').prop('checked',true);
+
+</script>

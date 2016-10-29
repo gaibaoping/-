@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //工厂模式：把实现一个功能的代码封装到一个函数中，以后在再实现这个功能，不需要重新的编写这些代码，只需要把函数执行一遍即可（'破函数'）->低耦合高内聚：减少页面中的冗余代码，提高代码的重复利用率
+    //面向对象编程思想需要我们掌握的就是类和实例之间的这点关系，如果想把关系捋明白，需要我们研究有关类的集成封装和多态
+        //函数封装
+        function sum(){
+            var total=null;
+            for(var i=0;i<arguments.length;i++){
+                var cur=Number(arguments[i]);
+                if(!isNaN(cur)){
+                    total+=cur;
+                }
+            }
+            return total;
+        }
+        console.log(sum(4,5,6));
+        console.log(sum(100,200,300));
+
+    //多态：多种形态-->JS重载和JS重写
+
+    //后台语言中的重载：方法名相同，参数的类型或者个数不一样，这样的话我们就可以把他们理解为不同的方法，以后执行的时候根据传递参数的不同，会找自己对应的方法执行-->这一点非常重要能体现函数的多种形态
+
+    //JS重载:相对于后台语言，从严格意义上来说JS中不存在重载，因为只要方法名相同，后面的就会把前面的覆盖掉，最后只能保留一个，以后不管传什么参数，永远都执行的是最后一个
+    //非严谨的角度来讲，js中的重载指的是相同一个方法，我们通过传递的参数不一样，来实现不同的功能
+    function sum(num1,num2){
+        console.log(1);
+    }
+    function sum(num1,num2,num3){
+        console.log(2);
+    }
+    sum(1,2);
+    sum(1,2,3);
+
+    //严谨的
+    function sum(num1,num2){
+        if(typeof num2==='undefined'){
+            console.log('参数错误');
+            return;
+        }
+        console.log(num1+num2);
+    }
+    sum(1);
+</script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background: #00b3ee;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            transition: width 1s linear 0s,height 1s linear 0s;
+        }
+        #div1:hover{
+            width: 200px;
+            height: 200px;
+            background: green;
+            /*transition-property: width,height;
+            transition-duration: 1s;
+            transition-delay: 0.5s;
+            transition-timing-function: linear;
+            transition: all 1s linear 0.5s;*/
+            transition: width 1s linear 0s,height 1s linear 0s;
+        }
+        #div2{
+            background: green;
+            width: 100px;
+            height: 100px;
+            margin: 30px auto;
+            border-radius: 50%;
+            box-shadow: 0 0 0 30px transparent;
+            transition: all 1s ease-in;
+        }
+        #div2:active{
+            box-shadow: 0 0 0 0 white;
+            transition: all 1s linear;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1');
+    oDiv.addEventListener('webkitTransitionEnd',function(){
+        console.log(1);
+    },false)
+</script>

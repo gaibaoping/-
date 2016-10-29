@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *  正则的分组：在字符串中如果想提取其中一部分，可以采取在正则中使用小括号的方式包起来，这样就形成了一个小分组，并且在捕获exec的结果中，会从数组的第二项开始分别把小分组拿到的结果一次排列
+    * */
+    var reg=/(\d+)/;
+    var str='zhufeng2015peixun2016';
+    console.log(reg.exec(str));//['2015','2015']
+    /*
+    * 分组的引用：如果在正则中存在分组，那么如果想使用分组里的内容，那么可以通过\n来引用分组的内容，n代表的是第几个分组。
+    *
+    * 问号的几种用法：
+    *       1 量词0-1次
+    *       2 放在量词后面破坏贪婪性，尽可能少去匹配
+    *       3 ?:一起出现，并且放在分组的开头，代表的是这个分组仅仅是匹配但是不捕获，并且也破坏了这个分组，更不可能使用分组引用了
+    *       4 正向预查询。。。
+    * */
+
+    //var reg=/(\w)(\w)\1\2/;
+    var reg=/(\w)(?:\w)\1/;
+    var str='asdcababxdas';
+    console.log(reg.test(str));
+    console.log(reg.exec(str));//['abab','a','b']
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Human(name,age){
+        this.name=name;
+        this.age=age;
+        //this.eat=function(){};//在构造函数中添加的都是私有属性
+    }
+    console.log(Human.__proto__==Function.prototype);
+    /*
+    *   函数的三种角色：1 普通函数 2 构造函数（类） 3 Function的一个实例
+    * */
+    //把这个eat私有方法如何转化成Human这个类的公有方法，只有new了一个实例根本就不能在构成函数中通过this添加。而是天生自带
+    //var person1=new Human();//eat
+    //var person2=new Human();//eat
+    //console.log(person1.eat==person2.eat);
+    //函数也是一个引用数据类型我就可以在它身上添加属性
+    console.dir(Human);
+    Human.prototype.money='20000$';
+    Human.prototype.eat=function(){};//每个实例都能调用这个eat方法
+    console.dir(Human.prototype);
+
+    var person1=new Human('tianxi',30);
+    var person2=new Human('wangchen',20);
+    console.log(person1.eat==person2.eat);
+
+    console.dir(person1);
+    console.dir(person2);
+    person1.money='30000$';
+
+    console.log(Human.prototype==person1.__proto__);
+    console.log(person1.__proto__.money);
+    console.log(person1.money);//其中的__proto可以省略
+    console.log(Human.prototype.money);//20000$
+    //console.log(person3.car);//在添加之前是没有的undefined
+    //出于安全起见在ie中__proto__不兼容
+    var prototype=Human.prototype;
+    new Human().__proto__.car='BMN';
+    var person3=new Human();
+    console.log(person3.car);
+
+    //person1.__proto__.money='100$';//对类原型中的属性进行修改
+    //console.log(Human.prototype.money);
+    /*
+    * 任何一个函数都天生自带一个属性prototype（原型）而这个属性的值是一个对象数据类型的（Object），并且也天生自带两个属性，一个是constructor，另外一个是__proto__。其中constructor的值是这个类（构造函数）本身（Human）
+    * Human.prototype.constructor==Human==>true
+    *
+    * 任何一个实例也都天生自带一个属性叫__proto__，而这个属性的值是这个实例自己所属于类的原型,这个原型相对于每个实例来讲都是一个公有的，在这个原型上属性对于每个实例来讲都是一个公有属性，
+    *   ps：任何一个引用数据类型都会天生自带__proto__属性
+    * */
+
+    Object.prototype.bike='forever';
+    console.log(person1.bike);
+
+    //person2.__proto__.__proto__==[].__proto__/*Array.prototype*/.__proto__
+   /*
+   * 原型链：
+   *      实例通过__proto__属性查找到自己所属类的原型，然后原型也可以通过__proto__继续向上查找。我们把这种查找方式就叫原型链
+   * */
+</script>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        html,body{
+            height: 100%;
+        }
+        #wrap{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        #wrap>img{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        #wrap ul{
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            text-align: center;
+            z-index: 15;
+        }
+        #wrap ul li{
+            display: inline-block;
+            width: 110px;
+            height: 110px;
+            border: 10px solid pink;
+            border-radius: 50%;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+        #wrap ul li a img{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        :target{/*当前活动的目标元素*/
+            z-index: 10;
+        }
+        #bg1:target{
+            animation: move 1s;
+        }
+        #bg2:target{
+            animation: up 1s;
+        }
+        #bg3:target{
+            animation: bg 1s;
+        }
+        #bg4:target{
+            animation: scall 1s;
+        }
+        #bg5:target{
+            animation: gen 1s;
+        }
+        @keyframes move {
+            0%{
+                transform: translate(-500px);
+            }
+            100%{
+                transform: translate(0px);
+            }
+        }
+        @keyframes up {
+            0%{
+                transform: translateY(-800px);
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+        @keyframes bg {
+            0%{
+                transform: scale(0.5);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        @keyframes scall {
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes gen {
+            0%{
+                transform: rotate(0deg) translate(-1000px);
+            }
+            100%{
+                transform: rotate(360deg) translate(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <img src="../img/1.jpg" alt="" id="bg1"/>
+    <img src="../img/2.jpg" alt="" id="bg2"/>
+    <img src="../img/3.jpg" alt="" id="bg3"/>
+    <img src="../img/4.jpg" alt="" id="bg4"/>
+    <img src="../img/5.jpg" alt="" id="bg5"/>
+    <ul>
+        <li><a href="#bg1"><img src="../img/1.jpg"/></a></li>
+        <li><a href="#bg2"><img src="../img/2.jpg"/></a></li>
+        <li><a href="#bg3"><img src="../img/3.jpg"/></a></li>
+        <li><a href="#bg4"><img src="../img/4.jpg"/></a></li>
+        <li><a href="#bg5"><img src="../img/5.jpg"/></a></li>
+    </ul>
+</div>
+</body>
+</html>

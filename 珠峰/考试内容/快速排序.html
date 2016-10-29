@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>快速排序</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary=[5,3,8,2,7,6,4];
+    function sum(ary){
+        if(ary.length<=1){
+            return ary;
+        }else{
+            var middleIndex=Math.floor(ary.length/2);
+            var middleItem=ary.splice(middleIndex,1);
+            var left=[];
+            var right=[];
+            for(i=0;i<ary.length;i++){
+                if(ary[i]<middleItem){
+                    left.push(ary[i]);
+                }else{
+                    right.push(ary[i]);
+                }
+            }
+        }
+        return sum(left).concat(middleItem,sum(right));
+    }
+    console.log(sum(ary));
+</script>

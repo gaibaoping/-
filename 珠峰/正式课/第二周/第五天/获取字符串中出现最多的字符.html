@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var str='aabbccsdnujdoddbaa';//获取这个字符串中哪个字符出现的最多
+    var reg=/\w/g;
+    var obj={};
+    str.replace(reg,function(){//replace 可以遍历字符串
+        if(obj[arguments[0]]>=1){//如果属性值大于等于1，说明已经以前匹配到过，那么就不是第一次出现，那么还需要累加这一次
+            obj[arguments[0]]+=1;
+        }else{//如果在这个对象中没有a这个属性，那么我就赋值一个1，作为第一次出现的基数
+            obj[arguments[0]]=1;
+        }
+    });
+    console.log(obj);
+    var max=0;//把最多的次数从对象中获取到，需要作比较和假设
+    for(var key in obj){
+        if(obj[key]>max){
+            max=obj[key];
+        }
+    }
+    console.log(max);
+    var ary=[];
+    for(var key in obj){//把所有出现最多次数的属性都拿出来放到一个数组中
+        if(obj[key]==max){
+            ary.push(key);
+        }
+    }
+    console.log(ary);
+
+    var str='字符串中出现最多的是'+ary.join()+",出现了"+max+'次';
+    console.log(str);
+</script>

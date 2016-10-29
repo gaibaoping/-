@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #cccccc;
+            line-height: 300px;
+            font-size: 40px;
+            margin: 200px auto;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">图片拖拽到此区域</div>
+    <div id="div2"></div>
+</body>
+</html>
+<script>
+    var oDiv1 = document.getElementById('div1');
+    var oDiv2 = document.getElementById('div2');
+    oDiv1.ondragenter = function(){
+        this.innerHTML  = '可以释放鼠标了'
+    };
+    oDiv1.ondragover = function(e){
+        e.preventDefault();//阻止浏览器默认的关闭功能,才能触发drop事件，默认情况下，拖拽元素不可以放入目标元素里，这是浏览器默认阻止了
+    };
+    oDiv1.ondrop = function(e){
+        e.preventDefault();//阻止浏览器默认把文件打开
+        this.innerHTML='';
+        //拖拽元素就在目标元素里
+        var files = e.dataTransfer.files;//获得所有的拖拽的图片
+        //遍历FileList获得的每一个文件
+        for(var i=0;i<files.length;i++){
+            showImg(files[i]);
+        }
+    };
+    function showImg(file){
+        //判断浏览器是否支持FileReader
+        if(typeof FileReader!='undefined') {
+            var reader = new FileReader;//创建读取文件信息的实例
+            //reader.readAsDataURL(file);//把文件信息以DataURL的形式读取出来，并且在页面显示出来
+            reader.readAsBinaryString(file);//把文件信息以二进制字符串的形式读取出来
+            //如果文件读取成功，则会触发onload事件
+            reader.onload = function(){
+                //1 二进制字符串通过btoa()转成base64 ->btoa(this.result);
+                //2.base64编码和“data:image/jpeg;base64,”拼接成DateURL地址
+                //读取出来的数据放在this.result里面
+                //div1.innerHTML = '<img src="'+this.result+'"/><p>'+file.name+'</p><p>'+file.type+'</p>';
+                oDiv1.innerHTML += '<img src="data:image/png;base64,'+btoa(this.result)+'"/><p>'+file.name+'</p><p>'+file.type+'</p>';
+            }
+        }
+    }
+</script>

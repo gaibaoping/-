@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #box{width: 300px;height: 50px; margin: 30px auto;border: 2px solid #111111;background-color: coral;text-align: center;line-height: 50px;font-size: 24px;cursor: pointer;-webkit-user-select: none;}
+        #box span{color: blue;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        认为中国女排很牛的点赞
+        <span>0</span>
+    </div>
+</body>
+</html>
+<script>
+    var box=document.getElementById('box');
+    var span=box.getElementsByTagName('span')[0];
+    //给最大的盒子绑定点击事件
+    /*var count=0;
+    box.onclick=function(){
+        count++;
+        span.innerHTML=count;
+    };
+    //需要把count这个全局变量变成私有变量,利用闭包的方式解决变量安全的问题
+    (function(){
+        var count=0;
+        //count++;
+        box.onclick=function(){
+            span.innerHTML=++count;
+        }
+    })();*/
+
+    //另外一种闭包方式
+    /*box.onclick=(function(){
+        var count=0;
+        return function(){
+            span.innerHTML=++count;
+        }
+    })();*/
+
+    //利用自定义属性
+   /* box.count=0;
+    box.onclick=function(){
+        //span.innerHTML=++this.count;
+        this.children[0].innerHTML=++this.count;
+    };*/
+
+    //
+    box.onclick=function(){
+        //++span.innerHTML;//++运算有强制转化为数字的功能
+        span.innerHTML=Number(span.innerHTML)+1;
+    };
+</script>

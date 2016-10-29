@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>验证码</title>
+    <style>
+        *{margin: 0;  padding: 0;}
+        .codeBox{width: 300px; height: 40px;border: 3px solid #ccc; border-radius: 5px;
+            box-shadow: 3px 3px 10px #111; position: absolute; top: 50%;left: 50%;
+            margin: -20px 0 0 -150px; font-family:"microsft yahei";
+            font-size: 40px; line-height: 40px; text-align: center;font-weight: bold;
+        -webkit-user-select: none; cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div id="codeBox" class="codeBox"></div>
+</body>
+</html>
+<script>
+    var codeBox=document.getElementById('codeBox');
+    //设定验证码每一个随机字符的范围
+    var strRange="0123456789abcdefghijklmnopqrstuvdxyz";
+    //这个取值范围的索引是从0-61
+    function getRandom(n,m){
+    n=Number(n);
+    m=Number(m);
+    if(isNaN(n)||isNaN(m)){
+        return Math.random();
+    }
+    if(n>m){
+        var temp=n;
+        n=m;
+        m=temp;
+    }
+    return Math.round(Math.random()*(m-n)+n);
+    }
+    function change(){
+        var codeBoxHtml='';
+        for(var i=0;i<4;i++) {
+            var ranNum = getRandom(0,33);
+            codeBoxHtml+=strRange.charAt(ranNum);
+        }
+        codeBox.innerHTML=codeBoxHtml;
+        console.log(codeBoxHtml);
+    }
+    change();
+    codeBox.onclick=function(){
+        change();
+    };
+
+    
+</script>

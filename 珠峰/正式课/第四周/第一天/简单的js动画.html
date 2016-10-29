@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0px;padding: 0px;}
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 500px;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="../utils.js"></script>
+<script>
+    var div1=document.getElementById('div1');
+    /*var maxLeft=utils.win('clientWidth')-div1.offsetWidth;//最大的left
+    var duration=500;//无论间隔多远必须在500ms内运动到终点
+    var speed=maxLeft/duration;//这个速度是固定的（匀速）
+    /!*
+    * 动画注意：1 定时器只要设置了就别忘了清
+    *         2 过界判断，过界判断的时候要先累加步长后再判断，这样可以规避运动超出的问题。
+    *         3 定时器的返回值可以保存在运动的那个元素上
+    *
+    * 动画过程：1 获取到当前的样式属性值
+    *         2 在获取到的值上累加步长
+    *         3 把累加之后的值再赋值回去
+    * *!/
+    var timer=window.setInterval(function(){
+        var leftVal=utils.css(div1,'left');//获取当前元素的left值
+        if(leftVal+speed>=maxLeft){
+            window.clearInterval(timer);
+            utils.css(div1,'left',maxLeft);
+            return;
+        }
+        leftVal+=speed;
+        utils.css(div1,'left',leftVal);//把累加之后的值重新赋值给元素
+    },10);*/
+
+    //另外一种匀速计算的方式
+    var duration=1000;//规定时间
+    var time=0;//花费的时间
+    var maxLeft=utils.win('clientWidth')-div1.offsetWidth;//最大的left
+    /*
+    *   花费的时间/规定的时间=运动的距离/规定的总距离
+    *
+    * */
+    //利用匀速计算公式计算 time begin change duration
+    var beginLeft=utils.css(div1,'left');//起点left的值就是当前left的样式
+    var change=maxLeft-beginLeft;
+    div1.timer=window.setInterval(function(){
+        time+=10;//由于花费时间的增加才会导致位置的变化
+        if(time>=duration){//花费的时间超过了规定的时间那么就是已经运动到达终点
+            window.clearInterval(div1.timer);//到达终点清除定时器
+            utils.css(div1,'left',maxLeft);//认为设置终点的值
+            return;
+        }
+        //var curLeft=time/duration*maxLeft;
+        var curLeft=linear(time,beginLeft,change,duration);//下一个起点的开始位置
+        utils.css(div1,'left',curLeft);
+    },10);
+    function Linear(time,begin,change,duration){//匀速
+        //time是花费的时间
+        //begin 开始的位置
+        //change 改变的距离（终点-起点）
+        //duration 时间间隔
+        return begin+time/duration*change;
+    }
+
+    function linear(t,b,c,d){
+        return b+t/d*c;
+    }
+
+</script>

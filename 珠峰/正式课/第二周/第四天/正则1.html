@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>正则表达式(Regular Expression)</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *  RegExp：
+    *       作用：专门用来和字符串做匹配的，制定一个规则，
+    *       创建方式：1 字面量  2 实例   区别
+    *       方法：1 test 验证字符串是否符合正则 通过返回true/不通过false
+    *            2 exec 捕获字符串中符合规则的部分  返回：捕获的结果
+    * */
+    var reg=/1/;//正则   字面量
+    var reg=new RegExp();// 实例
+    console.dir(RegExp.prototype);//查看所有在原型上的方法
+
+    /*
+    *  正则中常用的有特殊意义的元字符：
+    *      \d  0-9之间的数字
+    *      \D  除了\d的
+    *      \W  数字，字母，_下划线中的任意一个
+    *      \W  除了\w
+    *      \n  匹配换行
+    *      \s  空格或者空白 制表符
+    *      .   除了\n之外的任意字符
+    *      \.  转义字符  用\把.转换成代表自己本身的意思
+    *      \b  边界 字符串的开头和结尾一定是一个边界，而用空格两边也可以理解为形成一个边界
+    *           ps：\b边界不占位
+    *
+    *     ^ 以什么开头
+    *     $ 以什么结尾
+    *       ps：^和$一起出现对字符串的长度也是有限制的，并且他们不占位
+    *
+    * */
+    var reg=/a/;//只要在字符串中存在一个a就符合规则
+    var reg=/ab/;//字符串中要连续出现a和bvar reg=/
+    var res=reg.test('asdfefsdb');
+    console.log(res);//
+
+    // \d
+    var reg=/\da\d/;//两个连续出现的数组
+    var res=reg.test('9a9');
+    console.log(res);
+
+    // \w
+    var reg=/\d\d\w/;//只要字符串中出现过连续两个数字和一个字母组合就可以符合规则
+    var res=reg.test('Aaaaa18aaaaa');
+    console.log(res);
+
+    // \n  匹配换行
+
+    //\s
+    var reg=/\s/;
+    var res=reg.test(' ');
+    console.log(res);
+
+    //.
+    var reg=/./;
+    var res=reg.test(' ');
+    console.log(res);
+
+    var reg=/\./;//转义字符把转换成代表自己本身的意思
+    var res=reg.test('.');
+    console.log(res);
+
+    var reg=/\\d/;
+    var res=reg.test('\\d');
+    console.log(res);
+
+    //\b
+    var reg=/\b\d\w\b/;
+    var res=reg.test('c9a 7a');
+    console.log(res);
+
+    //^ $
+    var reg=/^\d\w$/;
+    var res=reg.test('7p');
+    console.log(res);
+
+    //手机号
+    var reg=/^1\d{10}$/;
+    var res=reg.test(15573320466);
+    console.log(res);
+
+    /*
+    *  正则表达式中量词：修饰在量词前面的元字符出现的个数，并且不占位
+    *       ? 0-1次  要么出现要么不出现
+    *       + 1-多次 至少出现一次
+    *       * 0-多次
+    *       {n} 出现n次
+    *       {n,} n到多次 至少出现n次
+    *       {n,m} n到m次 最少n次最多m次
+    *
+    *
+    * */
+    var reg=/^a\d?$/;
+    var reg=/^a\d{3}$/;
+    var res=reg.test('a845');
+    console.log(res);
+
+    /*
+    *  正则中或者的使用方法：
+    *       | 或者的意思 或者运算优先级比较低，会出现可能意想不到的情况，在使用的时候可以结合小括号一起使用。小括号有改变优先级的作用。
+    *       [0-9]  \d
+    *       [xyz]  x或y或z
+    *       [\d\s] 数字或者空白中的一个
+    *       [0-9a-zA-Z_]  /w
+    *       [.]  代表的是点本身
+    *       [+-]  代表加号或者减号中的一个
+    *       [^xyz]  除了x和y和z，其他的任意字符都可以
+    *
+    * */
+    var reg=/^18|19$/;
+    var str='18';
+    str='19';
+    str='189';
+    str='119';
+    str='1819';
+    str='18snusndsl';
+    console.log(reg.test(str));
+    //设置优先级
+    var reg=/^(18|19)$/;
+    var str='18';
+    str='19';
+    str='1819';
+    str='18snusndsl';
+    console.log(reg.test(str));
+
+    //或者2
+    var reg=/^[xyz]$/;//x或者y或者z中的一个
+    var reg=/^[1234567890]$/;
+    var reg=/^[0-9]$/;
+    var reg=/^[0-9a-zA-Z_]$/;//\w
+    var reg=/^[+-]$/;
+    var reg=/^[^xyz]$/;
+    console.log(reg.test('x'));
+</script>

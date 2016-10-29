@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var ary=[1,2,3,'x','y','z'];
+    //var res=ary.splice(2,3);
+    //var res=ary.splice(2);//从索引2开始删除到末尾
+    var res=ary.splice(6,0,'hahah');
+    console.log(ary);//[1,2,'z']
+    console.log(res);//[3,'x','y']
+    console.dir(parseInt('125px'));
+    /*var div1=document.body;
+    var oDiv=document.createElement('div');
+    div1.appendChild(oDiv);
+    console.log(div1);*/
+    var body1=document.body;
+    var oDiv=document.createElement('div');
+    body1.appendChild(oDiv);
+    //div1.insertBefore(oDiv,ul1);
+</script>
+</body>
+</html>

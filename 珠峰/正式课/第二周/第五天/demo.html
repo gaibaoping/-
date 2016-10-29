@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var str='142';//壹肆贰
+    var reg=/(\d)/g;
+    console.log(reg.exec(str));
+    console.log(reg.exec(str));
+    console.log(RegExp.$1);//reg这个正则第一个分组所捕获到的内容
+    var str2='u';
+    var reg2=/(\w)/;
+    reg2.exec(str2);
+    console.log(RegExp.$1);//u
+    /*
+    * RegExp.$1 ... $9: 这个类的$1属性会保持着最后一次任何一个正则的第一个分组所捕获到的内容。
+    *
+    * */
+    /*var str2='零壹贰叁肆伍陆柒捌玖';
+    str=str.replace(reg,'$2');*/
+    /*str=str.replace(reg,function(){
+        console.log(arguments);
+        return str2.charAt(arguments[0]);
+    });*/
+    //console.log(str);
+</script>

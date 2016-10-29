@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * call: Function.prototype.call 所有的函数都可以调用call方法
+    * call的调用执行步骤：
+    *       1 先通过任何一个函数实例找到定义在Function原型上的call方法
+    *       2 把函数实例中的this修改成call的第一个参数
+    *       3 最后还要把函数实例(fn)执行
+    *           ps：call的第一个参数永远都是用来修改函数实例(fn)中的this的，从第二个参数开始才是真正传给函数实例的实参
+    *           ps：只要调用了call方法那么函数实例在修改了this的同时也执行结束了
+    *           ps:单个call  f1.call(f2);最后是f1执行
+    *           ps:多个call  f1.call.call.call(f2);最后是f2执行(最后一个call前面的部分要是一个函数)
+    * */
+    function fn(){
+        console.log(this);
+    }
+    //console.dir(typeof Function.prototype);
+    console.dir(Function.prototype);
+    //Function的原型是一个函数，区别于其他类的原型
+    console.dir(typeof Array.prototype);
+    var obj={age:30};
+    fn.call(obj);//fn中的this是window,经过call方法执行一次之后fn中的this就不是window了
+
+    function f1(){console.log(1)}
+    //function f1(){this();}
+    function f2(){console.log(2)}
+    f1.call(f2);//1==>2
+
+    function sum(num1,num2){
+        console.log(this);
+        console.log(num1+num2);
+    }
+    sum.call(this,2,3);
+    //sum(1,2);//3
+
+    //Function.prototype.call=function(){}
+    //console.dir(sum.call);
+    var fx=f1.call;
+    f1.call/*也是Function的实例*/.call.call.call.call(f2);
+
+    //把call中的this修改成f2==>call中的this是谁
+    //别忘了把fx执行也就是call执行
+
+    //call是定义在哪里的？ Function.prototype.call上的
+
+    Function.prototype.myCall=function() {
+        //把这里的this修改
+    };
+    f1.myCall(obj);//把f1中的this修改成obj
+    f2.myCall(obj);
+    f1.call(obj);//把f1中的this修改成obj
+
+
+
+</script>

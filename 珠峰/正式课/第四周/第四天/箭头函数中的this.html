@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var obj = {
+        a: 'obj_a',
+        func1: function () {
+            console.log(this.a, 'in1');
+            setTimeout(function () {
+                console.log(this, this.a);
+            },1000);
+        },
+        func3: () => {
+            console.log(this, this.a, 'in3');
+            setTimeout(()=>{
+            console.log(this, this.a);
+            },1000);
+        },
+        func4: () => {
+            console.log(this, this.a, 'in4');
+            setTimeout(function () {
+            console.log(this, this.a);
+            },1000);
+        }
+    }
+    obj.func1();
+
+    let str = 'st${obj}r';
+    console.log(str);
+</script>

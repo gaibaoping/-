@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    number(数字) string(字符串) boolean(布尔) null undefined
+    Boolean() //把其他数据类型强制转化为布尔数据类型
+    false:0 NaN "" null undefined  其他自身做布尔运算的都是true
+    1 两个对象数据类型比较永远不相等（除了是同一个空间引用地址）
+    2 对象==字符串  对象转化成字符串再比较
+    3 null==undefined
+    4 null和undefined和其他数据类型作比较都不相等
+    undefined: 1 var obj={} obj.xxx=undefined 对象不存在的属性
+               2 函数参数
+               函数没有传的形参
+               3 return undefined
+               函数没有写返回值
+    null：空  通过id获取元素没有id
+
+    引用数据类型：{} [] /\d\w/ newDate() function ...通过dom方法获取回来的dom对象都是引用数据类型
+    typeof 'number'
+</body>
+</html>
+<script>
+    /*
+    * 数组：[1,2,3,{},[]]
+    *   length:数组的长度，数组里有多少项
+    *   数组是一个特殊的对象：数组的属性名字都是数字，并且是从0开始一次增加
+    *   索引（index）：索引是从0开始，
+    *
+    *   ary.length-- 可以删除最后一项
+    *   可以通过length属性和for循环遍历数组的每一项
+    *   也可以通过for in遍历数组
+    * */
+    var ary=[1,2,3];
+    ary.length--;
+    console.dir(ary);
+    //ary.length++;
+    console.dir(ary);
+    //console.log(ary[2]);
+    for(var i=0;i<ary.length;i++){
+        console.log(ary[i]);
+    }
+    console.log(i);
+
+    var ary=['x','y','z'];
+   /* for(var key in ary){
+        console.log(ary.key);
+        console.log(ary);
+    }*/
+    var i=0;
+    while(i<ary.length){
+        console.log(ary[i]);
+        i++;
+    }
+    var ary=[];
+    //debugger;//代码运行到这里就停止了，如果想继续需要我们主动去按照每一行执行。
+    //F11就是逐行执行，如果不想执行了直接F8跳出，如果想监控变量选中右键add to watch
+    //就可以在右侧的watch菜单内实时监控
+    while(ary.length<3){
+        ary[ary.length]=ary.length+1;
+    }
+    console.log(ary);
+    /*
+    * js中常用的数组方法：
+    *   1 方法的作用
+    *   2 参数
+    *   3 返回值（方法留下了什么）
+    *   4 是否改变原有数组
+    *
+    * */
+    var ary=['x','y','z'];
+    //增加 删除 修改 查询（复制）
+    /*
+    *push 1 向数组的末尾增加项，如果是多项用逗号隔开
+    *     2 要增加的数组项
+    *     3 返回值是数组的新长度
+    *     4 原有数组改变
+    * */
+    var res=ary.push('$',0);
+    console.log(ary);
+    console.log(res);
+    /*
+    *unshift 1 向数组的开头增加项,如果是多项用逗号隔开=splice(0,0,'x','y')
+    *        2 要增加的数组项
+    *        3 返回值是数组的新长度
+    *        4 原有数组改变
+    * */
+    var ary=['x','y'];
+    var res=ary.unshift('$');
+    console.log(ary);
+    console.log(res);
+    /*
+    * pop 1 删除数组的最后一项=splice(ary.length-1,1)
+    *     2 不用参数
+    *     3 返回的值是删除的最后一项
+    *     4 原有数组改变
+    * */
+    var ary=['x','y'];
+    var res=ary.pop();
+    console.log(ary);
+    console.log(res);
+    /*
+    * shift 1 删除数组的第一项=splice(0,1)
+    *       2 用不用参数
+    *       3 删除的数组的第一项
+    *       4 原有数组改变
+    * */
+    var ary=['x','y'];
+    var res=ary.shift();
+    console.log(ary);
+    console.log(res);
+    /*
+    *splice 1 删除数组项
+    *       2 splice(n) 从索引n开始删除到末尾
+    *         splice(0) 返回就是原有数组的所有项组成的新数组==>克隆
+    *         splice(n,m)
+    *         splice(n,m,a) 从索引n开始删除m个，然后把a放在删除的位置
+    *         splice(n,m,a,b...) 从索引n开始删除m个，然后把从第n+1个项开始插入新的数组项
+    *       3 删除的数组项组成的新数组
+    *       4 原有数组改变
+    * */
+    var ary=[1,2,3,'x','y'];
+    var res=ary.splice(1,0,'a');//把a添加到索引1的前面
+    console.log(ary);
+    console.log(res);
+    /*
+    * slice 1 复制数组
+    *       2 slice() 从开头复制到末尾，返回一个新的数组和原来的相同  克隆数组
+    *         slice(n) 从索引n开始复制到末尾
+    *         slice(n,m) 从索引n开始到索引m-
+    *         1（支持双负数(-n,-m)）
+    *       3 返回复制的新数组
+    *       4 原有数组不变
+    * */
+    var ary=[1,2,3,'x','y'];
+    var res=ary.slice(2,4);//把a添加到索引1的前面
+    console.log(ary);
+    console.log(res);
+    /*
+    * 拼接：
+    *   concat 1 拼接数组
+    *          2 concat() 返回一个和原有数组相同的数组  克隆数组
+    *            concat([]) 返回一个和原与数组相同的数组  克隆数组
+    *            concat(ary1,ary2,3)拼接数组参数可以是数组，也可以是单独的数组项，也可以是多个
+    *          3 拼好的新数组
+    *          4 原有数组不变
+    *   join 1 把数组中的每一项按照指定的分隔符拼接成字符串
+    *        2 参数就是指定的分隔符
+    *        3 返回拼接好的字符串
+    *        4 原有数组不变
+    * */
+    var ary1=[1];
+    var ary2=[2];
+    var ary3=['3'];
+    var res=ary1.concat(ary2).concat(ary3).slice().splice().push('a');
+    console.log(res);
+    console.log(ary1.concat(ary2).concat(ary3));
+    console.log(ary1.concat(ary1,ary2));
+    //join
+    //var ary=['x','y','z'];
+    //var res=ary.join('$');
+    var ary=[1,2,3];
+    var res=ary.join('+');
+    //eval();可以把字符串当作js表达式去运行
+    console.log(eval(res));
+
+    //排序
+    /*
+    *  reverse 1 倒序数组
+    *          2 不用参数
+     *         3 倒序过后的原有数组
+     *         4 原有数组改变（顺序改变）
+    * */
+    var ary=[1,2,3];
+    var res=ary.reverse();
+    console.log(res);
+    console.log(ary);
+    console.log(res==ary);
+    /*
+    *  sort 1 可以按照指定规则排序数组（升序或降序）
+    *       2 匿名函数（规定规则）
+    *           sort(function(x,y){return x-y;})升序
+    *           sort(function(x,y){return y-x;})降序
+    *       3 已经排好序的原有数组
+    *       4 原有数组改变（顺序改变）
+    * */
+    var ary=[3,1,2,5,6,10];
+    var res=ary.sort(function(a,b){
+        return b-a;
+    });
+    console.log(res);
+    console.log(ary);
+    console.log(res==ary);
+    /*function fn(param){
+        if(typeof param=='function'){
+            for(var i= 1;i<3;i++){param();
+            }
+        }
+    }
+    fn(function(){alert()});*/
+
+
+    //兼容性不好的4个
+    /*
+    * indexOf 1 查看数组项在数组中的索引位置（第一次出现）
+    *         2 要查看的项
+    *         3 如果这个项出现在数组中那么返回对应的索引，如果没有出现返回-1
+    *         4 原有数组不变
+    * lastIndexOf  1 查看数组项在数组中的最后一次出现的索引位置
+    *              2 要查看的项
+    *              3 如果这个项出现在数组中那么返回对应的索引，如果没有出现返回-1
+    *              4 原有数组不变
+    *
+    * */
+    var ary=['1',2,3,'x'];
+    var res=ary.indexOf(2);
+    console.log(res);
+    console.log(ary);
+    /*
+    * forEach 1 循环遍历数组的每一项
+    *         2 需要一个匿名函数参数
+    *         3 undefined
+    *         4 原有数组不变
+    * */
+    var ary=['x','y','z'];
+    var res=ary.forEach(function(){
+        console.log(arguments);
+    });
+    console.log(res);
+    console.log(ary);
+    /*
+    *  map 1 循环遍历数组
+    *      2 需要一个函数
+    *      3 匿名函数return的值组成一个新的数组
+    *      4 原有数组不变
+    * */
+    var ary=['x','y','z'];
+    var res=ary.map(function(item,index,oriAry){
+    return index*2;
+    });
+    console.log(res);
+    console.log(ary);
+</script>

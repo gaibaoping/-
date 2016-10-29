@@ -1,0 +1,57 @@
+*{margin: 0;padding: 0;}
+.banner{
+    width: 1000px;
+    height: 300px;
+    margin: 30px auto;
+    position: relative;
+    background: url("../images/default.gif")no-repeat center #cccccc;
+    overflow: hidden;
+}
+.banner .bannerInner{
+    width: 4000px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.banner .bannerInner div{
+    float: left;
+    width: 1000px;
+    height: 300px;
+}
+.banner .bannerInner img{
+    width: 100%;
+    height: 100%;
+    border: none;
+    vertical-align: top;
+    display: none;
+    opacity: 0;
+}
+.banner ul{
+    list-style: none;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+.banner ul li{
+    width: 18px;
+    height: 18px;
+    border: 2px solid black;
+    border-radius: 50%;
+    float: left;
+    margin-right: 3px;
+    cursor: pointer;
+}
+.banner ul li.selected{background: red;}
+.banner .left,.banner .right{
+    display: none;
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    top: 50%;
+    margin-top: -20px;
+    background: url("../images/pre.png") no-repeat;
+}
+.banner .right{
+    right: 0px;
+    background-position-x:-47px;
+}

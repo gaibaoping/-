@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>3</li>
+        <li>2</li>
+        <li>4</li>
+    </ul>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+    var lis=document.getElementById('ul').getElementsByTagName('li');
+    console.log(lis);
+    var lisAry=utils.listToArray(lis);//把lis转化成一个数组
+    console.log(lisAry);
+    //可以给它排序
+    lisAry.sort(function(a,b){
+        console.log(a,b);
+        //return a-b;//我这会儿不会按照li去排序，按照li的innerHTML排序
+        return a.innerHTML- b.innerHTML;
+    });
+    //打印排序好的数组
+    console.log(lisAry);//已经是按照innerHTML排好序的数组了
+
+    /*
+    * sort 不仅仅可以排序数字项的数组，还可以排序dom元素组成的数组了。
+    * 按照dom元素的一个属性去排序
+    *
+    * sort排序：如果按照字符串去比较，那么不能使用减法。
+    * 使用字符串的 str.localeCompare
+    * ps；如果是汉子是按照拼音比较，返回值是数字1 -1 0
+    * */
+</script>

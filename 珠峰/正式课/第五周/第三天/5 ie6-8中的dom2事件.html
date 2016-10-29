@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div{
+            width: 200px;
+            height: 200px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div');
+    function fn1(){console.log(1);console.log(this === oDiv);}
+    function fn2(){console.log(2);}
+    function fn3(){console.log(3);}
+    function fn4(){console.log(4);}
+    function fn5(){console.log(5);}
+    function fn6(){console.log(6);}
+    function fn7(){console.log(7);}
+    function fn8(){console.log(8);}
+    function fn9(){console.log(9);}
+    function fn10(){console.log(10);}
+    function fn11(){console.log(11);console.log(this);}
+    function fn12(){console.log(12);}
+
+     //绑定事件
+    oDiv.attachEvent('onclick',fn1);//在ie6-8中没有捕获，只有冒泡
+    oDiv.attachEvent('onclick',fn2);
+    oDiv.attachEvent('onclick',fn3);
+    oDiv.attachEvent('onclick',fn4);
+    oDiv.attachEvent('onclick',fn5);
+    oDiv.attachEvent('onclick',fn6);
+    oDiv.attachEvent('onclick',fn7);
+    oDiv.attachEvent('onclick',fn8);
+    oDiv.attachEvent('onclick',fn9);
+    oDiv.attachEvent('onclick',fn10);
+    oDiv.attachEvent('onclick',fn11);
+    oDiv.attachEvent('onclick',fn12);
+
+    /*
+    * 存在的兼容性问题：
+    *       1 绑定事件的函数被触发的时候函数中的this不是那个元素了，而是window
+    *       2 绑定多个函数的时候，事件被触发执行的顺序是乱的
+    *       3 同一个事件还可以多次绑定同一个函数（可以重复绑定）
+    *
+    *
+    *     ps:1 绑定事件使用attachEvent('onclick') 事件类型前边需要加on
+    *        2 事件发生的阶段全都是在冒泡阶段
+    * */
+    oDiv.detachEvent('onclick',fn12);//移除事件绑定
+</script>

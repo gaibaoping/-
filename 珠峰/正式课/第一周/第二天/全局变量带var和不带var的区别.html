@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var num=12;
+    console.log(window.num);//12
+    //console.log(total);//error
+    total=13;//简单的赋值过程，就是直接赋值给window的一个属性
+    console.log(window.total);
+    console.log(total);//window是可以省略不写的
+
+    function fn(x){
+        console.log(x);
+        (function(x){
+            x=100;
+            console.log(x);
+        })();
+        console.log(x);
+    }
+    fn();
+    console.log(window.x);
+    /*
+    * 全局变量带var和不带var的区别就是是否被预解释
+    * 而在变量的赋值过程中如果有私有变量，那么直接赋值给私有变量，如果没有那么通过作用域链去上一级查找，
+    * 如果查找到window顶级作用域还没有那么就直接赋值给window当作属性。
+    *    ps：上一级作用域是谁，就看函数被哪个function包着。上一级作用域是谁就看函数在哪里定义的，和在哪里执行没有关系
+    *
+    *
+    * */
+
+    /*
+    *  闭包：函数执行的时候会形成一个新的私有作用域，我们把这个私有作用域保护私有变量不受外界干扰的机制就叫做闭包
+    *  形成闭包要有函数执行才可以，否则别谈闭包。
+    * */
+</script>

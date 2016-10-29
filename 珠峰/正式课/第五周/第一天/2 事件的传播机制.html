@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #outer{
+            border-radius: 50%;
+            width: 500px;
+            height: 500px;
+            background: red;
+            padding: 100px;
+            box-sizing: border-box;
+        }
+        #middle{
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            background: yellow;
+            padding: 100px;
+            box-sizing: border-box;
+        }
+        #inner{
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        <div id="middle">
+            <div id="inner"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var outer = document.getElementById('outer');
+    var middle = document.getElementById('middle');
+    var inner = document.getElementById('inner');
+    /*document.body.onclick = function(e){
+        e = e || window.event;
+        e.target = e.target || e.srcElement;//事件源的兼容性处理
+        console.log(e.target);//事件源inner/middle...
+        //console.log('body');
+    };*/
+    /*outer.onclick = function(){
+        console.log('outer');
+    };
+    middle.onclick = function(){
+        console.log('middle');
+    };
+    inner.onclick = function(){
+        console.log('inner');
+    };*/
+    //在点击inner触发click事件的时候，middle/outer/body...都会被触发click事件，这种就叫事件传播
+    //事件传播分两种：1 从目标元素向父元素逐级触发叫做事件冒泡  从里到外
+                 //2 从最外层的元素向目标元素触发叫做事件捕获  从外到里
+
+    /*
+    *  事件绑定分dom0和dom2两种绑定方式
+    *       1 document.onclick = function (){}//dom0就是把一个函数赋值给一个元素的事件属性
+    *       2 outer.addEventLister('click',fn,false);
+    *           'click':事件类型（没有on）
+    *           fn:绑定的事件
+    *           true/false:是否在捕获阶段被触发/或者冒泡阶段触发
+    *         ps：dom0事件绑定没有捕获全都是在冒泡阶段被触发，在编程这个过程中捕获基本不用
+    *         ps：事件触发的顺序是先捕获后冒泡
+    * */
+    outer.addEventListener('click',function(){
+        console.log('outer');
+    },false);//冒泡阶段
+    inner.addEventListener('click',function(){
+        console.log('inner');
+    },false);//冒泡阶段
+    middle.addEventListener('click',function(){
+        console.log('middle');
+    },true);//捕获阶段
+    inner.onclick = function(e){
+        e = e || window.event;
+        e.stopPropagation ? e.stopPropagation(): e.cancelBubble = true;//阻止事件传播的
+        //console.log('inner');
+    };//冒泡阶段
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    function Fn(){
+        this.index=10;
+    }
+    Fn.prototype.sum=function(){
+
+    };
+    var f=new Fn;
+
+
+    console.log(f instanceof Object);//-->true
+    //f的原型链上存在Object.prototype，所以f可以调取使用Object.prototype上提供的方法，所以也可以说f是Object的一个实例，所以使用instanceof检测结果
+    //instanceof特点 只要当前类的原型在实例的原型链上，那么使用instanceof检测的结果就是true
+
+</script>

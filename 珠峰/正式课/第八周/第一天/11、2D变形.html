@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin:100px auto;
+        }
+        #div1:active{
+            /*transform: rotate(360deg);*/
+            /*transform: skew(30deg ,30deg);*/
+            /*transform: scale(3,2);*/
+            transform: translate(500px,0) rotate(180deg) ;
+            transition: 1s ease-in;
+
+            /*元素变形的基准点：默认是元素的中心点
+            rotate/skew/scale可以改变元素变形的基准点，但是translate的基准点不能改变,只能是元素的中心点
+            */
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

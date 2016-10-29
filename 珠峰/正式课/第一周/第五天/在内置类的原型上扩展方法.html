@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //Array数组的内置类
+    //Array.prototype:push pop shift unshift splice slice concat join toString sort reverse indexOf
+    var ary=[12,23,34];
+    //重写内置的slice方法：我们可以在内置类的原型上扩展和重写内置方法，重写完成后在调取时候以重写后的为主
+    Array.prototype.slice=function(){
+        console.log('ok');
+    };
+    ary.slice();
+    //为了保证不修改内置的方法，我们在定义方法的时候最好把方法名字前面追加特殊的前缀
+    //在数组原型上扩展的方法，那么数组的每一个实例都可以调取这个方法使用了
+    Array.prototype.myUnique=function myUnique(){};
+
+    var ary=[1,6,2,4,3,5,2,1];
+    ~function(pro){
+        function myUnique(){
+            var obj={};
+            for(var i=0;i<this.length;i++){
+                var cur=this[i];
+                if(obj[cur]==cur){
+                    this[i]=this[this.length-1];
+                    this.length--;
+                    i--;
+                    continue;
+                }
+                obj[cur]=cur;
+            }
+            obj=null;
+            return this;
+        }
+        pro.myUnique=myUnique;
+    }(Array.prototype);
+    console.log(ary.myUnique().sort(function(a,b){return a-b;}));
+    //ary-->Array.prototype-->Object.prototype
+</script>

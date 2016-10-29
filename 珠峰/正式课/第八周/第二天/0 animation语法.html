@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+css3中动画属性：过渡动画（只能设置两种状态-起始状态和结束状态）和帧动画
+帧动画相对于过渡动画来说，可以设置复杂的动画效果
+帧动画分为两个步骤：
+    1、通过@keyframes申明关键帧动画
+    2、通过animation调用关键帧动画
+    @keyframes 帧动画名称{
+        0%{
+            transform:rotate(10deg)
+        }
+        25%{
+            transform:rotate(25deg)
+        }
+        100%{
+            transform:rotate(50deg)
+        }
+    谷歌浏览器：
+    @-webkit-keyframes 帧动画名称{
+        0%{
+            transform:rotate(10deg)
+        }
+        25%{
+            transform:rotate(25deg)
+        }
+        100%{
+            transform:rotate(50deg)
+        }
+
+    animation-name:move;帧动画名称（自己设置）必须设置
+    animation-duration:1s;帧动画执行的时间  必须设置
+    animation-timing-function:cubic-bezier()动画类型
+    animation-delay:0.5s;延迟时间
+    animation-iteration-count:infinite/1;执行的次数  必须设置
+    animation-duration:normal|reverse|alternate|alternate-reverse;动画运行的方向
+    animation-play-state:running|paused;动画运行的状态
+    animation-fill-mode:none|backwards(起始状态)|forwards(最后一帧状态)|both(可能停留在最后一帧或第一帧，根据设置的方向而定);动画结束的状态
+    animation:move 1s both
+-->
+</body>
+</html>

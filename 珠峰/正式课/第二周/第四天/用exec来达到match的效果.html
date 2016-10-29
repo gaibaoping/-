@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var str='zhufeng2015peixun2016money2017';
+    var reg=/\d+/g;
+    //console.log(reg.exec(str));
+
+    var ary=[];//用来存放捕获回来的结果
+    var res=reg.exec(str);
+    while(res){
+        ary.push(res[0]);//如果这行代码能执行到，说明res这个捕获回来的结果不是null，那么我就把结果中的第一项放到数组中
+        res=reg.exec(str);
+    }
+    console.log(ary);
+</script>

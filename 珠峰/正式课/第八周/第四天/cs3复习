@@ -1,0 +1,63 @@
+transition属性：
+    1.只有两种状态，开始状态和结束状态
+    2.通过伪类（hover），js代码或者媒体查询才能触发它
+    3.通过css属性值，由起始值向结束值之间实现平滑过渡的效果
+    在css中没有时间轴的概念，所有的效果是即时效果，transition属性可以在一定时间内实现某个效果
+    transition-property:width ->起始值：all
+    transition-timing-function:动画运行的速度 ease ease-in ease-out ease-in-out->起始值：ease ease-in-out   linear 贝塞尔曲线
+    transition-duration:动画运行的时间 ->起始值：0s （时间必须设置的）
+    transition-delay:延迟时间 ->起始值：0s
+    符合写法：
+        transition:all 1s linear 2s;所有属性设置的顺序按照前面写
+        除了动画运行的时间，其他都设置默认的值 transition:1s
+        transition:width 1s linear 2s,height 1s linear 2s 设置多个属性，中间用逗号隔开
+
+
+帧动画 animation
+    1.可以通过keyframes 在一定时间内可以设置设置任意时间点的状态 0% ，100% 时间的百分之多少
+    2.只要设置了animation属性 动画就会执行
+
+    帧动画运行得需要两步：
+        1.通过keyframes （动画名）（设置运动轨迹
+        2.通过animation调用关键字动画
+
+    animation下的细分属性
+        1.animation-name 帧动画的名称（必写）
+        2.animation-duration 动画执行的时间（必写）
+        3.animation-timing-function 动画运行的速度 默认值ease
+        4.animation-delay 延迟时间
+        5.animation-direction:normal|reverse|alternate(至少动画执行两次，开始时从第一帧到最后一帧，然后再从最后一帧到第一帧)|alternate-reverse(开始时从最后一帧到第一帧，然后再从第一帧到最后一帧)
+        6.animation-play-state:running(默认值)运行的|paused停止的
+        7.animation-iteration-count:1|infinite(无数次) 动画执行的次数（推荐写）
+        8.animation-fill-mode:none(默认值)|backwards(起始状态)|forwards(最后一帧)|both(根据方向而定，有可能停留在最后一帧或者第一帧) ->(推荐写，并设置成both)
+
+    简写写法
+        animation:move 1s 1s 1 both;->名称 运行时间 延迟时间 执行次数 结束后的状态
+
+
+transform 控制变形效果
+    2D空间：（X轴，Y轴）旋转，倾斜，缩放，平移
+    3D空间：翻转，多了一个Z轴
+    transform:rotate(45deg);
+    transform:skew(15deg);如果只设置一个参数，表示水平方向倾斜15deg，设置了两个值，第一个值水平方向的倾斜，第二个值垂直方向的倾斜
+    transform:scale(1);默认值是1，只设置一个值，水平和垂直都缩放该倍数，设置两个值，第一个值表示x轴方向的缩放倍数，第二个值表示y轴方向的缩放倍数
+    transform:translate(10px,20px); 只设置一个值表示水平方向平移，设置两个值，前面一个的是水平方向平移，后面的是垂直方向平移
+
+    2D效果转成3D效果
+        必须先设置如下属性：
+        1.perspective 景深 近大远小的效果
+        2.transform-style:preserve-3d 所有变形元素在3D空间里展示
+
+        transform:rotateX(45deg) 围着X轴上下旋转
+        transform:rotateY(45deg) 围着Y轴左右旋转
+        transform:rotateZ(45deg) 围着Z轴上旋转的角度
+
+        transform:scaleX(0.5) x轴上的缩放倍数
+        transform:scaleY(0.5) y轴上的缩放倍数
+        transform:scaleZ(0.5) z轴上的缩放倍数,但是不能使用，必须配合着其他的变形方法一起使用（例如rotateX(45deg)）
+
+        transform:scale3d(x,y,z)
+        transform:translateX(0.5)
+        transform:translateY(0.5)
+        transform:translateZ(0.5)
+        transform:translate(x,y,z)可以开启硬件加速功能，让动画更加流畅

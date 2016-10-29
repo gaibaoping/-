@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    //回调函数callBack
+    var $callBack= $.Callbacks();//回调函数的集合，容器中装的都是函数
+    function fn1(){
+        console.log(1);
+    }
+    function fn2(){
+        console.log(2);
+    }
+    //[fn1]
+    $callBack.add(fn1);//向回调函数集合中添加一个fn1函数
+    //[fn1,fn2]
+    $callBack.add(fn2);//向回调函数集合中添加一个fn2函数
+
+    $callBack.fire();//执行回调函数集合中的所有函数
+
+    $callBack.remove(fn1);//从集合中移除方法
+
+    $callBack.fire();
+</script>

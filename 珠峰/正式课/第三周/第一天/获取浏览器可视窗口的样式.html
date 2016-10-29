@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{margin: 0;padding: 0;width: 100%;height: 150%}
+    </style>
+</head>
+<body>
+</body>
+</html>
+<script>
+    function win(attr,val){//如果传了val参数那么就是设置浏览器的可视窗口的attr属性，如果没有传值那么就是获取attr属性的值
+        if(typeof val=='undefined'){
+            return document.documentElement[attr]||document.body[attr];
+        }
+        //代码运行到此处一定val传值了，是需要设置值。scrollTop和scrollLeft
+        document.documentElement[attr]=val;
+        document.body[attr]=val;
+    }
+    console.log(win('clientWidth'));//获取浏览器可视窗口的宽度
+
+
+    function win(attr,val){
+        if(typeof val != 'undefined'){ //val有值设置
+            document.documentElement[attr] = val;
+            document.body[attr] = val;
+        }
+        return document.documentElement[attr] || document.body[attr];
+    }
+    console.log(win('scrollTop',800));
+    /*var num = 0;
+    window.setInterval(function (){
+        console.log(win('scrollTop',++num));
+    },10);*/
+    //window.clearInterval(1);
+</script>

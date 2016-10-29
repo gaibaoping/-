@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *  正则捕获：
+    *       exec：[捕获到的结果，index：捕获到结果的索引位置，input：原有字符串]
+    *       exec在捕获不到结果的时候返回null
+    *       lastIndex属性：下一次会从这个索引位置开始，必须正则中包含全文g
+    *
+    * */
+    /*
+    *   修饰符：
+    *       i: ignoreCase 忽略大小写
+    *       m：multiline  多行匹配
+    *       g：global 全文匹配  把所有符合规则的全部都匹配到，配合着exec使用可以把所有符合需求的字符串全部捕获到。但是要捕获多次。
+    * */
+    var reg=/\d+/g;
+    var str='zhufeng2015peixun2016';
+    //console.log(reg.test(str));//true
+    //第一次捕获
+    var res=reg.exec(str);
+    console.log(res);//捕获结果
+    console.log(reg.lastIndex);//11
+    //第二次捕获
+    var res=reg.exec(str);
+    console.log(res);//捕获结果
+    console.log(reg.lastIndex);//21
+
+    //打印正则
+    console.dir(reg);//lastIndex的属性
+    //修改lastIndex属性
+    //reg.lastIndex=12;
+
+    //第三次捕获
+    var res=reg.exec(str);
+    console.dir(res);//null
+    console.log(reg.lastIndex);//0
+
+    //第四次捕获
+    var res=reg.exec(str);
+    console.dir(res);//
+    console.log(reg.lastIndex);//
+
+
+    /*
+    * match：字符串方法也是用来捕获的
+    *     结果：和exec用法雷同，结果是把所有符合规则的全部捕获回来并且添加到一个数组中
+    * */
+    var res=str.match(reg);
+    console.log(res);//[2015,2016]
+
+    /*
+    * match和exec：
+    *     1 如果有全文g那么match方法会把所有的能匹配到结果放到一个数组中，而exec需要多次执行才会得到所有的能匹配到的结果
+    *     2 如果没有全文g，那么match和exec的匹配结果完全相同，都是第一次的结果.[结果 index： input：]
+    *
+    * */
+</script>

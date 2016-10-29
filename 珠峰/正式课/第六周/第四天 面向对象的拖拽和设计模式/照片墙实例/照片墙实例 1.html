@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul{
+            width: 480px;
+            height: 640px;
+            margin: 100px auto;
+            padding: 5px;
+            list-style: none;
+            background: #cccccc;
+        }
+        li{
+            float: left;
+            width: 150px;
+            height: 150px;
+            margin: 5px;
+            overflow: hidden;
+            background: green;
+            cursor: pointer;
+            -webkit-user-select: none;
+            z-index: 0;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><img src="img/1.png" alt=""/></li>
+        <li><img src="img/2.png" alt=""/></li>
+        <li><img src="img/3.png" alt=""/></li>
+        <li><img src="img/4.png" alt=""/></li>
+        <li><img src="img/5.png" alt=""/></li>
+        <li><img src="img/6.png" alt=""/></li>
+        <li><img src="img/7.png" alt=""/></li>
+        <li><img src="img/8.png" alt=""/></li>
+        <li><img src="img/9.png" alt=""/></li>
+        <li><img src="img/10.png" alt=""/></li>
+        <li><img src="img/11.png" alt=""/></li>
+        <li><img src="img/12.png" alt=""/></li>
+    </ul>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script src="js/animate.js"></script>
+<script src="js/event2.js"></script>
+<script src="js/Drag.js"></script>
+<script>
+    var oLis = document.getElementsByTagName('li');
+    for(var i = oLis.length-1; i >= 0; i--){
+        var oLi = oLis[i];
+        oLi.style.left = oLi.offsetLeft + 'px';
+        oLi.style.top = oLi.offsetTop + 'px';
+        oLi.style.position = 'absolute';
+        //offsetLeft的值包括marginLeft，但是绝对定位是从marginLeft外边开始算
+        oLi.style.margin = 0;
+        new Drag(oLi).on('dragstart',increaseIndex).on('dragend',goHome).on('dragging',HitedTest).on('dragend',changePosition);
+    }
+    var zIndex = 0;
+    function increaseIndex(){
+        this.ele.style.zIndex =++zIndex;
+    }
+    function goHome(){
+        animate(this.ele,{left:this.x,top:this.y},500);
+    }
+
+    //判断a，b是否碰撞上了
+    function isHited(a,b){
+        if(a.offsetLeft + a.offsetWidth< b.offsetLeft|| a.offsetTop + a.offsetHeight< b.offsetTop|| a.offsetLeft> b.offsetLeft + b.offsetWidth|| a.offsetTop> b.offsetTop+ b.offsetHeight){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    //进行碰撞检测，把撞上的保存到数组中，并且改变其背景颜色为红色以表示它是碰撞上了
+    function HitedTest(){
+        this.aHited=[];
+        for(var i=0;i<oLis.length;i++){
+            var oLi=oLis.item(i);
+            if(this.ele==oLi)continue;
+            if(isHited(this.ele,oLi)){
+                this.aHited.push(oLi);
+                oLi.style.backgroundColor="red";
+            }else{
+                oLi.style.background = '';
+            }
+        }
+    }
+
+    //
+    function changePosition(){
+        var a = this.aHited;
+        if(a&& a.length){
+            for(var i = 0; i< a.length;i++){
+                var oLi = a[i];
+                oLi.distance = Math.sqrt(Math.pow(this.ele.offsetLeft-oLi.offsetLeft,2)+Math.pow(this.ele.offsetTop-oLi.offsetTop,2));
+            }
+            a.sort(function(a,b){return a.distance - b.distance});
+            var shortest = a[0];//把距离最短的元素找到了
+
+            animate(shortest,{left:this.ele.l,top:this.ele.t},700);
+            animate(this.ele,{left:this.ele.l,top:this.ele.t},700);
+
+        }
+    }
+</script>

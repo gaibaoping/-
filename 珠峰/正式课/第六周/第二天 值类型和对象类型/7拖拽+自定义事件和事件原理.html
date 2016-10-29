@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+div{ width:100px; height:100px; position:absolute; top:0; left:0; cursor:move; -webkit-user-select:none; overflow:hidden; background:gray;}
+div img{ width:100px; height:100px; border:none;}
+</style>
+</head>
+
+<body>
+<div id="div1"><img src="images/5.png"></div>
+<div id="div2" style="top:100px; left:100px; background:orange;"><img src="images/1.png"></div>
+<div id="div3" style="left:200px; background:purple"><img src="images/2.png"></div>
+<div id="div4" style="left:400px; background:pink;"><img src="images/3.png"></div>
+</body>
+</html>
+<script src="event2.js"></script>
+<script>
+//注意this关键字的利用：this都是指向被拖拽的元素，是由事件的原则的决定
+//用好this，有利降低程序的耦合度：就是指这些拖拽方法不会只能拖拽某一个固定的元素，而是把它绑定给那个元素就可以拖拽那个元素
+//另外要注意的是：this并非在所有的应用中都要指向被拖拽的元素，this是谁是由程序的要求或实现的需求来决定的
+/*
+当down执行的时候，清除动画效果和增加层级关系要随之执行
+当move执行的进修，计算速度的代码要执行
+当up执行的时候，fly和drop要随之执行*/
+function down(e){//拖拽开始--准备拖拽---用"selfdragstart"来表示这个阶段
+	this.x=this.offsetLeft;
+	this.y=this.offsetTop;
+	this.mx=e.pageX;
+	this.my=e.pageY;
+	
+	if(this.setCapture){
+		on(this,"mousemove",move);
+		on(this,"mouseup",up);
+		this.setCapture();
+	}else{
+		this.MOVE=move.bind(this);
+		this.UP=up.bind(this);
+		on(document,"mousemove",this.MOVE);
+		on(document,"mouseup",this.UP);
+	}
+	e.preventDefault();
+	selfRun.call(this,"selfdrag1",e);//selfRun方法的运行，被称之为“通知”，就是当这个主行为执行的时候，去遍历执行以"selfdragstart"为区分符的那个数组.
+//特别强调的是：selfRun的第一个参数是什么，就规定了代表down方法的事件类型是什么。
+//这儿也叫发布事件
+
+}
+function move(e){//拖拽进行---"selfdragging"
+	this.style.left=this.x+(e.pageX-this.mx)+"px";
+	this.style.top=this.y+(e.pageY-this.my)+"px";
+	selfRun.call(this,"selfdrag2",e);
+	
+}
+
+function up(e){//拖拽结束----"selfdragend"
+	if(this.releaseCapture){
+		this.releaseCapture();
+		off(this,"mousemove",move);
+		off(this,"mouseup",up);
+	}else{
+		off(document,"mousemove",this.MOVE);
+		off(document,"mouseup",this.UP);
+	}
+	selfRun.call(this,"selfdrag3",e);
+}
+function clearEffect(){
+	clearTimeout(this.flyTimer);
+	clearTimeout(this.dropTimer)	
+}
+function getSpeed(e){
+	if(this.prevPosi){//如果有上一次的位置，说明这已经不是第一次
+		this.speed=e.pageX-this.prevPosi;
+		this.prevPosi=e.pageX;//不断的更新“上一次的位置”,确保“上一次的位置”总是最近一次的。
+		
+	}else{
+		this.prevPosi=e.pageX;//如果没有上一次的位置，则把当前的位置赋值给“上一次的位置”	
+	}	
+}
+function fly(){
+	this.speed*=.98;
+	var maxRight=(document.documentElement.clientWidth||document.body.clientWidth)-this.offsetWidth;//得到最大的右边界
+	var currentX=this.offsetLeft+this.speed;//正常运动时，盒子应该到达的位置
+	if(currentX<=0){//左边界判断,如果越过了左界
+		this.style.left=0;//则停在左边界上
+		this.speed*=-1;//调个头，撞到边界向反方向运动
+	}else if(currentX>=maxRight){
+		this.style.left=maxRight+"px";
+		this.speed*=-1;
+	}else{
+		this.style.left=currentX+"px";
+	}
+	//var that=this;
+	//this.flyTimer=setTimeout(function(){fly.call(that)},20);
+	if(Math.abs(this.speed)>=.5){
+		this.flyTimer=setTimeout(processThis(fly,this),20);
+	}
+	
+}
+function drop(){
+	if(this.dropSpeed){
+		this.dropSpeed+=9;	
+	}else{
+		this.dropSpeed=9;	
+	}
+	this.dropSpeed*=.98;
+	var maxBottom=(document.documentElement.clientHeight||document.body.clientHeight)-this.offsetHeight;
+	var currentY=this.offsetTop+this.dropSpeed;
+	if(currentY>=maxBottom){
+		this.style.top=maxBottom+"px";
+		this.dropSpeed*=-1;
+		this.flag++;//标识属性，用来记录连续多少次到达了边界的属性	
+	}else{
+		this.style.top=currentY+"px";
+		this.flag=0;
+	}
+	if(this.flag<2){//这是个很有趣的技巧
+		this.dropTimer=setTimeout(processThis(drop,this),20);	
+	}
+}
+
+var eles=document.getElementsByTagName("div");
+for(var i=0;i<eles.length;i++){
+	var ele=eles.item(i);
+	on(ele,"mousedown",down);
+	on(ele,"selfdrag1",clearEffect);
+	on(ele,"selfdrag2",getSpeed);
+	on(ele,"selfdrag3",fly);
+	on(ele,"selfdrag3",drop);
+}
+</script>

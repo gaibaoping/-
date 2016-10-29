@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1">
+        <p id="p"></p>
+        <ul>
+            <li></li>
+            <li id="li2"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    var $p=$('#p');
+    //append  appendChild
+    $('#div1').append($p);
+
+    //appendTo 把子元素添加到容器中
+    var img=new Image;
+    $(img).appendTo($p);//把img用$封装成jQ实例对象
+
+    //prepend  向开头添加
+    //子元素.prependTo(父容器)
+
+    //before after
+    $('#div1').before('<span>123</span>');//在#div1的前面添加元素
+    $('#div1').after('<span>123</span>');//在#div1的后面添加元素
+
+    //insertBefore insertAfter
+
+    //warp
+    $('#div1').wrap('<div class="warp"></div>');//给#div1添加一个父级元素，而这个父级就是参数的html标签
+
+    //clone() ==>cloneNode(true/false)
+    //remove() ==>removeChild()
+    //$('<i></i>')replaceAll($('#div1')) ==>replaceChild()
+
+    $('<i></i>').appendTo($('#div1'));//把创建的i标签添加到#div1中
+</script>

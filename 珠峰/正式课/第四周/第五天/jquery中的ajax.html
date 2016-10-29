@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+   /* var jQuery=function(){
+        //返回一个jQuery实例
+    };
+    function $(){
+        return new jQuery();
+    }
+    jQuery.ajax=function(){};*/
+   //$.ajax()这种调用方式是不需要实例，ajax这些方法是定义在jQuery这个类本身，而那些css，html，animate等方法都需要jQuery实例来调用，这些是定义在原型上的.jQuery.prototype
+   $.ajax({
+       type: 'get',//post
+       ulr: 'data.txt'+Math.random,
+       async: false,//true 异步
+       dataType:'json',//直接处理成json
+       success: function(data){//data获取回来的数据
+           //成功获取数据需要如何处理 绑定数据
+       }
+   });
+</script>

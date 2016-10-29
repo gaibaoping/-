@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1">
+        <p></p>
+        <!--注释-->
+        <!--<span></span>-->
+        <ul id="ul1">
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <p>
+        <em></em>
+        <span></span>
+    </p>
+</body>
+</html>
+<script>
+    /*
+    * dom中的节点关系属性
+    *      节点包括：文本 注释 换行 元素等
+    *      parentNode 父节点
+    *      childNodes  所有的子节点（可能包含注释，文本，换行，元素）
+    *      children  只有元素  不兼容
+    *      一下四种不存在返回null
+    *      previousSibling 上一个兄弟节点  有可能是换行
+    *      previousElementSibling 上一个元素兄弟几点 不兼容
+    *
+    *      nextElementSibling 下一个兄弟节点
+    *      nextSibling 下一个元素兄弟节点 不兼容
+    * */
+    /*
+    *     js中常用的节点类型
+    *         nodea         元素              文本       注释       document
+    *       nodetype         1                3          8            9
+    *       nodename       大写的标签名字    #text      #comment    #document
+    *       nodeValue       null             文本内容   注释内容     null
+    * */
+    var div1=document.getElementById('div1');
+    var ul1=document.getElementById('ul1');
+    console.log(ul1.parentNode);
+    //console.log(ul1.previousSibling.previousSibling);
+    //console.log(ul1.previousElementSibling);
+    //console.log(ul1.nextElementSibling);
+    //console.log(ul1.childNodes);//NodeList
+    //console.log(ul1.children);
+    console.log(ul1.firstChild);//第一个子节点
+    console.log(ul1.firstElementChild);//第一个元素子节点 不兼容
+    console.log(ul1.lastChild);//最后一个子节点
+    console.log(ul1.lastElementChild);// 最后一个元素子节点  不兼容
+
+    //循环
+    /*for(var i=0;i<10;i++){
+        console.log(i);
+    }
+    var i=0;
+    while(i<10){
+        console.log(i);
+        i++;
+    }
+    for(var key in {}){}
+
+    var i=0;
+    while(i<5){
+        console.log(i);
+        i++;//条件的迭代
+    }*/
+    //ul1.previousElementSibling
+    function previousElementSibling(ele){//要获取谁下面的就把谁传进来
+        var prev=ele.previousSibling;//首先获取上一个哥哥节点，然后判断是不是元素，如果是元素那么就继续向上查找
+        while(prev && prev.nodeType!==1){//prev存在并且prev的节点类型不是元素才继续向上查找
+            prev=prev.previousSibling;
+        }
+        return prev;
+    }
+    console.log(previousElementSibling(ul1));
+    //ul1.childNodes(元素 文本 注释)>ul1.children（元素）
+   function children(ele){
+        var ary=[];
+        //childNodes里节点类型为1的
+        var nodes=ele.childNodes;
+        for(var i=0;i<nodes.length;i++) {
+            if (nodes[i].nodeType == 1) {
+                ary.push(nodes[i]);
+            }
+        }
+       return ary;
+   }
+    console.log(children(ul1))
+
+
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <ul id="ul">
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    function listToArray(likeArray){//把类数组转化成数组
+        var ary=Array.prototype.slice.call(likeArray);
+        /*var ary=[];
+        for(var i=0;i<likeArray.length;i++){
+            ary.push(likeArray[i]);
+        }*/
+        return ary;
+    }
+
+
+    Array.prototype.myslice=function(n,m){
+        //this 这个方法中的this就是我要操作（我要赋值）的原有数组
+        //如果我能把这个方法中的this修改成其他的类数组
+        //就是把类数组中从n到m-1项放到一个新数组里
+        //如果要是把this换成arguments就是把argument的n到m-1放到数组里
+        //call可以做修改this的操作
+        var aty=[];
+        for (var i=n;i<m;i++){
+            ary.push(this[i]);
+        }
+        return aty;
+    };
+
+    var lis=document.querySelectorAll('#ul li');
+    console.log(lis);
+    var lisAry=listToArray(lis);
+    console.log(lisAry);
+</script>

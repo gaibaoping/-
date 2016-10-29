@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary=[3,5,4,2,1];
+    var newAry=[];
+    newAry.push(ary[0]);//原有数组里的第一项添加到新数组中
+    //原有数组不变，新数组从空数组变成了[3]
+    //newAry：[3] 5
+    for(var i=1;i<ary.length;i++){//由于原有数组已经把第一项拿出来了就从索引1开始循环
+        for(var j=newAry.length-1;j>=0;){
+            if(ary[i]<newAry[j]){
+                j--;
+                if(j===-1){
+                newAry.unshift(ary[i]);//由于j已经是-1不符合循环的条件了，那么就不用循环了
+            }//如果从原有数组中拿过来的比新数组中的小那么需要继续和上一项去比较
+
+            }else{//比新数组中的大，那么直接插入到当前比较项的后面，知道了合适的位置，newAry就不用循环了
+                newAry.splice(j+1,0,ary[i]);//已经找到了合适的位置
+                break;
+            }
+        }
+    }
+    console.log(newAry);
+    var ary=[1,8,7,6,4];
+    var newAry=[];
+    newAry.push(ary[0]);
+    for(var i=1;i<ary.length;i++){
+        for(var j=newAry.length-1;j>=0;){
+            if(newAry[j]>ary[i]){
+                j--;
+                if(j===-1){
+                    newAry.unshift(ary[i]);
+                }
+            }else{
+                newAry.splice(j+1,0,ary[i]);
+                break;
+            }
+        }
+    }
+    console.log(newAry);
+</script>

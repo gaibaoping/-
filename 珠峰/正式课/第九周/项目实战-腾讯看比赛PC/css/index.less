@@ -1,0 +1,301 @@
+@import (reference/*只导入不编译*/)"public";
+html,body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  font-size: 12px;
+  font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica, sans-serif;
+  color: @color-text;
+  background: #f4f4f4;
+}
+a,a:hover,a:active{
+  color: @color-text;
+}
+
+/*header*/
+.header{
+  @h:63;
+  height: unit(@h,px);
+  border-bottom: 1px solid @color-border;
+  background: @color-white;
+  .box{
+    margin: 0 auto;
+    padding: 0 10px;
+    width: unit((@box-width)-20,px);
+    height: unit(@h,px);
+
+    .logo{
+      float: left;
+      width: 160px;
+      margin-right: 60px;
+      height: unit(@h,px);
+      background: url("../img/kbs-logo.png") no-repeat center;
+      font-size: 0;
+    }
+    .nav{
+      float: left;
+      height: unit(@h,px);
+      line-height: unit(@h,px);
+      text-align: center;
+
+      a{
+        float: left;
+        width: 90px;
+        height: unit((@h)-8,px);
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        font-size: 16px;
+        font-weight: 700;
+
+        /*a.bg*/
+        &.bg{
+          color: @color-white;
+          background: @color-blue;
+        }
+        /*a:hover*/
+        &:hover{
+          border-top-color: @color-blue;
+        }
+        &.liveQQ{
+          width: unit(@h,px);
+          height: unit(@h,px);
+          text-align: center;
+          border: none;
+          /*background: url("../img/live-qq-logo.jpg") no-repeat center;*/
+          img{
+            width: 56px;
+            height: 56px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+        &.downLoad{
+          position: relative;
+          .weChat{
+            z-index: 88;
+            position: absolute;
+            top: unit((@h)-4,px);
+            left: -15px;
+            padding: 0 15px;
+            width: 90px;
+            height: 0;/*130*/
+            overflow: hidden;
+            .transition(@duration: 0.3s);
+            img{
+              width: 90px;
+              height: 90px;
+              display: block;
+            }
+            p{
+              line-height: 20px;
+              font-size: 14px;
+              font-weight: normal;
+            }
+          }
+          .weChatBg{
+            .weChat;
+            background: @color-white;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+          }
+          &:hover{
+            .weChat,.weChatBg{
+              padding: 18px 15px;
+              height: 130px;
+            }
+          }
+        }
+      }
+    }
+    .login{
+      float: right;
+      margin-top: unit(((@h)-28)/2,px);
+      width: 46px;
+      height: 28px;
+      line-height: 28px;
+      color: @color-white;
+      text-align: center;
+      border-radius: 2px;
+      background: @color-blue;
+
+      &:hover{
+        /*background: #265cf0;*/
+        background: darken(@color-blue,10%);
+      }
+    }
+  }
+}
+.content{
+  margin: 20px auto;
+  width: unit(@box-width,px);
+  /*height: auto; 需要在JS中计算：一屏幕的高度-header区域的高度-margin值*/
+  .iScrollIndicator{
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+  }
+  .menu{
+    width: 198px;
+    /*height:auto;需要在JS中计算：content-2*/
+    background: @color-white;
+    border: 1px solid @color-border;
+    overflow: hidden;
+    /*overflow-y: auto;*/
+    position: relative;
+    float: left;
+
+    .menuItem{
+      a{
+        display: block;
+        position: relative;
+        height: 50px;
+        width: 169px;
+        line-height: 50px;
+        border-left: 5px solid transparent;
+        padding-left: 24px;
+        font-size: 16px;
+
+        i,i:after{
+          position: absolute;
+          right: 10px;
+          top: 17px;
+          display: none;
+          width: 0;
+          height: 0;
+          font-size: 0;
+          border: 6px solid transparent;
+          border-left-color: @color-blue;
+        }
+        /*after是往容器的末尾追加一个虚拟的子元素*/
+        i:after{
+          top: -6px;
+          right: -4px;
+          content: '';
+          z-index: 1;
+          border-left-color: @color-blue-lighten;
+        }
+
+        &.bg,&:hover{
+          border-left-color: @color-blue;
+          background-color: @color-blue-lighten;
+          color: @color-blue;
+        }
+        &.bg{
+          i,i:after{
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .conRight{
+    width: 820px;
+    height: 100%;
+    float: right;
+  }
+}
+.calendar{
+  position: relative;
+  @H:80;
+  height: unit(@H,px);
+  border: 1px solid @color-border;
+  overflow: hidden;
+  background: @color-white;
+
+  .btnLeft{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 24px;
+    height: unit(@H,px);
+
+    i{
+      position: absolute;
+      top: unit(((@H)-18)/2,px);
+      height: 0;
+      width: 0;
+      font-size: 0;
+      border: 9px solid transparent;
+      border-right-color: #999;
+
+      &:after{
+        content:'';
+        position: absolute;
+        top: -9px;
+        left: -6px;
+        width: 0;
+        height: 0;
+        font-size: 0;
+        z-index: 1;
+        border: 9px solid transparent;
+        border-right-color: @color-white;
+      }
+    }
+    &:hover{
+      i{
+        border-right-color: @color-blue;
+        border-left-color: transparent;
+      }
+    }
+  }
+  .btnRight{
+    .btnLeft;
+    left: auto;
+    right: 0;
+
+    i{
+      left: 7.5px;
+      border-right-color: transparent;
+      border-left-color: #999999;
+      &:after{
+        left: -12px;
+        border-right-color: transparent;
+        border-left-color: @color-white;
+      }
+    }
+    &:hover{
+      i{
+        border-left-color: @color-blue;
+        border-right-color: transparent;
+      }
+    }
+  }
+
+  .container{
+    position: relative;
+    margin: 5px 24px;
+    width: 770px;
+    height: unit((@H)-10,px);
+    overflow: hidden;
+
+    .wrapper{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 7700px;/*需要在js中针对于A的个数动态计算宽度值*/
+      height: 100%;
+
+      .slide{
+        float: left;
+        width: 110px;
+        height: 100%;
+
+        &:hover,&.bg{
+          background: @color-blue-lighten;
+          color: @color-blue;
+        }
+
+        span{
+          display: block;
+          line-height: 27px;
+          text-align: center;
+          font-size: 16px;
+
+        }
+        .week{
+          margin-top: 9px;
+        }
+      }
+    }
+  }
+}

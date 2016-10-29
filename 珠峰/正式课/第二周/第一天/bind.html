@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //Function.prototype是一个空匿名函数
+    console.dir(Function.prototype);//是一个函数，是一个匿名函数，并且是一个空函数
+    console.log(Function.prototype());//undefined
+    function fn(){}
+    console.dir(fn);//name函数名字,length参数个数
+
+    /*
+    * bind也是改变this关键字的，call和apply就是传参凡是不同，但是call和apply都是已经执行了的
+    * bind方法只是返回一个处理好this的新函数
+    * 并且需要自己执行还可以传新的参数
+    * bind不兼容，后期会把这些不兼容处理掉
+    * bind:是一种预处理思想
+    * */
+    function fn(n,m){
+        console.log(this);
+        console.log(n+m);
+    }
+    var obj={age:30};
+    fn.call(obj,100,200);
+    fn.apply(obj,[100,200]);
+    //call和apply都执行完了
+    //var res=fn.bind(obj,100,200);
+    var res=fn.bind(obj);
+    console.log(res);
+    console.log(res===fn);//返回值是一个新函数
+    res(400,500);
+</script>

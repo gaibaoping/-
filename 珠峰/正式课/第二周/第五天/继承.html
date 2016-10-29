@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 继承：子类继承父类的方法
+    *       1 原型继承：子类的原型指向父类的一个实例B.prototype=new A();
+    *                 父类的私有和公有方法都是子类的公有方法
+    *       2 call继承：在子类的构造函数中 父类.call(this)
+    *                  把父类的私有变成子类的私有
+    *       3 冒充对象继承：在子类的构造函数中循环里边父类的一个实例，然后分别把这个属性添加给this（子类实例f）一份
+    *                   把父类的公有和私有的都变成子类的私有
+    *       4 混合继承：原型继承+call继承
+    *                  把公有的和私有全都当作公有（原型继承）
+    *                  把私有的全都拿过来当私有的（call继承）
+    *                  ps：父类的私有在子类的公有多了一份，但是在使用的时候会直接去调用自己的私有方法，所以不会造成影响
+    *       5 中间件继承：子类原型上的__proto__属性，默认指向的是Object.prototype但是重新赋值为父类的原型。
+    *                   B.prototype.__proto__=A.prototype
+    *                   父类的公有变成子类的公有
+*           6 Object.create() 这个方法不兼容这个继承也不兼容
+    * */
+    //1 原型继承
+    function A(){
+        this.x=100;
+    }
+    A.prototype.getX=function(){
+        console.log(this.x);
+    };
+    var a=new A();
+    a.getX();
+
+    function B(){}
+    B.prototype=new A();//最核心的代码
+    B.prototype.constructor=B;//保证构造函数不丢失需要重新添加上
+    var b=new B();
+    b.getX();
+
+    //2 call继承
+    function C(){
+        this.x=1000;//d.x=1000
+    }
+    C.prototype.getX=function(){
+        console.log(this.x);
+    };
+
+    function D(){
+        //this//d
+        C.call(this);//父类.call(this)  核心代码
+    }
+    var d=new D();//d.x=1000
+    console.log(d.x);
+
+    //3 冒充对象继承
+    function E(){
+        this.x=200;
+    }
+    E.prototype.getX=function(){
+        console.log(this.x);
+    };
+    function F(){
+        var e=new E();
+        for(var key in e){//key代表的是e的属性   核心代码
+            //hasOwnProperty  可实现只复制公有或私有属性
+            this[key]=e[key];
+        }
+    }
+    var f=new F();
+    console.log(f);
+
+    //4 混合继承
+    function G(){
+        this.x=300;
+    }
+    G.prototype.getX=function(){
+        console.log(this.x);
+    };
+    function H(){
+        G.call(this);//call继承
+    }
+    H.prototype=new G();//原型继承
+    H.prototype.constructor=H;//原型继承
+    var h=new H();
+
+    //5 中间件继承  不兼容
+    function K(){
+        this.x=400;
+    }
+    K.prototype.getX=function(){
+        console.log(this.x);
+    };
+    function L(){
+
+    }
+    L.prototype.__proto__= K.prototype;//核心代码
+    var l=new L();
+
+    //6  完成继承效果
+    function M(){}
+    function N(){}
+    N.prototype=Object.create(M.prototype);
+
+    var res=Object.create(/*obj*/);//参数：需要一个对象数据类型的参数,这个参数会作为一个类的原型
+    //Fn.prototype=obj; 返回值：这个类的一个实例 new Fn();
+    function create(obj){
+        function Fn(){}
+        Fn.prototype=obj;
+        return new Fn();
+    }
+</script>

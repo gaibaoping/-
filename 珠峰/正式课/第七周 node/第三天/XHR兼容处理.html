@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var xhr = new XMLHttpRequest;//创建AJAX对象，在IE6级以下浏览器中不兼容，我们需要使用以下三种方式来处理以下兼容
+    /*xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    xhr = new ActiveXObject('Msxm12.XMLHTTP');
+    xhr = new ActiveXObject('Msxm13.XMLHTTP');*/
+
+    /*function createXR(){
+        var xhr = null;
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }else{
+            //if(new ActiveXObject('Microsoft.XMLHTTP')){}这样写不行
+            try{
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }catch(e){
+                try{
+                    xhr = new ActiveXObject('Msxm12.XMLHTTP');
+                }
+            }
+        }
+    }*/
+
+    //惰性思想：高级单例模式，使用JS惰性思想的单例模式
+</script>

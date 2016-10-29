@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+</body>
+</html>
+<script>
+    //点击事件委托给body去处理。。。利用的就是事件冒泡的传播
+    var lis = document.getElementsByTagName('li');
+    /*for(var i = 0; i<lis.length; i++){
+        lis[i].onclick = function(){
+            console.log(lis[i].innerHTML);
+        }
+    }*/
+    //给li绑定事件需要分别给每一个li的事件onclick属性赋值一个函数，这样难免造成内存的浪费
+    document.body.onclick = function (e){//只要一个函数就可以
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        console.log(e.target.innerHTML);//点谁就输出谁
+    }
+</script>

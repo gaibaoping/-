@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="https://www.nuomi.com/?cid=002540">
+    <input type="submit"/>
+</form>
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+    var input = $('input');
+    console.log(input);
+    input.click();
+    //单例模式
+    var obj = {};
+    obj.name = "";
+    obj.age = "";
+    obj.height = "";
+
+    //工厂模式-->生产效率提高了
+    //构造函数模式-->实例识别
+    //原型模式-->复用的问题
+    //object oriented programming 以对象数据类型为导向的编程方式
+
+    //提高了生产对象的方式，也同时提高了管理这些对象的方法。也是对生产对象的方式进行了优化
+    var str = 'abcd';
+    str.length;
+    //这个str上的方法和属性都是定义在string.prototype上的
+    str.attr1 = 'attr1';
+    alert(str.attr1);
+    //值类型的数据是保存快内存里，它的特点是快捷高效。每次使用一个值类型的数据的时候，立马在内存里给这个数据开避空间，一旦操作完成，马上再把这个内存空间回收。
+</script>

@@ -1,0 +1,79 @@
+[HTML+CSS]
+    使用HTML5新增加的语化标签：section、header、footer、nav、article、figure、figcaption、aside（标注：文章来说没有重要作用，去掉也可以的，可以使用aside，例如：广告位）、details、summary...
+    -css中会使用css3中的一些常用的属性和变形动画等
+    -css采用less开发
+    js部分采用jquery
+    局部滚动使用IScroll.js
+    数据获取使用JQ中的JSONP从腾讯的服务器拿数据，拿到数据后我们使用EJS模板引擎技术把内容绑定在页面上
+
+    1、新建立页面
+    基本上都会存在的四部分
+    <title>页面标签</title>
+    <meta name="keywords" content="网站的关键字"/>
+    <meta name="description" content="网站的描述"/>
+    <link type="image/x-icon" rel="stylesheet" href=""/>设置网站的
+
+    =>SEO搜索引擎优化
+        目的：当用户在百度、谷歌等搜索网站中输入某一个关键字的时候，可以把我们的网站搜出来，并且位置尽量靠前
+        首先我们的网站中需要有相关的关键字，并且最好出现的次数多一些，让搜索引擎尽可能的多收录一些你的关键字
+        网站描述也是我们必须要做的一件事情，搜索出来的结果下方展示的详细信息就是网站的描述，网站的描述也会让搜索引擎多收录一些内容
+        ...
+        <title>珠峰培训 - javascript培训,JS培训,北京JS培训,HTML5培训,node培训,nodeJS培训,移动端培训,珠峰培训 - Powered By EduSoho</title>
+        <meta name="keywords" content="javascript培训,js培训,HTML5培训,css培训,前端开发培训,node.js培训,nodeJS培训,移动端培训,北京珠峰培训" />
+        <meta name="description" content="珠峰培训是中国前端开发知名品牌，七年JS前端培训，以专注立身；70%的同学来自老学员推荐，以诚信立业。先学习考试通过后交学费；四周内可无条件退学费；工资不到9千退学费。我们专注的特色培训有：javascript培训,node.JS培训,前端开发培训,HTML5培训,移动端培训" />
+    =>SEM竞价推广
+
+    2、
+        我们把<h1>做logo区域，给它一张背景图（背景图中已经包含了文字），我们自己在h1中又写了一段文字，这样做的目的只是为了SEO优化，让搜索引擎把h1中的文字收录了，但是文字并不展示给用户，我们需要把文字隐藏（font-size:0）
+
+        HTML5中新增加的语义化标签在IE6~8下是不兼容的，我们如何处理：把低版本浏览器中把我们使用的新标签都替换为传统的div标签即可，但是如果让我们自己做这件事情特别的麻烦，好在目前已经有一款插件实现了兼容处理 =>HTML5.MIN.js
+        条件注释：
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="js/html5.min.js"></script>
+        <![endif]-->
+3、使用less
+    1.浏览器不能直接的识别less代码，如果用less写完样式后，我们需要让浏览器识别的话：
+        把我们的less编译为css代码（在NODE中安装一个less，以后通过lessc xxx.less xx.css -x）
+        还有一种方式在开发中非常有用：我们引入一个less.js，这个js会帮我们把less转换为css，就不需要自己写一点less就编译一次了
+        <link type="text/css" rel="stylesheet/less" href="css/index.less"/>
+        <script type="text/javascript" src="js/less-2.5.3.min.js"></script>
+
+4、给容器的背景设置透明度
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    给一个容器这样设置透明度，容器中的所有元素都会透明
+    background: rgba(255,255,255,0.5);
+    这样设置只是容器的背景透明，里面的子元素不透明（css3的属性）
+
+5、项目中的三角箭头都是如何处理的
+    1.切图
+    2.使用字体图片或者svg图片等（图片其实都是使用代码汇出来的）
+    3.使用&gt;/&lt;
+    4.使用border+transform实现
+
+6、使用ejs
+    1.导入ejs
+    2.制定模板：把我们需要动态绑定数据的HTML结构都放在模板中
+     <script type="text/template" id="calendarTemplate">
+        <%$.each(calendarData,function(index,item){});%>
+        <a href="javascript:;" class="slide">
+            <span class="week">星期日</span>
+            <span class="data">09-25</span>
+        </a>
+    </script>
+    3.在模板中嵌套数据：假设我们模板中有一个数据，它是一个数组calendarData,数组中包含了我们需要的每一个时间区域的数据，我们可以先使用假设的值做数据的嵌套，以后只需要把真实的数据按照假设的格式传递模板就可以了
+    我们想在模板中写JS的话，只需要把JS代码写在<%%>中间即可
+    我们想在模板中输出一些东西，只需要把需要输出的内容放在<%%>中间即可
+    <script type="text/template" id="calendarTemplate">
+            <%$.each(calendarData,function(index,item){%>
+                <a href="javascript:;" class="slide">
+                    <span class="week"><%=item.weekday%></span>
+                    <span class="data"><%=item.data%></span>
+                </a>
+            <%});%>
+    </script>
+
+    4.在JS中把真实的数据传递给模板
+        1)首先把模板中的内容都获取到
+        2)把需要的数据准备好
+        3)使用ejs的相关方法render，把数据和内容结合到一起，ejs会把

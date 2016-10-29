@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Fn(){
+        this.x=100;
+    }
+    Fn.prototype.getX=function(){
+        console.log(this.x);
+    };
+    //批量设置公有属性和方法，坏处constructor丢失。我们需要自己来补上
+    Fn.prototype={
+        constructor:Fn,
+        getX:function(){
+            console.log(this.x);
+        },
+        getY:function(){},
+        getZ:function(){}
+    };
+    var f1=new Fn();
+    f1.getX();
+    Fn.prototype.getX();
+    console.dir(f1.constructor);
+</script>

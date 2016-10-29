@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1" style="width: 100px;height: 100px; background: red;"></div>
+</body>
+</html>
+<script>
+    /*
+    * 函数：function 也要遵循引用数据类型的赋值过程
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    */
+    //var sum=function(){}//函数表达式
+    function sum(){//求和函数
+        //用花括号抱起来的就叫函数体
+        console.log(1+2);
+    }
+    sum();//函数的执行，函数名字+小括号
+    //我这个函数只能求1+2的和==>我想求任意两个数的和==>如果1和2是两个可以变化的值就可以了，但是这个变量不能再函数体内声明
+    //我现在这个函数需要一个可以变的量，并且这个量还是从外面进来的==>需要提供函数入口，这个入口在函数中叫参数，
+    // 参数定义在小括号
+    //function sum(num1,num2){
+        //var num1=3;
+        //var num2=5;
+        //console.log(num1+num2);
+    //}
+    //sum(7,8);
+    //对于函数体内的形参如果定义了却在执行的时候没有传实参那么在函数体内就是undefined
+    function sum(num1,num2){
+        var total=0;
+        if(typeof num1!='undefined'){
+            total+= Number(num1);//total=total+num1
+        }
+        if(typeof num2!='undefined'){
+            total+=Number(num2);
+        }
+        console.log(total);
+    }
+    sum(7,'8')
+    //var div1=document.getElementById('div1');
+    //div1.onmouseover=function(){}
+
+    //function fn(){}
+    //var obj={
+       // name='tainxi';
+        //englishname='obj.name'+'lat';
+    //}
+    //运用数据类型赋值的步骤；1 先开辟一个新的堆内存空间 2把属性名字和属性值当做字符串存到空间中
+    // 3 把空间地址赋值给变量
+    //ps: 在第三步之前我这个变量的赋值动作还没有结束，我这个变量obj还没有这个空间地址呢
+
+
+</script>

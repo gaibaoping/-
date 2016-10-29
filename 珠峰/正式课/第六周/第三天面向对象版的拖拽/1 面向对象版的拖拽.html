@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        div{ width:100px; height:100px; position:absolute; top:0; left:0; cursor:move; -webkit-user-select:none; overflow:hidden; background:gray;}
+        div img{ width:100px; height:100px; border:none;}
+    </style>
+</head>
+<body>
+    <div id="div1"><img src="images/5.png"></div>
+    <div id="div2" style="top:100px; left:100px; background:orange;"><img src="images/1.png"></div>
+    <div id="div3" style="left:200px; background:purple"><img src="images/2.png"></div>
+    <div id="div4" style="left:400px; background:pink;"><img src="images/3.png"></div>
+</body>
+</html>
+<script src="event_end.js"></script>
+<script>
+    div = document.getElementById('div1');
+    console.dir(div);
+    //面向对象的编程，主要是思想和管理，重管理轻逻辑
+    //相对于面向过程来说的。面向过程的编辑是重逻辑的编程
+    //要确定一个主体对象（上下文），所有的行为（方法）和属性是依赖于这个主体的。
+
+    //如果打算修改升级dom元素的addEventListener方法，应该在哪修改
+    //div-->HTMLDivElement-->HTMLElement-->Element-->nodea-->EventTarget-->Object
+    //EventTarget类是管理行为与行为之间的关系的--->管理节点上的行为与其它行为对接的类就是这个EventTarget。
+    //如果只是用面向对象来完成一个单一的拖拽，除了麻烦，没有什么特点
+
+    //确定使用类或类上的方法的时候一个重要的原则：在类上的方法里，this关键字一定要指向当前类的实例；如果和事件绑定的原则冲突，则强制执行这个原则（一定用call和apply方法改变其this的指向，让其指向Drag类的实例）
+    function Drag(ele){//初始化实例的作用，把实例上要用到的一些私有属性或方法，在这准备好
+        this.x = null;
+        this.y = null;
+        this.mx = null;
+        this.my = null;
+        //document.body.offsetParent = null;
+        this.ele = ele;//通过参数把拖拽的元素传进来，然后把它保存到ele属性上。这样在其它的原型方法里就可以通过this.ele这个属性来操作被拖拽的元素了。一个方法的参数相当于这个方法的私有变量
+
+        /*
+        * 以下这个绑定方式会导致this.down方法里的this指向ele，就和我们规定的原则冲突了。
+        * on(ele,'mousedown',this.down);
+        * on(this.ele,'mousedown',this.down);
+        * */
+        this.DOWN = processThis(this.down,this);
+        this.MOVE = processThis(this.move,this);
+        this.UP = processThis(this.up,this);
+        //var that = this;
+        //this.DOWN = function(e){that.down.call(that,e);this};
+        on(ele,'mousedown',this.DOWN);
+
+    }
+    Drag.prototype.down = function(e){
+        this.x = this.ele.offsetLeft;
+        this.y = this.ele.offsetTop;
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        if(this.ele.setCapture){
+            this.ele.setCapture();
+            on(this.ele,'mousemove',this.MOVE);
+            on(this.ele,'mouseup',this.UP);
+        }else{
+            on(document,'mousemove',this.MOVE);
+            on(document,'mouseup',this.UP);
+        }
+        e.preventDefault();
+    };
+    Drag.prototype.move = function(e){
+        this.ele.style.left = this.x + (e.pageX - this.mx) + 'px';
+        this.ele.style.top = this.y + (e.pageY - this.my) + 'px';
+    };
+    Drag.prototype.up = function(e){
+        if(this.ele.releaseCapture){
+            this.ele.releaseCapture();
+            off(this.ele,'mousemove',this.MOVE);
+            off(this.ele,'mouseup',this.UP);
+        }else{
+            off(document,'mousemove',this.MOVE);
+            off(document,'mouseup',this.UP);
+        }
+    };
+    var eles = document.getElementsByTagName('div');
+    for(var i = 0; i < eles.length; i++){
+        var ele = eles.item(i);
+
+        new Drag(ele);//1、如果创建的实例没有赋值给一个变量，那这个实例存在吗？
+        //数据和变量的关系
+        //2、当用new运算符去创建一个类的实例的时候，发生了几件事？
+            //第一点：先创建一个属于这个类的实例，并且把这个实例返回
+            //第二点：这个实例已经有一些初始的属性了，比如__proto__属性，就是说实例上已经有原型方法了
+            //第三点：以这个实例为上下文，自动运行构造函数
+            //类名有两个身份：一个身份是类，一个身份是自动运行初始化函数（构造函数是用来初始化实例的）
+    }
+    function processThis(fn, obj) {
+        return function (e) {
+            fn.call(obj, e)
+        }
+    }
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .box{
+            position: relative;
+            width: 300px;
+            height: 32px;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .box input,.box span{
+            display: block;
+            width: 260px;
+            padding: 0 5px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid green;
+        }
+        .box span{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #999999;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="email" id="userEmail" placeholder="请输入邮箱"/>
+    <span id="userEmailTip">请输入邮箱</span>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    if(window.navigator.userAgent.indexOf('MSIE')>-1){
+        var userEmail = document.getElementById('userEmail'),
+                emailTip = document.getElementById('userEmailTip');
+        userEmail.placeholder = '';
+        emailTip.style.display = 'block';
+
+        //->点击的是SPAN,我们让文本框获取光标,这样才可以在文本框中输入内容
+       /* emailTip.onclick = function(){
+            userEmail.focus();
+        };*/
+        //->处理SPAN的显示和隐藏即可
+        userEmail.onkeydown = userEmail.onkeyup = userEmail.onfocus = check;
+        function check() {
+            var val = userEmail.value;
+            emailTip.style.display = val.length > 0 ? 'none' : 'block';
+        }
+
+    }
+
+</script>

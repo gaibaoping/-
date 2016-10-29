@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>闭包选项卡</title>
+    <style type="text/css">
+        *{margin: 0px;padding: 0px;}
+        #div1{
+            width: 200px;
+            height: 300px;
+            margin: 10px auto;
+        }
+        ul li{list-style: none;}
+        li{
+            float: left;
+            display: block;
+            width: 50px;
+            height: 30px;
+            border: 1px solid #111111;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+        li.cur{background-color: aqua;}
+        #div1 div{
+            display: none;
+            clear: both;
+            width: 200px;
+            height: 200px;
+        }
+        #div1 div.cur{display: block;background-color: bisque;}
+    </style>
+</head>
+<body>
+<div id="div1">
+    <ul>
+        <li class="cur">图片</li>
+        <li>视频</li>
+        <li>音乐</li>
+    </ul>
+    <div class="cur">图片内容</div>
+    <div>视频内容</div>
+    <div>音乐内容</div>
+</div>
+</body>
+</html>
+<script>
+    var div1=document.getElementById('div1');
+    var lis=div1.getElementsByTagName('li');
+    var oDiv=div1.getElementsByTagName('div');
+    //console.log(oDiv);
+    for(var i=0;i<lis.length;i++){
+        (function (i){
+            lis[i].onclick=function(){
+                for(var j=0;j<lis.length;j++){
+                lis[j].className='';
+                oDiv[j].className='';
+            }
+                lis[i].className='cur';
+                oDiv[i].className='cur';
+            };
+        })(i);
+    }
+
+</script>

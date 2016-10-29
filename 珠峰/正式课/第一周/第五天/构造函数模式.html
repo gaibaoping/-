@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
+<script>
+    var oDiv=document.getElementById('div1');
+    //typeof oDiv->'object'通过方法获取到的元素对象是对象数据类型的，每一个对象数据类型都是由键值对组成的
+    // 包含私有的属性[在当前对象或者实例本身上的属性是私有的属性hasOwnProperty()]
+    // 包含公有的属性[共有的属性和方法都定义在当前实例所属类的原型上了]
+    console.log(oDiv);
+    //hasOwnProperty:检测当前的属性名是否属于对象的私有属性（值得注意的是，浏览器会为一些实例或者对象增加一些内置的私有属性，这些属性是不能被hasOwnProperty准确检测出来的）
+    console.log(oDiv.hasOwnProperty('tagName'));//false tagName是当前oDiv这个元素对象内置的私有的属性，但是使用hasOwnProperty检测不出来
+    oDiv.index=10;//在oDiv元素标签上增加一个自定义属性index，赋值为10
+    console.log(oDiv.hasOwnProperty('index'));//这个index是我们自己给oDiv追加的自定义私有属性，可以检测
+    /*
+    JS中的类：
+      内置类：Number String Boolean Null Undefined Object Array RegExp Date Function...(每一种数据类型都有自己的所属类)
+      oDiv是div元素对象的（实例）.__proto__-->HTMLDivElement.prototype
+
+      每一个HTML元素标签都有一个自己所属的内置类
+
+      NodeList节点集合类，通过document.getElementByName('zhufeng')获取的集合就是它的实例
+    */
+
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div{
+            width: 200px;
+            height: 200px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+</body>
+</html>
+<script>
+    var div = document.getElementById('div');
+ /*    div.onclick = function(){
+        console.log(this);
+    };
+    div.onclick = null;*/
+
+    function fn1(){console.log(1);}
+    function fn2(){console.log(2);}
+    function fn3(){console.log(3);}
+    function fn4(){console.log(4);}
+    function fn5(){console.log(5);}
+    function fn6(){console.log(6);}
+    function fn7(){console.log(7);}
+    function fn8(){console.log(8);}
+    function fn9(){console.log(9);}
+    function fn10(){console.log(10);}
+    function fn11(){console.log(11);}
+    function fn12(){console.log(12);}
+    //dom2的绑定和移除
+    function fn(){
+        console.log(this);//
+    }
+    //.addEventListener('click',fn,true);
+    div.addEventListener('click',fn,false);
+    div.addEventListener('click',fn1,false);
+    div.addEventListener('click',fn2,true);
+    div.addEventListener('click',fn3,false);
+    div.addEventListener('click',fn4,false);
+    div.addEventListener('click',fn5,false);
+    div.addEventListener('click',fn6,false);
+    div.addEventListener('click',fn7,false);
+    div.addEventListener('click',fn8,false);
+    div.addEventListener('click',fn9,false);
+    div.addEventListener('click',fn10,false);
+    div.addEventListener('click',fn11,false);
+    div.addEventListener('click',fn12,false);
+    //移除绑定事件的时候，需要一个函数名字，所以在dom2级事件绑定我们一般不绑定匿名函数
+    /*
+    * 移除事件：removeEventLister('click',fn,false)  移除绑定在click事件 冒泡阶段的fn函数
+    * */
+    //div.removeEventListener('click',fn);
+    div.removeEventListener('click',fn,false);
+
+    /*
+    * dom2在标准浏览器中:
+    *       1 绑定的函数中的this没有问题
+    *       2 绑定多个函数的时候，事件触发的时候执行的顺序就是按照绑定时候的顺序
+    *       3 不能重复绑定（同一个事件类型，在相同阶段，一个函数只能绑定一次）
+    * */
+    /*
+    * 在ie低版本6-8中不兼容
+    * */
+</script>

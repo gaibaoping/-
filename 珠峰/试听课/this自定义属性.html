@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        ul{list-style: none;}
+        li{width: 100px;height: 30px;margin: 3px 0;background-color: #cc0000;}
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var lis=document.getElementsByTagName('li');
+    for(var i=0;i<lis.length;i++){
+        lis[i].zhuFi=i;
+        lis[i].onclick=function(){
+            alert('我是第'+(this.zhuFi+1)+'个');
+        }
+    }
+    //i=4
+    //this第一种用法：事件发生的时候绑定函数中的this就是触发事件的那个元素
+</script>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        #div1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="../utils.js"></script>
+<script>
+    var div1=document.getElementById('div1');
+/*    var time=0;
+    var duration=1000;
+    var beginLeft=utils.css(div1,'left');//获取当前div1的left的值（已经生效的left样式）
+    var targetLeft=utils.win('clientWidth')-div1.offsetWidth;//div1要运动到达的目标值
+    var beginOpacity=utils.css(div1,'opacity');
+    var targetOpacity=0.5;
+    var changeOpacity=targetOpacity-beginOpacity;
+    var changeLeft=targetLeft-beginLeft;//需要运动的距离就是终点-起点
+    div1.timer=window.setInterval(function(){
+        time+=10;//花费的时间越来越多
+        if(time>=duration){
+            window.clearInterval(div1.timer);
+            utils.css(div1,'left',targetLeft);
+            utils.css(div1,'opacity',targetOpacity);
+            return;
+        }
+        var leftVal=linear(time,beginLeft,changeLeft,duration);//计算出位置
+        utils.css(div1,'left',leftVal);//把位置赋值回去
+        var opacityVal=linear(time,beginOpacity,changeOpacity,duration);
+        utils.css(div1,'opacity',opacityVal);
+
+    },10);*/
+
+    var time=0;
+    var duration=1000;
+    /*var begin={
+        width:utils.css(div1,'width'),
+        height:utils.css(div1,'height'),
+        opacity:utils.css(div1,'opacity'),
+        left:utils.css(div1,'left')
+    };*/
+    var target={
+        width:300,
+        height:50,
+        opacity:0.2,
+        left:300
+    };
+    var begin={};
+    var change={};
+    for(var key in target){
+        begin[key]=utils.css(div1,key);
+        change[key]=target[key]-begin[key];
+    }
+    /*var change={
+        width:target.width-begin.width,
+        height:target.height-begin.height,
+        opacity:target.opacity-begin.opacity,
+        left:target.left-begin.left
+    };*/
+    div1.timer=window.setInterval(function(){
+        time+=10;
+        if(time>=duration){
+            window.clearInterval(div1.timer);
+            utils.css(div1,target);
+            utils.css(div1,'background','green');
+            return;
+        }
+        for(var key in change){
+            //key: width height opacity left
+            if(change[key]){//保证这个方向上有运动才做动画
+                var targetVal=linear(time,begin[key],change[key],duration);
+                utils.css(div1,key,targetVal);
+            }
+        }
+    },10);
+    function linear(t,b,c,d){
+        //t 花费的时间
+        //b 开始的位置
+        //c 应该运动的距离
+        //d 时间(规定时间内完成)
+        return b+t/d*c;
+    }
+
+</script>

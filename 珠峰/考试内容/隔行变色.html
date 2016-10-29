@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var div=document.createElement('div');
+    document.body.appendChild(div);
+    console.log(div);
+    var str='';
+    str+='<ul>';
+    for(i=0;i<10;i++){
+        str+='<li>';
+        str+='</li>';
+    }
+    str+='</ul>';
+    div.innerHTML=str;
+    var lis=document.getElementsByTagName('li');
+    var ul=document.getElementsByTagName('ul');
+    console.log(lis);
+    //var cur=lis.('lis[2]');
+    ul[0].style.listStyle='none';
+    for(i=0;i<lis.length;i++){
+        lis[i].style.width='200px';
+        lis[i].style.height='30px';
+        lis[i].style.listStyle='none';
+        if(i%2){
+            lis[i].style.backgroundColor='red';
+        }else{
+            lis[i].style.backgroundColor='blue';
+        }
+        lis[i].index=lis[i].style.backgroundColor;
+        lis[i].onmouseover=function(){
+            this.style.backgroundColor='green';
+        };
+        lis[i].onmouseout=function(){
+            this.style.backgroundColor=this.index;
+        };
+        lis[i].ge=i;
+        lis[i].onclick=function(){
+            alert('我是第'+(this.ge+1)+'个');
+        };
+        //
+        //console.log(cur);
+
+    }
+
+
+</script>

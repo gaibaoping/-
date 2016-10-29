@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary=[{age:30,name:'田喜'},{age:40,name:'珠峰'},{age:20,name:'王晨'},{age:10,name:'张鑫'}];
+    //按照年龄排序
+    ary.sort(function(a,b){return a.age- b.age;});
+    console.log(ary);
+    //按照姓名排序，这是字符串排序
+    ary.sort(function(a,b){
+        return a.name.localeCompare(b.name);
+    });
+    console.log(ary);
+    /*function fn(likeArray) {//类数组转化成数组
+        try {
+            return Array.prototype.slice.call(likeArray, 0);
+        } catch (e) {
+            var ary = [];
+            for (var i = 0; i < likeArray.length; i++) {
+                ary[ary.length] = likeArray[i];
+            }
+            return ary;
+        }
+    }
+    console.log(fn([1,5,7,3]));*/
+
+    /*
+     * sort 不仅仅可以排序数字项的数组，还可以排序dom元素组成的数组了。
+     * 按照dom元素的一个属性去排序
+     *
+     * sort排序：如果按照字符串去比较，那么不能使用减法。
+     * 使用字符串的 str.localeCompare
+     * ps；如果是汉子是按照拼音比较，返回值是数字1 -1 0
+     * */
+</script>

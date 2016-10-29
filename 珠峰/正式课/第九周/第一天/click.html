@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <style type="text/css">
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            /*top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;低版本浏览器不兼容*/
+            width: 100px;
+            height: 100px;
+            background: green;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+<script type="text/javascript">
+    var oBox = document.getElementById('box');
+    //在pc端我们快速点击两次不是我们认为的双击，而是触发了两次click执行 => pc端的click应该理解为点击，只要触发点击操作，就会执行click事件
+    oBox.onclick = function(){
+        console.log('ok');
+    };
+    //pc端的双击
+    oBox.ondblclick = function(){
+        console.log('no');
+    };
+
+    //在移动端我们的click被认为是单击，当我们第一次点击完成后，并没有立马触发click事件，而是需要等待300ms左右，看是否触发了第二次点击，触发了属于双击，就不会执行click了 => 移动端使用click存在300ms延迟的原因
+</script>
+</body>
+</html>

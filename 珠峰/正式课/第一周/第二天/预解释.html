@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    //console.log(num);
+    var num=10;
+    var obj={name:"tx"};
+    function fn(){
+        console.log(num);//undefined
+        var num=10;
+        console.log(num);//10
+    }
+    fn();
+    console.log(fn);
+    //预解释只发生在当前作用域
+    function foo(){
+        function fxx(){//fxx是私有变量
+        }
+    }
+    for(var i=0;i<2;i++){//对于for循环和if else等都不是私有变量
+        var t=6;
+    }
+    console.log(i);
+    console.log(t);
+    /*
+    * 全局变量和私有变量：
+    *       当浏览器打开一个网页的时候就会提供一个全局作用域window，而我们把直接定义在全局作用域内的变量叫做全局变量。
+    *         ps：直接暴露在script标签下的变量就可以理解为全局变量，没有function包着的一般都是全局变量。
+    *       私有变量：我们把定义在函数中的变量叫做私有变量，由于在函数外访问不到所以称之为私有变量。
+    *
+    * 函数执行过程：实名函数 匿名函数 自运行函数 事件发生的时候
+    *       1 会形成一个新的私有的作用域（栈内存）
+    *       2 形参赋值（形参相当于在当前函数体内声明的私有变量）
+    *       3 预解释函数体内带var和function的
+    *       4 代码逐行执行
+    *       ps：每次执行形成的新的私有的作用域是互不干预的
+    *       ps：如果形参和私有变量重名，那么在预解释阶段私有变量就不用提前声明了，因为在形参赋值的过程就已经声明了。但是当代码执行到赋值过程的时候还会重新赋值。
+    *       预解释只发生在当前作用域
+    * */
+</script>

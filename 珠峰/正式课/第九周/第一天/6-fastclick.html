@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <style type="text/css">
+        html,body{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            /*top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;低版本浏览器不兼容*/
+            width: 100px;
+            height: 100px;
+            background: green;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+</body>
+</html>
+<script type="text/javascript" src="js/fastclick.min.js"></script>
+<script>
+    FastClick.attach(document.body);//FastClick主要采取的是事件委托，我们这样写的意思是把touchstart、touchmove、touchend都委托给document.body，以后只要是在这个容器中出现的click事件，FastClick都会帮助用touch模型来处理
+    var oBox = document.getElementById('box');
+    oBox.onclick = function(){
+        console.log('ok');
+    }
+</script>

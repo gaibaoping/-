@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .wrap{
+            position: relative;
+            width: 500px;
+            height: 40px;
+            margin: 30px auto;
+        }
+        .wrap input{
+            padding: 0 10px;
+            width: 500px;
+            height: 40px;
+            outline: none;/*去掉表单默认的边框*/
+        }
+        .wrap ul{
+            display: none;
+            position: absolute;
+            top: 43px;
+            list-style: none;
+            width: 520px;
+            border: 1px solid #cccccc;
+        }
+        .wrap ul li{
+            height: 30px;
+            line-height: 30px;
+        }
+        .wrap ul li a{
+            padding: 0 10px;
+            text-decoration: none;
+            display: block;
+            color: #cccccc;
+        }
+        .wrap a:hover{
+            background: lightgreen;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrap" id="wrap">
+        <input isSearch="yes" type="text" placeholder="请输入"/>
+        <ul>
+            <li><a href="javascript:void 0">珠峰</a></li>
+            <li><a href="javascript:void 0">珠峰css</a></li>
+            <li><a href="javascript:void 0">珠峰js</a></li>
+            <li><a href="javascript:void 0">珠峰html</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+    var wrap = document.getElementById('wrap');
+    var input = wrap.getElementsByTagName('input')[0];
+    var ul = wrap.getElementsByTagName('ul')[0];
+    wrap.onkeyup = wrap.onclick = function (e){//重新获得焦点的时候和键入弹起的时候执行的代码和逻辑是相同的
+        //console.log(this);//事件绑定给谁谁就是this
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        if(e.target.getAttribute('isSearch') == 'yes'){
+            //是我要找的那个输入框
+            var inputVal = e.target.value;//获取输入的值
+            var reg = /^\s*$/;//匹配所有的空
+            if(reg.test(inputVal)){
+                ul.style.display = 'none';//如果能匹配上这个空正则，说明在输入框内什么都没有输入，那么对应下面列表就可以隐藏了
+                return;
+            }
+            //代码运行到这里说明真正输入内容了
+            ul.style.display = 'block';
+        }
+    };
+    wrap.onclick = function (e){
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        if(e.target.nodeName == 'A'){//判断点击的事件源是不是a
+            input.value = e.target.innerHTML;//把a里面的html赋值给输入框的value
+            ul.style.display = 'none';//列表消失
+        }else if(e.target.nodeName.toLowerCase() == 'input'){
+            wrap.onkeyup();
+        }
+    }
+</script>

@@ -1,0 +1,26 @@
+*{margin: 0px;padding: 0px;}
+.box{
+    width: 500px;
+    margin: 50px auto;
+    border: 3px solid orange;
+    border-radius: 5px;
+    padding: 10px;
+}
+.box table{}
+.box table thead{background-color: orangered;}
+.box table thead th,td{
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    -webkit-user-select: none;
+}
+.cursor{
+    cursor: pointer;
+}
+.c1{
+    background-color: blue;
+}
+.c2{
+    background-color: lightgreen;
+}
