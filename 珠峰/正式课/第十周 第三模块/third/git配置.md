@@ -89,6 +89,7 @@ git branch -d xxx
 ```
 git merge 分支
 ```
+<<<<<<< HEAD
 > 在主干上拉取一条分支，在分支上进行开发，开发后，在主干上将代码进行合并，主干上目前没有人开发，可以使用快转的方式，将我们的指针直接指向到分支的最新装态 fast-forward
 
 ## 在github上部署静态页
@@ -111,3 +112,5 @@ git remote add aaa 地址
 ```
 git push aaa gh-pages
 ```
+=======
+>>>>>>> d10e6424106f87137fc1cf6774bc822413a89f55
