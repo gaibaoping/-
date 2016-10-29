@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
+</head>
+<body ng-controller="myCtrl">
+<input type="text" ng-model="title"/>
+<test t="{{title}}" s="say(w,h)"></test>
+</body>
+</html>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',['$scope',function($scope){
+        $scope.title='内容';
+        $scope.say = function(who,hello){
+            alert(who+hello);
+        }
+    }]);
+    app.directive('test',function(){
+        return{
+            template:`<input type="text" ng-model="m" /><button ng-click="say({w:'北京',h:'欢迎'})">点我</button>`,
+            scope:{
+                m:'@t',//取当前指令的属性t对应的字符串$scope.m=100 单项绑定
+                //m:'=t'//$scope.m = $cope.title = 100 引用的是变量不需要花括号取值，并且是双向绑定
+                say:'&s'//函数用&
+            }
+        }
+    })
+</script>

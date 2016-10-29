@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head >
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" ng-model="name"/>
+<input type="text" ng-model="age"/>
+<!--1. ng-bind绑定一个变量 防止闪烁（不能绑定多个 标签内不能写任何内容）-->
+<!--<div ng-bind="name"></div>-->
+<!--<div ng-bind="age"></div>-->
+<!--{{name}}-->
+<!--{{3+3*2+1}}
+{{true?'1':'0'}}-->
+
+<!--2. ng-bind-template 可以绑定多个 绑定的是字符串（标签内不能绑定内容）-->
+<!--<div ng-bind-template="{{name}} {{age}}"></div>-->
+<!--3. ng-cloak 防止闪烁-->
+<div ng-cloak>
+    {{name}}
+    hellow
+    {{age}}
+</div>
+<style>
+    [ng-cloak]{display: none}
+</style>
+<!--支持简单的三元表达式 还支持运算符-->
+
+<script src="./node_modules/angular/angular.js"></script>
+</body>
+</html>
+<!--
+    基础的api 常用的指令 ng-app ng-model 购物车
+    自定义指令 给标签赋予一些意义 （封装插件）
+
+    服务 自定义服务
+    filter过滤器
+
+    http 获取数据 书店+node
+    考试 路由
+
+    双向绑定的原理 依赖注入
+-->

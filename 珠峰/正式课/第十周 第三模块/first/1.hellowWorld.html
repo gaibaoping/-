@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app>
+<!---->
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--双向数据绑定 一定是表单类型可以双向绑定-->
+<input type="text" ng-model="name"/>
+{{name}}
+<!--想让元素双向绑定就添加一个ng-model属性（指令）
+    在当前作用域下绑定一个name属性（变量）
+    如果当前作用域下没有，则表示创建一个name属性挂载在当前作用域下
+-->
+</body>
+</html>
+<script src="./node_modules/angular/angular.js"></script>

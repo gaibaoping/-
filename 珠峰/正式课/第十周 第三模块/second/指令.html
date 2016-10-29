@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head >
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<input type="text" ng-model="name" my-border/>-->
+<!--元素型 element-->
+<my-border></my-border>
+<!--属性型  装饰型指令 Attribut-->
+<div my-border class="name">红色</div>
+<!--class-->
+<div class="my-border"></div>
+<!--注释型 comment-->
+<!-- directive:my-border -->
+</body>
+</html>
+<script src="../first/node_modules/angular/angular.js"> </script>
+<script>
+    //指令是依赖于控制器的，默认指令是不会产生独立作用域的
+    var app = angular.module('appModule',[]);
+    //指令认为两种：装饰型指令 组件式指令
+
+    //自定义指令：指令的名字和指令的定义
+    /*app.directive('myBorder',function(){
+        return{
+            restrict:'ECMA',//设置使用范围（E:element,C:commit,M:）
+            template:'<h1>hello</h1>',//默认将模板插入到当前的指令中,默认使用EA
+            replace:true//将原有指令替换掉，template里面的标签只能有一个根节点
+        }
+    });*/
+
+    //装饰
+    app.directive('myBorder',function(){
+        return{
+            restrict:'A',
+            link:function(scope,element,attrs){//直接用来操作dom元素
+                //scope是当前作用域的$rootScope
+                console.log(scope);
+                //element 当前元素 指令所在的元素
+                console.log(element);//element是jQ对象 被angular.element包装过的对象
+                element.css('border','1px solid red');
+
+                //当前元素上所有属性的集合
+                console.log(attrs);
+            }
+        }
+    })
+</script>

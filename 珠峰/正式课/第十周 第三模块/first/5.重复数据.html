@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head >
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <ul>
+        <li ng-repeat="val in datas track by $index" >
+            {{val}} {{$index}}
+            {{$even}} {{$odd}} {{$first}} {{$last}} {{$middle}}
+        </li>
+    </ul>
+    <ul>
+        <li ng-repeat="(parent,phone) in data track by $index">
+            {{phone.name}}
+            <ul>
+                <li ng-repeat="(child,type) in phone.type track by $index">
+                    {{parent}} {{type}} {{child}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',['$scope',function($scope){
+        $scope.datas = ['苹果','香蕉','橘子','西瓜','苹果'];
+        $scope.data = [
+            {'name':'iphone','type':['i7','i8']},
+            {'name':'xiaomi','type':['note1','note2']},
+            {'name':'sanxing','type':['max6','max7']}
+        ];
+        //要遍历谁就要把当前遍历的内容写在当前的标签上
+    }]);
+</script>

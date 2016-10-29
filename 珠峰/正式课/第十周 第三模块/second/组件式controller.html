@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
+</head>
+<body ng-controller="myCtrl">
+<input type="text" ng-model="centent"/>
+<panel title="{{title}}">{{centent}}</panel>
+<panel title="{{title}}">1111</panel>
+</body>
+</html>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.controller('myCtrl',['$scope',function($scope){
+        $scope.title='标题';
+        $scope.centent='内容';
+    }]);
+    app.directive('panel',function(){
+        return{
+            templateUrl:'panel.html',
+            transclude:true,
+            scope:{
+                title:'@'
+            }
+            //scope:true//{}是无法继承其他作用域的 完全断绝关系  true不断绝关系
+            //如果插件内写一个值可能存在可能不存在，如果控制器中没有，则会报错，我们希望每一个只都是传过来的
+        }
+    })
+</script>

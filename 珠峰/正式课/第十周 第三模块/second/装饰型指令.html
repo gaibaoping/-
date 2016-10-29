@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appModule">
+<head>
+    <meta charset="UTF-8">
+    <title>装饰型指令</title>
+    <style>
+        .div1{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="div1" drag></div>
+</body>
+</html>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('appModule',[]);
+    app.directive('drag',function(){
+        return{
+            restrict:'A',
+            link:function(scope,element,attr){
+                console.dir(element);
+                element.on('mousedown',function(e){
+                    var disx = e.pageX - this.offsetLeft;
+                    var disy = e.pageY - this.offsetTop;
+                    angular.element(document).on('mousemove',function(e){
+                        //计算盒子距离浏览器的边缘
+                        var x = e.pageX - disx;
+                        var y = e.pageY - disy;
+                        element.css({
+                            top:y + 'px',
+                            left:x + 'px'
+                        });
+                    });
+                    angular.element(document).on('mouseup',function(e){
+                        angular.element(document).off();
+                    });
+                    e.preventDefault();
+                });
+            }
+        }
+    })
+</script>
